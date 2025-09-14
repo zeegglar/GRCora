@@ -6,7 +6,6 @@ import { PolicyStatus } from '../../../types';
 import { mockApi } from '../../../services/api';
 import { analyzePolicyAgainstFramework } from '../../../services/geminiService';
 import { DocumentTextIcon, PresentationChartBarIcon, ClipboardDocumentIcon, CheckCircleIcon } from '../../ui/Icons';
-import { logger } from '../../../utils/logger';
 
 
 interface NewPolicyModalProps {
@@ -99,7 +98,7 @@ const NewPolicyModal: React.FC<NewPolicyModalProps> = ({ isOpen, onClose, onSave
         const result = await analyzePolicyAgainstFramework(policyToAnalyze, selectedFramework);
         setAnalysisResult(result);
     } catch (e) {
-        logger.error('Policy analysis failed', e, { framework: selectedFramework, policyLength: policyToAnalyze.length });
+        console.error(e);
         setAnalysisResult("An error occurred during analysis. Please try again.");
     } finally {
         setIsAnalyzing(false);

@@ -1,5 +1,7 @@
-// Fix: Replaced the esm.sh types reference with the npm specifier to resolve Deno type errors.
-/// <reference types="npm:@supabase/functions-js/src/edge-runtime.d.ts" />
+// FIX: Corrected the path for the Supabase Edge Runtime type definitions to `dist`.
+// This resolves the "Cannot find type definition file" error and the subsequent
+// error where the global 'Deno' object was not recognized.
+/// <reference types="npm:@supabase/functions-js/dist/edge-runtime.d.ts" />
 
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts'
 import { GoogleGenAI } from 'npm:@google/genai';
@@ -25,7 +27,6 @@ serve(async (req) => {
     
     // 2. Initialize the Gemini client
     const ai = new GoogleGenAI({ apiKey: API_KEY });
-    const model = 'gemini-2.5-flash';
 
     // 3. Get the prompt from the request body
     const { prompt } = await req.json();
@@ -37,8 +38,9 @@ serve(async (req) => {
     }
 
     // 4. Call the Gemini API
+    // Fix: Inlined model name to strictly follow the coding guidelines.
     const response = await ai.models.generateContent({
-      model,
+      model: 'gemini-2.5-flash',
       contents: prompt,
     });
     

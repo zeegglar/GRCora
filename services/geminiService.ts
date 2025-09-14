@@ -1,6 +1,5 @@
 import { supabase } from './supabaseClient';
 import type { Control, Project, AssessmentItem, Risk } from '../types';
-import { logger } from '../utils/logger';
 
 
 // A helper function to call our secure Supabase Edge Function
@@ -10,7 +9,7 @@ async function callAIAssist(prompt: string): Promise<string> {
   });
 
   if (error) {
-    logger.error("Error invoking Supabase function for AI assist", error, { prompt: prompt.slice(0, 100) });
+    console.error("Error invoking Supabase function:", error);
     throw new Error("Failed to get response from AI model via Edge Function.");
   }
   

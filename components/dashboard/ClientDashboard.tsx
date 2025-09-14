@@ -1,25 +1,18 @@
-
 import React, { useState, useEffect } from 'react';
-import type { Project, User, View, AssessmentItem } from '../../types';
-import { AssessmentStatus } from '../../types';
+import type { User, View, Project, Risk, AssessmentItem } from '../../types';
 import { mockApi } from '../../services/api';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+import { AssessmentStatus } from '../../types';
+import RiskHeatmap from './RiskHeatmap';
 
 interface ClientDashboardProps {
   user: User;
   setView: (view: View) => void;
 }
 
-const statusColors: { [key in AssessmentStatus]: string } = {
-    [AssessmentStatus.COMPLETED]: '#4ade80',
-    [AssessmentStatus.IN_PROGRESS]: '#facc15',
-    [AssessmentStatus.IN_REVIEW]: '#60a5fa',
-    [AssessmentStatus.NOT_STARTED]: '#71717a',
-};
-
 const ClientDashboard: React.FC<ClientDashboardProps> = ({ user, setView }) => {
   const [projects, setProjects] = useState<Project[]>([]);
-  const [assessmentData, setAssessmentData] = useState<any[]>([]);
+  const [risks, setRisks] = useState<Risk[]>([]);
+  const [assessmentItems, setAssessmentItems] = useState<AssessmentItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -27,75 +20,76 @@ const ClientDashboard: React.FC<ClientDashboardProps> = ({ user, setView }) => {
       setIsLoading(true);
       const userProjects = await mockApi.getProjectsForOrg(user.organizationId);
       setProjects(userProjects);
-
       if (userProjects.length > 0) {
-          const items = await mockApi.getAssessmentItems(userProjects[0].id);
-          const statusCounts = items.reduce((acc, item) => {
-              acc[item.status] = (acc[item.status] || 0) + 1;
-              return acc;
-          }, {} as Record<AssessmentStatus, number>);
-
-          const chartData = Object.entries(statusCounts).map(([name, value]) => ({ name, value }));
-          setAssessmentData(chartData);
+        const projectRisks = await mockApi.getRisks(userProjects[0].id);
+        setRisks(projectRisks);
+        const projectItems = await mockApi.getAssessmentItems(userProjects[0].id);
+        setAssessmentItems(projectItems);
       }
       setIsLoading(false);
     };
     fetchData();
   }, [user.organizationId]);
+  
+  const assessmentProgress = () => {
+      if(assessmentItems.length === 0) return 0;
+      const completed = assessmentItems.filter(item => item.status === AssessmentStatus.COMPLETED).length;
+      return Math.round((completed / assessmentItems.length) * 100);
+  }
 
   if (isLoading) {
     return <div className="p-8">Loading dashboard...</div>;
   }
   
-  const project = projects[0];
+  const mainProject = projects[0];
 
   return (
     <div className="flex-1 p-8 overflow-y-auto">
       <header className="mb-8">
-        <h1 className="text-4xl font-bold text-white">Dashboard</h1>
-        <p className="text-slate-400 mt-1">Welcome back, {user.name}.</p>
+        <h1 className="text-4xl font-bold text-white">Client Dashboard</h1>
+        <p className="text-slate-400 mt-1">Welcome, {user.name}.</p>
       </header>
-      <main className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 glass-card rounded-lg p-6">
-            <h2 className="text-xl font-bold text-white mb-4">Assessment Status</h2>
-            <p className="text-sm text-slate-400 mb-6">Current status of controls for the {project?.name} project.</p>
-            <div style={{width: '100%', height: 300}}>
-                <ResponsiveContainer>
-                    <BarChart data={assessmentData} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
-                        <XAxis dataKey="name" stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
-                        <YAxis stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
-                        <Tooltip
-                          cursor={{fill: 'rgba(100, 116, 139, 0.1)'}}
-                          contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: '0.5rem' }}
-                        />
-                        <Bar dataKey="value" radius={[4, 4, 0, 0]}>
-                            {assessmentData.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={statusColors[entry.name as AssessmentStatus]} />
-                            ))}
-                        </Bar>
-                    </BarChart>
-                </ResponsiveContainer>
-            </div>
-        </div>
-        <div className="glass-card rounded-lg p-6 flex flex-col">
-            <h2 className="text-xl font-bold text-white mb-4">Active Project</h2>
-            {project ? (
-                <>
-                <div className="flex-grow">
-                    <p className="text-lg font-semibold text-blue-400">{project.name}</p>
-                    <p className="text-slate-400 text-sm mt-2">Frameworks: {project.frameworks.join(', ')}</p>
+      <main>
+        {!mainProject ? (
+          <div className="text-center text-slate-400 p-8">
+            <p>No projects have been assigned to you yet.</p>
+          </div>
+        ) : (
+          <div className="space-y-8">
+             <div 
+                className="glass-card p-6 rounded-lg cursor-pointer hover:ring-2 hover:ring-blue-500 transition-all"
+                onClick={() => setView({ type: 'project', projectId: mainProject.id, tab: 'assessments' })}
+             >
+                <h2 className="text-xl font-bold text-white">{mainProject.name}</h2>
+                <p className="text-slate-400 text-sm mb-4">Frameworks: {mainProject.frameworks.join(', ')}</p>
+                <div className="grid grid-cols-2 gap-4">
+                    <div>
+                        <p className="text-sm text-slate-400">Assessment Progress</p>
+                        <div className="w-full bg-slate-700 rounded-full h-2.5 mt-1">
+                            <div className="bg-green-500 h-2.5 rounded-full" style={{width: `${assessmentProgress()}%`}}></div>
+                        </div>
+                        <p className="text-lg font-semibold mt-1">{assessmentProgress()}% Complete</p>
+                    </div>
+                     <div>
+                        <p className="text-sm text-slate-400">Open Risks</p>
+                        <p className="text-3xl font-bold">{risks.filter(r => r.status === 'Open').length}</p>
+                    </div>
                 </div>
-                <button
-                    onClick={() => setView({ type: 'project', projectId: project.id, tab: 'assessments' })}
-                    className="mt-6 w-full text-center px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors font-semibold"
-                >
-                    Go to Project
-                </button>
-                </>
-            ) : (
-                <p className="text-slate-400">No active projects found.</p>
-            )}
-        </div>
+            </div>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="glass-card rounded-lg p-6">
+                    <h3 className="text-lg font-semibold mb-4">Risk Heatmap</h3>
+                    <RiskHeatmap risks={risks} />
+                </div>
+                <div className="glass-card rounded-lg p-6">
+                    <h3 className="text-lg font-semibold mb-4">Recent Activity</h3>
+                    <p className="text-slate-500 text-center py-8">Activity feed coming soon.</p>
+                </div>
+            </div>
+
+          </div>
+        )}
       </main>
     </div>
   );

@@ -1,3 +1,5 @@
+// types.ts
+
 export enum UserRole {
   CONSULTANT_OWNER = 'consultant_owner',
   CONSULTANT_ADMIN = 'consultant_admin',
@@ -27,88 +29,82 @@ export interface Project {
   frameworks: string[];
 }
 
-export type View =
-  | { type: 'landing' }
-  | { type: 'login' }
-  | { type: 'dashboard' }
-  | { type: 'project'; projectId: string; tab: 'assessments' | 'evidence' | 'risks' | 'policies' | 'vendors' | 'reports' }
-  | { type: 'vendorDetail'; projectId: string; vendorId: string };
-
-
-export interface Control {
-    id: string;
-    name: string;
-    description: string;
-    family: string; // e.g., 'Organizational Controls', 'Protect'
-    framework: string;
-}
-
 export enum AssessmentStatus {
-    COMPLETED = 'Completed',
-    IN_PROGRESS = 'In Progress',
-    IN_REVIEW = 'In Review',
-    NOT_STARTED = 'Not Started',
+  COMPLETED = 'Completed',
+  IN_PROGRESS = 'In Progress',
+  IN_REVIEW = 'In Review',
+  NOT_STARTED = 'Not Started',
 }
 
 export interface AssessmentItem {
-    id: string;
-    controlId: string;
-    projectId: string;
-    status: AssessmentStatus;
-    notes: string;
-    remediationPlan?: string;
-    assignedTo: string; // userId
+  id: string;
+  projectId: string;
+  controlId: string;
+  status: AssessmentStatus;
+  notes: string;
+  remediationPlan?: string;
+}
+
+export interface Control {
+  id: string;
+  name: string;
+  description: string;
+  family: string;
+  framework: string;
 }
 
 export enum RiskLevel {
-    LOW = 'Low',
-    MEDIUM = 'Medium',
-    HIGH = 'High',
-    CRITICAL = 'Critical',
+  LOW = 'Low',
+  MEDIUM = 'Medium',
+  HIGH = 'High',
+  CRITICAL = 'Critical',
 }
 
 export interface Risk {
-    id: string;
-    title: string;
-    level: RiskLevel;
-    status: 'Open' | 'Closed';
-    controlId: string;
-    projectId: string;
+  id: string;
+  projectId: string;
+  title: string;
+  level: RiskLevel;
+  status: 'Open' | 'Closed';
+  controlId: string;
 }
 
 export enum PolicyStatus {
-    DRAFT = 'Draft',
-    IN_REVIEW = 'In Review',
-    APPROVED = 'Approved',
-    REJECTED = 'Rejected',
-    ARCHIVED = 'Archived',
-}
-
-export interface PolicyHistory {
-    status: PolicyStatus;
-    date: string;
-    userId: string;
-    notes?: string;
+  DRAFT = 'Draft',
+  IN_REVIEW = 'In Review',
+  APPROVED = 'Approved',
+  REJECTED = 'Rejected',
+  ARCHIVED = 'Archived',
 }
 
 export interface Policy {
-    id: string;
-    title: string;
-    content: string;
-    ownerId: string;
-    status: PolicyStatus;
-    version: string;
-    lastUpdated: string;
-    projectId: string;
-    history: PolicyHistory[];
-    controlId?: string; // Link to the control that prompted this policy
+  id: string;
+  projectId: string;
+  title: string;
+  content: string;
+  version: string;
+  status: PolicyStatus;
+  ownerId: string;
+  lastUpdated: string; // YYYY-MM-DD
+  controlId?: string;
+  history: PolicyVersion[];
 }
 
 export interface PolicyVersion {
-    version: string;
-    date: string;
-    editorId: string;
-    changes: string;
+  version: string;
+  date: string;
+  editorId: string;
+  changes: string;
+}
+
+export interface Evidence {
+  id: string;
+  projectId: string;
+  controlId: string;
+  title: string;
+  fileUrl: string;
+  uploaderId: string;
+  uploadDate: string; // YYYY-MM-DD
 }
 
 export enum VendorLifecycleStage {
@@ -119,28 +115,26 @@ export enum VendorLifecycleStage {
 }
 
 export interface Vendor {
-    id: string;
-    name: string;
-    service: string;
-    tier: '1' | '2' | '3';
-    status: VendorLifecycleStage;
-    owner: string;
-    projectId: string;
-}
-
-export interface Evidence {
-    id: string;
-    title: string;
-    fileUrl: string;
-    uploadDate: string;
-    uploaderId: string; // userId
-    controlId: string;
-    projectId: string;
+  id: string;
+  projectId: string;
+  name: string;
+  service: string;
+  tier: '1' | '2' | '3';
+  status: VendorLifecycleStage;
+  owner: string;
 }
 
 export interface ControlMapping {
     id: string;
+    projectId: string;
     sourceControlId: string;
     targetControlId: string;
-    projectId: string;
 }
+
+
+export type View =
+  | { type: 'landing' }
+  | { type: 'login' }
+  | { type: 'dashboard' }
+  | { type: 'project'; projectId: string; tab: 'assessments' | 'evidence' | 'risks' | 'policies' | 'vendors' | 'reports' }
+  | { type: 'vendorDetail', projectId: string, vendorId: string };
