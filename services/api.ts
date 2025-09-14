@@ -9,20 +9,20 @@ export const mockUsers: User[] = [
     { id: 'user-5', name: 'Dana Scully', email: 'contrib@northwind.test', role: UserRole.CLIENT_CONTRIBUTOR, organizationId: 'org-northwind', avatarUrl: `https://i.pravatar.cc/150?u=user-5` },
 ];
 
-export let mockOrganizations: Organization[] = [
+export const mockOrganizations: Organization[] = [
     { id: 'org-aurelius', name: 'Aurelius Risk Partners' },
     { id: 'org-northwind', name: 'Northwind Health' },
     { id: 'org-contoso', name: 'Contoso Manufacturing' },
     { id: 'org-litware', name: 'Litware Finance' },
 ];
 
-let mockProjects: Project[] = [
+const mockProjects: Project[] = [
     { id: 'proj-1', name: 'Northwind Health - ISO 27001 Readiness', organizationId: 'org-northwind', frameworks: ['ISO 27001:2022'] },
     { id: 'proj-2', name: 'Contoso Manufacturing - NIST CSF 2.0 Assessment', organizationId: 'org-contoso', frameworks: ['NIST CSF 2.0'] },
     { id: 'proj-3', name: 'Litware Finance - SOC 2 Type I', organizationId: 'org-litware', frameworks: ['SOC 2'] },
 ];
 
-let mockControls: Control[] = [
+const mockControls: Control[] = [
     // ISO 27001:2022
     { id: 'ISO-A.5.1', name: 'Policies for information security', description: 'A set of policies for information security should be defined, approved by management, published and communicated.', family: 'Organizational Controls', framework: 'ISO 27001:2022' },
     { id: 'ISO-A.6.3', name: 'Information security awareness, education and training', description: 'Information security awareness, education and training should be provided to all relevant personnel.', family: 'People Controls', framework: 'ISO 27001:2022' },
@@ -41,7 +41,7 @@ let mockControls: Control[] = [
     { id: 'SOC2-CC6.1', name: 'Logical Access Security', description: 'The entity implements logical access security measures to protect information assets.', family: 'Logical and Physical Access Controls', framework: 'SOC 2' },
 ];
 
-let mockAssessmentItems: AssessmentItem[] = [
+const mockAssessmentItems: AssessmentItem[] = [
     { id: 'item-1', controlId: 'ISO-A.5.1', projectId: 'proj-1', status: AssessmentStatus.IN_REVIEW, notes: 'Initial draft of ISMS policy suite is complete. Awaiting review from management.', remediationPlan: '', assignedTo: 'user-2' },
     { id: 'item-2', controlId: 'ISO-A.8.12', projectId: 'proj-1', status: AssessmentStatus.IN_PROGRESS, notes: 'Evaluating DLP solutions from vendors A and B.', remediationPlan: '1. Finalize DLP vendor selection.\n2. Implement DLP solution on endpoints.\n3. Test and validate DLP rules.', assignedTo: 'user-5' },
     { id: 'item-3', controlId: 'NIST-PR.AC-1', projectId: 'proj-2', status: AssessmentStatus.COMPLETED, notes: 'Quarterly access review completed and signed off by department heads.', remediationPlan: '', assignedTo: 'user-3' },
@@ -49,16 +49,16 @@ let mockAssessmentItems: AssessmentItem[] = [
     { id: 'item-5', controlId: 'SOC2-CC6.1', projectId: 'proj-3', status: AssessmentStatus.IN_PROGRESS, notes: 'Reviewing AD group policies for excessive permissions.', remediationPlan: '', assignedTo: 'user-4' },
 ];
 
-let mockRisks: Risk[] = [
+const mockRisks: Risk[] = [
     { id: 'risk-1', title: 'Excessive user permissions in production DB', level: RiskLevel.HIGH, status: 'Open', controlId: 'ISO-A.8.12', projectId: 'proj-1' },
     { id: 'risk-2', title: 'Lack of formal incident response plan', level: RiskLevel.MEDIUM, status: 'Open', controlId: 'NIST-RS.RP-1', projectId: 'proj-2' },
 ];
 
-let mockPolicies: Policy[] = [
+const mockPolicies: Policy[] = [
     { id: 'pol-1', title: 'Access Control Policy', content: 'This policy outlines the access control requirements for all company information systems...', ownerId: 'user-2', status: PolicyStatus.APPROVED, version: '1.2', lastUpdated: '2023-10-26', projectId: 'proj-1', history: [{status: PolicyStatus.APPROVED, date: '2023-10-26', userId: 'user-2', notes: 'Final approval.'}] },
 ];
 
-let mockPolicyVersions: Record<string, PolicyVersion[]> = {
+const mockPolicyVersions: Record<string, PolicyVersion[]> = {
     'pol-1': [
         { version: '1.2', date: '2023-10-26', editorId: 'user-2', changes: 'Updated section 3.1 to include MFA requirements.' },
         { version: '1.1', date: '2023-09-15', editorId: 'user-5', changes: 'Added password complexity rules.' },
@@ -66,11 +66,11 @@ let mockPolicyVersions: Record<string, PolicyVersion[]> = {
     ]
 };
 
-let mockEvidence: Evidence[] = [
+const mockEvidence: Evidence[] = [
     { id: 'ev-1', title: 'Q3 Access Review Sign-off.pdf', fileUrl: '#', uploadDate: '2023-11-01', uploaderId: 'user-5', controlId: 'NIST-PR.AC-1', projectId: 'proj-2' },
 ];
 
-let mockVendors: Vendor[] = [
+const mockVendors: Vendor[] = [
     { id: 'ven-1', name: 'Amazon Web Services', service: 'Cloud Hosting', tier: '1', status: VendorLifecycleStage.ACTIVE, owner: 'CTO', projectId: 'proj-1' },
     { id: 'ven-2', name: 'CrowdStrike', service: 'Endpoint Security', tier: '2', status: VendorLifecycleStage.ONBOARDING, owner: 'CISO', projectId: 'proj-2' },
 ];
