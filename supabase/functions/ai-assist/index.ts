@@ -1,5 +1,5 @@
-// Fix: Replaced invalid Deno types reference with a valid one for Supabase Edge Functions to resolve TS errors.
-/// <reference types="https://esm.sh/@supabase/functions-js@2/src/edge-runtime.d.ts" />
+// Fix: Replaced the esm.sh types reference with the npm specifier to resolve Deno type errors.
+/// <reference types="npm:@supabase/functions-js/src/edge-runtime.d.ts" />
 
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts'
 import { GoogleGenAI } from 'npm:@google/genai';

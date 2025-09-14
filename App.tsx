@@ -1,9 +1,10 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import type { User, View, Organization, Project } from './types';
 import { UserRole } from './types';
-import { supabase } from './services/supabaseClient';
-import { mockOrganizations, consultantClientLinks } from './services/api'; // Mock data for some parts remains for now
+import { supabase, isSupabaseConfigured } from './services/supabaseClient';
+import { mockOrganizations, consultantClientLinks } from './services/api'; 
 
+import EnvironmentNotice from './components/setup/EnvironmentNotice';
 import LandingPage from './components/landing/LandingPage';
 import LoginPage from './components/auth/LoginPage';
 import Sidebar from './components/layout/Sidebar';
@@ -15,6 +16,12 @@ import VendorDetailView from './components/views/vendors/VendorDetailView';
 
 
 const App: React.FC = () => {
+  // Immediately check if the environment is configured.
+  if (!isSupabaseConfigured) {
+    // If not, render a helpful guide instead of the app.
+    return <EnvironmentNotice />;
+  }
+
   const [user, setUser] = useState<User | null>(null);
   const [view, setView] = useState<View>({ type: 'landing' });
   const [projects, setProjects] = useState<Project[]>([]);
@@ -56,7 +63,6 @@ const App: React.FC = () => {
     };
   }, []);
   
-  // This can be replaced with real API calls later
   useEffect(() => {
       const fetchProjects = async () => {
           if(user) {

@@ -1,3 +1,5 @@
+// services/supabaseClient.ts
+
 // Fix: Manually define types for import.meta.env to resolve errors when vite/client types are not found.
 interface ImportMetaEnv {
   readonly VITE_SUPABASE_URL: string;
@@ -8,13 +10,16 @@ interface ImportMeta {
   readonly env: ImportMetaEnv
 }
 
-import { createClient } from '@supabase/supabase-js';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-if (!supabaseUrl || !supabaseAnonKey) {
-    throw new Error("Supabase URL and Anon Key must be provided in environment variables.");
-}
+// Export the client and a flag indicating if it's configured.
+export const isSupabaseConfigured = !!(supabaseUrl && supabaseAnonKey);
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// Provide a real or dummy client based on configuration.
+// This prevents a crash on module import.
+export const supabase: SupabaseClient = isSupabaseConfigured
+  ? createClient(supabaseUrl, supabaseAnonKey)
+  : {} as SupabaseClient;
