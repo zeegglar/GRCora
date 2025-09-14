@@ -1,7 +1,7 @@
-// FIX: Corrected the path for the Supabase Edge Runtime type definitions to `dist`.
+// FIX: Corrected the path for the Supabase Edge Runtime type definitions.
 // This resolves the "Cannot find type definition file" error and the subsequent
 // error where the global 'Deno' object was not recognized.
-/// <reference types="npm:@supabase/functions-js/dist/edge-runtime.d.ts" />
+/// <reference types="npm:@supabase/functions-js/edge-runtime.d.ts" />
 
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts'
 import { GoogleGenAI } from 'npm:@google/genai';
