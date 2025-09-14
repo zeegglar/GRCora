@@ -1,3 +1,4 @@
+
 import type { User, Organization, Project, Control, AssessmentItem, Risk, Policy, PolicyVersion, Evidence, Vendor, ControlMapping } from '../types';
 import { UserRole, AssessmentStatus, RiskLevel, PolicyStatus, VendorLifecycleStage } from '../types';
 
@@ -21,9 +22,9 @@ export const consultantClientLinks: Record<string, string[]> = {
 }
 
 let mockProjects: Project[] = [
-  { id: 'proj-1', name: 'Q3 2024 SOC 2 Audit', organizationId: 'org-2', frameworks: ['SOC 2', 'NIST CSF 2.0'] },
-  { id: 'proj-2', name: 'ISO 27001 Certification', organizationId: 'org-3', frameworks: ['ISO 27001:2022'] },
-  { id: 'proj-3', name: 'HIPAA Compliance Initiative', organizationId: 'org-4', frameworks: ['HIPAA'] },
+  { id: 'proj-1', name: 'Q3 2024 SOC 2 Audit', organizationId: 'org-2', frameworks: ['SOC 2', 'NIST CSF 2.0'], trend: 'down' },
+  { id: 'proj-2', name: 'ISO 27001 Certification', organizationId: 'org-3', frameworks: ['ISO 27001:2022'], trend: 'stable' },
+  { id: 'proj-3', name: 'HIPAA Compliance Initiative', organizationId: 'org-4', frameworks: ['HIPAA'], trend: 'up' },
 ];
 
 let mockControls: Control[] = [
@@ -43,6 +44,9 @@ let mockAssessmentItems: AssessmentItem[] = [
 let mockRisks: Risk[] = [
     { id: 'risk-1', projectId: 'proj-1', title: 'Over-privileged user accounts', level: RiskLevel.HIGH, status: 'Open', controlId: 'SOC2.CC6.1' },
     { id: 'risk-2', projectId: 'proj-2', title: 'Lack of formal access review process', level: RiskLevel.MEDIUM, status: 'Open', controlId: 'ISO.A.5.15' },
+    { id: 'risk-3', projectId: 'proj-3', title: 'ePHI exposed in test environments', level: RiskLevel.CRITICAL, status: 'Open', controlId: 'HIPAA.164.312.a.1' },
+    { id: 'risk-4', projectId: 'proj-3', title: 'Insufficient audit logging for PHI access', level: RiskLevel.HIGH, status: 'Open', controlId: 'HIPAA.164.312.a.1' },
+    { id: 'risk-5', projectId: 'proj-1', title: 'Weak password policies', level: RiskLevel.MEDIUM, status: 'Open', controlId: 'SOC2.CC6.1' },
 ];
 
 let mockPolicies: Policy[] = [];
@@ -58,7 +62,7 @@ export const mockApi = {
   getProjectsForOrg: async (orgId: string): Promise<Project[]> => mockProjects.filter(p => p.organizationId === orgId),
   getProjectsForConsultant: async (clientOrgIds: string[]): Promise<Project[]> => mockProjects.filter(p => clientOrgIds.includes(p.organizationId)),
   createProject: async (name: string, organizationId: string, frameworks: string[]): Promise<Project> => {
-      const newProject: Project = { id: `proj-${Date.now()}`, name, organizationId, frameworks };
+      const newProject: Project = { id: `proj-${Date.now()}`, name, organizationId, frameworks, trend: 'stable' };
       mockProjects.push(newProject);
       return newProject;
   },
@@ -76,6 +80,7 @@ export const mockApi = {
 
   // Risks
   getRisks: async (projectId: string): Promise<Risk[]> => mockRisks.filter(r => r.projectId === projectId),
+  getAllRisksForProjects: async (projectIds: string[]): Promise<Risk[]> => mockRisks.filter(r => projectIds.includes(r.projectId)),
   createRisk: async (riskData: Omit<Risk, 'id'>): Promise<Risk> => {
       const newRisk: Risk = { ...riskData, id: `risk-${Date.now()}` };
       mockRisks.push(newRisk);
