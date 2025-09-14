@@ -1,10 +1,11 @@
 // FIX: Corrected the path for the Supabase Edge Runtime type definitions.
 // This resolves the "Cannot find type definition file" error and the subsequent
 // error where the global 'Deno' object was not recognized.
-/// <reference types="npm:@supabase/functions-js/edge-runtime.d.ts" />
+/// <reference types="npm:@supabase/functions-js/edge-runtime" />
 
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts'
-import { GoogleGenAI } from 'npm:@google/genai';
+// FIX: Use the correct import for GoogleGenAI.
+import { GoogleGenAI } from "npm:@google/genai";
 
 // Add CORS headers to handle preflight requests
 const corsHeaders = {
@@ -26,6 +27,7 @@ serve(async (req) => {
     }
     
     // 2. Initialize the Gemini client
+    // FIX: Correctly initialize GoogleGenAI with a named apiKey parameter.
     const ai = new GoogleGenAI({ apiKey: API_KEY });
 
     // 3. Get the prompt from the request body
@@ -38,12 +40,13 @@ serve(async (req) => {
     }
 
     // 4. Call the Gemini API
-    // Fix: Inlined model name to strictly follow the coding guidelines.
+    // FIX: Use ai.models.generateContent and provide the model name with the request.
     const response = await ai.models.generateContent({
       model: 'gemini-2.5-flash',
       contents: prompt,
     });
     
+    // FIX: Correctly extract the text response.
     const text = response.text;
 
     // 5. Return the response
