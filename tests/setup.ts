@@ -1,21 +1,22 @@
 import '@testing-library/jest-dom';
+import { vi } from 'vitest';
 
 // Mock Supabase
-jest.mock('../services/supabaseClient', () => ({
+vi.mock('../services/supabaseClient', () => ({
   supabase: {
     auth: {
-      onAuthStateChange: jest.fn(() => ({ data: { subscription: { unsubscribe: jest.fn() } } })),
-      signOut: jest.fn(),
+      onAuthStateChange: vi.fn(() => ({ data: { subscription: { unsubscribe: vi.fn() } } })),
+      signOut: vi.fn(),
     },
-    from: jest.fn(() => ({
-      select: jest.fn(() => ({
-        eq: jest.fn(() => ({
-          single: jest.fn(() => Promise.resolve({ data: null, error: null }))
+    from: vi.fn(() => ({
+      select: vi.fn(() => ({
+        eq: vi.fn(() => ({
+          single: vi.fn(() => Promise.resolve({ data: null, error: null }))
         }))
       }))
     })),
     functions: {
-      invoke: jest.fn(() => Promise.resolve({ data: { text: 'Mock AI response' }, error: null }))
+      invoke: vi.fn(() => Promise.resolve({ data: { text: 'Mock AI response' }, error: null }))
     }
   },
   isSupabaseConfigured: true
@@ -24,14 +25,14 @@ jest.mock('../services/supabaseClient', () => ({
 // Mock window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  value: jest.fn().mockImplementation(query => ({
+  value: vi.fn().mockImplementation(query => ({
     matches: false,
     media: query,
     onchange: null,
-    addListener: jest.fn(),
-    removeListener: jest.fn(),
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
+    addListener: vi.fn(),
+    removeListener: vi.fn(),
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
   })),
 });
