@@ -3,6 +3,7 @@ import type { User, View, Organization, Project } from './types';
 import { UserRole } from './types';
 import { supabase, isSupabaseConfigured } from './services/supabaseClient';
 import { mockOrganizations, consultantClientLinks } from './services/api';
+import { NotificationProvider } from './components/context/NotificationContext';
 
 import EnvironmentNotice from './components/setup/EnvironmentNotice';
 import LandingPage from './components/landing/LandingPage';
@@ -193,28 +194,30 @@ const App: React.FC = () => {
   const linkedClients = mockOrganizations.filter(org => linkedClientIds.includes(org.id));
 
   return (
-    <div className="flex h-screen bg-slate-900/50">
-      <Sidebar
-        user={user}
-        currentView={view}
-        setView={setView}
-        onLogout={handleLogout}
-        currentProjectName={currentProjectName}
-      />
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <Header
+    <NotificationProvider>
+      <div className="flex h-screen bg-slate-900/50">
+        <Sidebar
           user={user}
-          view={view}
+          currentView={view}
           setView={setView}
-          organizations={mockOrganizations}
-          projects={projects}
-          linkedClients={linkedClients}
+          onLogout={handleLogout}
+          currentProjectName={currentProjectName}
         />
-        <main className="flex-1 overflow-y-auto bg-slate-900">
-           {renderLoggedInView()}
-        </main>
+        <div className="flex-1 flex flex-col overflow-hidden">
+          <Header
+            user={user}
+            view={view}
+            setView={setView}
+            organizations={mockOrganizations}
+            projects={projects}
+            linkedClients={linkedClients}
+          />
+          <main className="flex-1 overflow-y-auto bg-slate-900">
+             {renderLoggedInView()}
+          </main>
+        </div>
       </div>
-    </div>
+    </NotificationProvider>
   );
 };
 
