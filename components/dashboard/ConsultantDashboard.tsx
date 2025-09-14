@@ -23,7 +23,7 @@ const TrendIndicator: React.FC<{ trend?: 'up' | 'down' | 'stable' }> = ({ trend 
         return <div className="flex items-center space-x-1 text-red-400"><ArrowUpRightIcon className="h-4 w-4" /><span>Increasing</span></div>;
     }
     if (trend === 'down') {
-        return <div className="flex items-center space-x-1 text-green-400"><ArrowDownRightIcon className="h-4 w-4" /><span>Decreasing</span></div>;
+        return <div className="flex items-center space-x-1 text-green-400"><ArrowDownRightIcon className="h-4 w-4" /><span>Improving</span></div>;
     }
     return <div className="text-slate-400">Stable</div>;
 }
@@ -97,6 +97,28 @@ const ConsultantDashboard: React.FC<ConsultantDashboardProps> = ({ user, setView
     fetchData();
   }, [user.organizationId]);
 
+  const projectsWithTrend = useMemo(() => {
+    return projects.map(p => {
+      const openProjectRisks = allRisks.filter(r => r.projectId === p.id && r.status === 'Open');
+
+      const thirtyDaysAgo = new Date();
+      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+      const recentOpenRisks = openProjectRisks.filter(
+        r => r.creationDate && new Date(r.creationDate) > thirtyDaysAgo
+      ).length;
+
+      let trend: 'up' | 'down' | 'stable' = 'stable';
+      if (recentOpenRisks >= 2) {
+        trend = 'up';
+      } else if (openProjectRisks.length === 0) {
+        trend = 'down';
+      }
+
+      return { ...p, trend };
+    });
+  }, [projects, allRisks]);
+
   const riskSummaries = useMemo(() => {
     const summaries = new Map<string, RiskSummary>();
     projects.forEach(project => {
@@ -139,9 +161,9 @@ const ConsultantDashboard: React.FC<ConsultantDashboardProps> = ({ user, setView
           </button>
         </header>
         <main>
-            {projects.length > 0 ? (
+            {projectsWithTrend.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {projects.map(project => {
+                    {projectsWithTrend.map(project => {
                         const client = getClientForProject(project);
                         const riskSummary = riskSummaries.get(project.id);
                         if (!client || !riskSummary) return null;

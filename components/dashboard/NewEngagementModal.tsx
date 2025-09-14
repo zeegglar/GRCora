@@ -41,19 +41,13 @@ const NewEngagementModal: React.FC<NewEngagementModalProps> = ({ isOpen, onClose
         finalClientId = newOrg.id;
         onClientCreated(); // Callback to refresh client list in dashboard
     }
-
+    
     if (!finalClientId || !projectName || selectedFrameworks.length === 0) {
       alert('Please fill out all fields and select at least one framework.');
       return;
     }
 
     onCreate(projectName, finalClientId, selectedFrameworks);
-
-    // Reset all form state after successful submission
-    setClientId('');
-    setNewClientName('');
-    setProjectName('');
-    setSelectedFrameworks([]);
   };
 
   return (

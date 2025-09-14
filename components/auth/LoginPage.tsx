@@ -1,133 +1,48 @@
 import React, { useState } from 'react';
-import { supabase } from '../../services/supabaseClient';
-import type { View } from '../../types';
+import { mockUsers } from '../../services/api';
 
 interface LoginPageProps {
-  setView: (view: View) => void;
-  onDemoLogin?: (email: string) => void;
+  onLogin: (userId: string) => void;
 }
 
-const LoginPage: React.FC<LoginPageProps> = ({ setView, onDemoLogin }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
+  const [selectedUser, setSelectedUser] = useState(mockUsers[0].id);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    setError('');
-
-    // Demo mode - bypass authentication for testing
-    if (demoUsers.some(user => user.email === email)) {
-      // Simulate login success and navigate to dashboard
-      setTimeout(() => {
-        setView({ type: 'dashboard' });
-        setLoading(false);
-      }, 500);
-      return;
-    }
-
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
-
-    if (error) {
-      setError(error.message);
-    } else {
-      // The onAuthStateChange listener in App.tsx will handle navigation
-    }
-    setLoading(false);
+    onLogin(selectedUser);
   };
-
-  const handleDemoLogin = (demoEmail: string) => {
-    setLoading(true);
-    if (onDemoLogin) {
-      // Use the parent's demo login handler
-      onDemoLogin(demoEmail);
-    } else {
-      // Fallback - just navigate to dashboard
-      setTimeout(() => {
-        setView({ type: 'dashboard' });
-        setLoading(false);
-      }, 300);
-    }
-  };
-
-  const demoUsers = [
-      { email: 'owner@aurelius.test', role: 'Consultant Owner' },
-      { email: 'admin@northwind.test', role: 'Client Admin' },
-      { email: 'admin@contoso.test', role: 'Client Admin' },
-      { email: 'admin@litware.test', role: 'Client Admin' },
-  ];
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-slate-900 p-4 bg-gradient-grcora">
-      <div className="w-full max-w-md animate-fade-in-scale-up">
+    <div className="min-h-screen bg-slate-900 flex flex-col justify-center items-center p-4">
+      <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-            <h1 className="text-5xl font-extrabold text-gradient bg-gradient-grcora">GRCora</h1>
-            <p className="text-xl text-indigo-200 mt-2">
-                Compliance, streamlined. Risk, revealed.
-            </p>
+            <h1 className="text-5xl font-bold text-gradient bg-gradient-grcora">GRCora</h1>
+            <p className="text-slate-400 mt-2">GRC for Consultants and Their Clients</p>
         </div>
-
-        <div className="glass-card rounded-2xl p-8 shadow-2xl">
-          <h2 className="text-2xl font-bold text-white mb-2 text-center">Welcome Back</h2>
-          <p className="text-slate-400 mb-6 text-center">Sign in to your account</p>
-          <form onSubmit={handleSubmit}>
-            {error && <p className="bg-red-500/20 text-red-400 text-center text-sm p-3 rounded-lg mb-4">{error}</p>}
-            <div className="mb-4">
-              <label className="block text-slate-400 text-sm font-bold mb-2" htmlFor="email">
-                Email Address
-              </label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="e.g., owner@aurelius.test"
-                className="w-full px-4 py-3 text-slate-200 bg-slate-900/50 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
-                required
-              />
-            </div>
-            <div className="mb-6">
-              <label className="block text-slate-400 text-sm font-bold mb-2" htmlFor="password">
-                Password
-              </label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                className="w-full px-4 py-3 text-slate-200 bg-slate-900/50 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
-              />
-            </div>
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition-colors disabled:opacity-50"
-            >
-              {loading ? 'Signing in...' : 'Sign In'}
-            </button>
-          </form>
-        </div>
-
-        <div className="mt-8 pt-6">
-            <h3 className="text-indigo-200/80 font-semibold mb-3 text-center">Quick Logins</h3>
-            <div className="grid grid-cols-2 gap-2">
-                {demoUsers.map(user => (
-                    <button
-                        key={user.email}
-                        onClick={() => handleDemoLogin(user.email)}
-                        className="text-sm text-center p-2 rounded-md bg-slate-800/50 hover:bg-slate-700/70 text-indigo-300 transition-colors"
+        <div className="glass-card rounded-lg p-8 shadow-2xl">
+            <h2 className="text-2xl font-bold text-white text-center">Sign In</h2>
+            <p className="text-center text-sm text-slate-400 mt-2 mb-6">This is a demo. Please select a user profile to log in.</p>
+            <form onSubmit={handleSubmit}>
+                <div className="mb-4">
+                    <label htmlFor="user-select" className="block text-sm font-medium text-slate-300 mb-2">Select a user to continue</label>
+                    <select
+                        id="user-select"
+                        value={selectedUser}
+                        onChange={(e) => setSelectedUser(e.target.value)}
+                        className="w-full px-3 py-2 text-slate-200 bg-slate-900/50 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
-                        {user.role}
-                    </button>
-                ))}
-            </div>
-            <p className="text-xs text-slate-500 mt-3 text-center">(Demo password: password123)</p>
+                        {mockUsers.map(user => (
+                            <option key={user.id} value={user.id}>
+                                {user.name} ({user.role.replace(/_/g, ' ')})
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <button type="submit" className="w-full mt-4 px-4 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors font-semibold text-white">
+                    Sign In
+                </button>
+            </form>
         </div>
       </div>
     </div>

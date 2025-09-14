@@ -75,6 +75,7 @@ export interface Risk {
   status: 'Open' | 'Closed';
   controlId: string;
   projectId: string;
+  creationDate?: string;
 }
 
 export interface Policy {
