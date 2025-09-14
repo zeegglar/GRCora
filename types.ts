@@ -1,3 +1,4 @@
+
 // types.ts
 
 export enum UserRole {
@@ -27,6 +28,7 @@ export interface Project {
   name: string;
   organizationId: string;
   frameworks: string[];
+  trend?: 'up' | 'down' | 'stable';
 }
 
 export enum AssessmentStatus {
