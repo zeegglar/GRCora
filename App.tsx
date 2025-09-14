@@ -17,12 +17,6 @@ import VendorDetailView from './components/views/vendors/VendorDetailView';
 
 
 const App: React.FC = () => {
-  // Immediately check if the environment is configured.
-  if (!isSupabaseConfigured) {
-    // If not, render a helpful guide instead of the app.
-    return <EnvironmentNotice />;
-  }
-
   const [user, setUser] = useState<User | null>(null);
   const [view, setView] = useState<View>({ type: 'landing' });
   const [projects, setProjects] = useState<Project[]>([]);

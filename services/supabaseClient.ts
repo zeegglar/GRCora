@@ -1,15 +1,5 @@
 // services/supabaseClient.ts
 
-// Fix: Manually define types for import.meta.env to resolve errors when vite/client types are not found.
-interface ImportMetaEnv {
-  readonly VITE_SUPABASE_URL: string;
-  readonly VITE_SUPABASE_ANON_KEY: string;
-}
-
-interface ImportMeta {
-  readonly env: ImportMetaEnv
-}
-
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
