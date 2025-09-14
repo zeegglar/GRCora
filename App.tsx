@@ -2,8 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import type { User, View, Organization, Project } from './types';
 import { UserRole } from './types';
 import { supabase, isSupabaseConfigured } from './services/supabaseClient';
-import { mockOrganizations, consultantClientLinks } from './services/api';
-import { logger } from './utils/logger'; 
+import { mockOrganizations, consultantClientLinks } from './services/api'; 
 
 import EnvironmentNotice from './components/setup/EnvironmentNotice';
 import LandingPage from './components/landing/LandingPage';
@@ -17,6 +16,12 @@ import VendorDetailView from './components/views/vendors/VendorDetailView';
 
 
 const App: React.FC = () => {
+  // Immediately check if the environment is configured.
+  if (!isSupabaseConfigured) {
+    // If not, render a helpful guide instead of the app.
+    return <EnvironmentNotice />;
+  }
+
   const [user, setUser] = useState<User | null>(null);
   const [view, setView] = useState<View>({ type: 'landing' });
   const [projects, setProjects] = useState<Project[]>([]);
@@ -43,7 +48,7 @@ const App: React.FC = () => {
                 });
                 setView({ type: 'dashboard' });
             } else {
-                logger.error('User profile not found', error, { userId: session.user.id });
+                console.error('User profile not found:', error);
                 setUser(null);
             }
         } else {
@@ -94,12 +99,6 @@ const App: React.FC = () => {
     }
     return undefined;
   }, [view, projects]);
-
-  // Immediately check if the environment is configured.
-  if (!isSupabaseConfigured) {
-    // If not, render a helpful guide instead of the app.
-    return <EnvironmentNotice />;
-  }
 
   if (loading) {
       return <div className="h-screen w-screen flex items-center justify-center bg-slate-900 text-white">Loading...</div>

@@ -24,18 +24,6 @@
       ]
     },
     "allowImportingTsExtensions": true,
-    "noEmit": true,
-    "strict": false,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "exactOptionalPropertyTypes": false,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": false
-  },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "supabase/**/*"
-  ]
+    "noEmit": true
+  }
 }

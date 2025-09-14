@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import type { Control, Project } from '../../types';
 import { explainControl, suggestEvidence, draftRemediationPlan, draftPolicySection } from '../../services/geminiService';
 import { CheckCircleIcon } from './Icons';
-import { logger } from '../../utils/logger';
 
 type AIAction = 'explain' | 'evidence' | 'remediation' | 'policy';
 
@@ -57,7 +56,7 @@ const AIAssistPanel: React.FC<AIAssistPanelProps> = ({ control, project, onApply
       setLastAction(action);
     } catch (e) {
       setError('An error occurred while communicating with the AI. Please try again.');
-      logger.error('AI assist action failed', e, { action, controlId: control.id, projectId: project.id });
+      console.error(e);
     } finally {
       setActiveAction(null);
     }
