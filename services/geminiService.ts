@@ -13,6 +13,7 @@ async function callAIAssist(prompt: string): Promise<string> {
     throw new Error("Failed to get response from AI model via Edge Function.");
   }
   
+  // FIX: The invoked function returns an object with a 'text' property.
   return data.text;
 }
 

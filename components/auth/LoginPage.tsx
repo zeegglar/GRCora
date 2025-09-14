@@ -54,7 +54,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ setView, onDemoLogin }) => {
       }, 300);
     }
   };
-  
+
   const demoUsers = [
       { email: 'owner@aurelius.test', role: 'Consultant Owner' },
       { email: 'admin@northwind.test', role: 'Client Admin' },
@@ -71,7 +71,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ setView, onDemoLogin }) => {
                 Compliance, streamlined. Risk, revealed.
             </p>
         </div>
-        
+
         <div className="glass-card rounded-2xl p-8 shadow-2xl">
           <h2 className="text-2xl font-bold text-white mb-2 text-center">Welcome Back</h2>
           <p className="text-slate-400 mb-6 text-center">Sign in to your account</p>
