@@ -12,6 +12,6 @@ vi.mock('../../components/setup/EnvironmentNotice', () => ({
 describe('App', () => {
   it('renders loading state initially', () => {
     render(<App />);
-    expect(screen.getByText('Loading...')).toBeInTheDocument();
+    expect(screen.getByText('Loading...')).toBeTruthy();
   });
 });
