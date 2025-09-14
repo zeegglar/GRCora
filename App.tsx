@@ -27,6 +27,51 @@ const App: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // Demo users for testing
+  const demoUsers: Record<string, User> = {
+    'owner@aurelius.test': {
+      id: 'demo-user-1',
+      name: 'Marcus Aurelius',
+      email: 'owner@aurelius.test',
+      role: UserRole.CONSULTANT_OWNER,
+      organizationId: 'org-1',
+      avatarUrl: 'https://i.pravatar.cc/150?u=demo-user-1'
+    },
+    'admin@northwind.test': {
+      id: 'demo-user-2',
+      name: 'Alia Atreides',
+      email: 'admin@northwind.test',
+      role: UserRole.CLIENT_ADMIN,
+      organizationId: 'org-2',
+      avatarUrl: 'https://i.pravatar.cc/150?u=demo-user-2'
+    },
+    'admin@contoso.test': {
+      id: 'demo-user-3',
+      name: 'Bob Johnson',
+      email: 'admin@contoso.test',
+      role: UserRole.CLIENT_ADMIN,
+      organizationId: 'org-3',
+      avatarUrl: 'https://i.pravatar.cc/150?u=demo-user-3'
+    },
+    'admin@litware.test': {
+      id: 'demo-user-4',
+      name: 'Charlie Day',
+      email: 'admin@litware.test',
+      role: UserRole.CLIENT_ADMIN,
+      organizationId: 'org-4',
+      avatarUrl: 'https://i.pravatar.cc/150?u=demo-user-4'
+    }
+  };
+
+  const handleDemoLogin = (email: string) => {
+    const demoUser = demoUsers[email];
+    if (demoUser) {
+      setUser(demoUser);
+      setView({ type: 'dashboard' });
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
         setLoading(true);
@@ -107,7 +152,7 @@ const App: React.FC = () => {
   const renderLoggedOutView = () => {
     switch(view.type) {
         case 'login':
-            return <LoginPage setView={setView} />;
+            return <LoginPage setView={setView} onDemoLogin={handleDemoLogin} />;
         case 'landing':
         default:
             return <LandingPage setView={setView} />;

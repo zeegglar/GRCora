@@ -4,9 +4,10 @@ import type { View } from '../../types';
 
 interface LoginPageProps {
   setView: (view: View) => void;
+  onDemoLogin?: (email: string) => void;
 }
 
-const LoginPage: React.FC<LoginPageProps> = ({ setView }) => {
+const LoginPage: React.FC<LoginPageProps> = ({ setView, onDemoLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -16,7 +17,17 @@ const LoginPage: React.FC<LoginPageProps> = ({ setView }) => {
     e.preventDefault();
     setLoading(true);
     setError('');
-    
+
+    // Demo mode - bypass authentication for testing
+    if (demoUsers.some(user => user.email === email)) {
+      // Simulate login success and navigate to dashboard
+      setTimeout(() => {
+        setView({ type: 'dashboard' });
+        setLoading(false);
+      }, 500);
+      return;
+    }
+
     const { error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
@@ -28,6 +39,20 @@ const LoginPage: React.FC<LoginPageProps> = ({ setView }) => {
       // The onAuthStateChange listener in App.tsx will handle navigation
     }
     setLoading(false);
+  };
+
+  const handleDemoLogin = (demoEmail: string) => {
+    setLoading(true);
+    if (onDemoLogin) {
+      // Use the parent's demo login handler
+      onDemoLogin(demoEmail);
+    } else {
+      // Fallback - just navigate to dashboard
+      setTimeout(() => {
+        setView({ type: 'dashboard' });
+        setLoading(false);
+      }, 300);
+    }
   };
   
   const demoUsers = [
@@ -93,9 +118,9 @@ const LoginPage: React.FC<LoginPageProps> = ({ setView }) => {
             <h3 className="text-indigo-200/80 font-semibold mb-3 text-center">Quick Logins</h3>
             <div className="grid grid-cols-2 gap-2">
                 {demoUsers.map(user => (
-                    <button 
-                        key={user.email} 
-                        onClick={() => { setEmail(user.email); setPassword('password123'); }} 
+                    <button
+                        key={user.email}
+                        onClick={() => handleDemoLogin(user.email)}
                         className="text-sm text-center p-2 rounded-md bg-slate-800/50 hover:bg-slate-700/70 text-indigo-300 transition-colors"
                     >
                         {user.role}
