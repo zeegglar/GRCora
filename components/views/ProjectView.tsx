@@ -1,4 +1,5 @@
-import React from 'react';
+// FIX: Import useState hook to resolve 'Cannot find name' error.
+import React, { useState } from 'react';
 import type { View, User, Project, AssessmentItem, Risk, Policy, Vendor, Evidence, Control } from '../../types';
 
 import AssessmentTable from './assessments/AssessmentTable';
@@ -66,7 +67,8 @@ const ProjectView: React.FC<ProjectViewProps> = ({ user, view, projectData, setV
   const renderTabContent = () => {
     switch (tab) {
       case 'assessments':
-        return <AssessmentTable assessmentItems={assessmentItems} controls={controls} onUpdate={onUpdate} user={user} />;
+        // FIX: Pass the full project object to AssessmentTable to provide necessary context for child components.
+        return <AssessmentTable assessmentItems={assessmentItems} controls={controls} onUpdate={onUpdate} user={user} project={project} />;
       case 'risks':
         return <RiskTable risks={risks} controls={controls} onCreateRisk={handleCreateRisk} projectId={project.id} />;
       case 'policies':

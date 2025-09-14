@@ -11,6 +11,7 @@ interface AIAssistPanelProps {
   project: Project;
   onApplyRemediation: (remediationPlan: string) => void;
   onApplyPolicy: (policyContent: string) => void;
+  onCopyToNotes: (content: string) => void;
 }
 
 const LoadingSpinner: React.FC = () => (
@@ -23,7 +24,7 @@ const LoadingSpinner: React.FC = () => (
     </div>
 );
 
-const AIAssistPanel: React.FC<AIAssistPanelProps> = ({ control, project, onApplyRemediation, onApplyPolicy }) => {
+const AIAssistPanel: React.FC<AIAssistPanelProps> = ({ control, project, onApplyRemediation, onApplyPolicy, onCopyToNotes }) => {
   const [activeAction, setActiveAction] = useState<AIAction | null>(null);
   const [output, setOutput] = useState('');
   const [error, setError] = useState('');
@@ -118,6 +119,12 @@ const AIAssistPanel: React.FC<AIAssistPanelProps> = ({ control, project, onApply
                 >
                    {isCopied ? <CheckCircleIcon className="h-4 w-4 text-green-400" /> : null}
                    <span>{isCopied ? 'Copied!' : 'Copy'}</span>
+                </button>
+                <button 
+                    onClick={() => onCopyToNotes(output)}
+                    className="px-3 py-1 text-xs rounded-md font-semibold bg-slate-600/80 hover:bg-slate-500 text-white transition-colors"
+                >
+                    Copy to Notes
                 </button>
                 {(lastAction === 'remediation' || lastAction === 'policy') && (
                      <button 

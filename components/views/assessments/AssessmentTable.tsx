@@ -1,5 +1,6 @@
+
 import React, { useState, useMemo } from 'react';
-import type { AssessmentItem, Control, User } from '../../../types';
+import type { AssessmentItem, Control, User, Project } from '../../../types';
 import { mockApi } from '../../../services/api';
 import AIAssistPanel from '../../ui/AIAssistPanel';
 import ControlMappingModal from './ControlMappingModal';
@@ -7,11 +8,13 @@ import { LinkIcon } from '../../ui/Icons';
 import SendReminderModal from './SendReminderModal';
 import { UserRole } from '../../../types';
 
+// FIX: Add project to props to receive the full project context.
 interface AssessmentTableProps {
   assessmentItems: AssessmentItem[];
   controls: Map<string, Control>;
   user: User;
   onUpdate: () => void;
+  project: Project;
 }
 
 const statusStyles = {
@@ -21,13 +24,15 @@ const statusStyles = {
   'Not Applicable': 'bg-slate-600/50 text-slate-400',
 };
 
+// FIX: Add project to props to receive the full project context from AssessmentTable.
 const AssessmentRow: React.FC<{ 
   item: AssessmentItem; 
   control: Control; 
   allControls: Control[];
   user: User;
   onUpdate: () => void;
-}> = ({ item, control, allControls, user, onUpdate }) => {
+  project: Project;
+}> = ({ item, control, allControls, user, onUpdate, project }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isMappingModalOpen, setIsMappingModalOpen] = useState(false);
   const [isReminderModalOpen, setIsReminderModalOpen] = useState(false);
@@ -47,6 +52,13 @@ const AssessmentRow: React.FC<{
     // In a real app, this would open the new policy modal with pre-filled content
     alert("Policy content created. Please paste it into a new policy document.");
   }
+
+  const handleCopyToNotes = (content: string) => {
+    const newNotes = item.notes
+      ? `${item.notes}\n\n--- Copied from GRCora Assist ---\n${content}`
+      : `--- Copied from GRCora Assist ---\n${content}`;
+    mockApi.updateAssessmentItemNotes(item.id, newNotes).then(onUpdate);
+  };
 
   const handleOpenMapping = async () => {
     const data = await mockApi.getMappingsForControl(control.id);
@@ -83,16 +95,18 @@ const AssessmentRow: React.FC<{
           </select>
         </td>
         <td className="px-6 py-4 text-slate-400">{control.family}</td>
+        <td className="px-6 py-4 text-slate-400">{control.framework}</td>
       </tr>
       {isExpanded && (
         <tr className="bg-slate-800/20">
-          <td colSpan={4} className="p-4">
+          <td colSpan={5} className="p-4">
             <div className="p-4 bg-slate-900/50 rounded-lg">
               <h4 className="font-semibold text-white">Control Description</h4>
               <p className="text-sm text-slate-400 mt-1 mb-4">{control.description}</p>
               {isConsultant && <button onClick={handleOpenMapping} className="mb-4 flex items-center text-sm text-blue-400 hover:underline"><LinkIcon className="h-4 w-4 mr-2" />Manage Mappings</button>}
               <h4 className="font-semibold text-white">Auditor Notes</h4>
               <textarea
+                key={item.id + item.notes} // Force re-render when notes change
                 defaultValue={item.notes}
                 onBlur={(e) => mockApi.updateAssessmentItemNotes(item.id, e.target.value)}
                 rows={3}
@@ -102,11 +116,13 @@ const AssessmentRow: React.FC<{
               <div className="flex justify-end mt-2">
                  <button onClick={() => setIsReminderModalOpen(true)} className="text-sm text-blue-400 hover:underline">Send Reminder...</button>
               </div>
+              {/* FIX: Use the complete project object passed from props, which resolves the missing 'organizationId' error and provides correct project context. */}
               <AIAssistPanel 
                 control={control} 
-                project={{ id: item.projectId, name: "Project", frameworks: [control.framework] }}
+                project={project}
                 onApplyRemediation={handleApplyRemediation}
                 onApplyPolicy={handleApplyPolicy}
+                onCopyToNotes={handleCopyToNotes}
               />
             </div>
           </td>
@@ -130,11 +146,84 @@ const AssessmentRow: React.FC<{
   );
 };
 
-const AssessmentTable: React.FC<AssessmentTableProps> = ({ assessmentItems, controls, user, onUpdate }) => {
+const AssessmentTable: React.FC<AssessmentTableProps> = ({ assessmentItems, controls, user, onUpdate, project }) => {
+  const [statusFilter, setStatusFilter] = useState<string>('All');
+  const [familyFilter, setFamilyFilter] = useState<string>('All');
+  const [frameworkFilter, setFrameworkFilter] = useState<string>('All');
+
   const allControls = useMemo(() => Array.from(controls.values()), [controls]);
   
+  const controlFamilies = useMemo(() => {
+    const families = new Set<string>();
+    allControls.forEach(control => families.add(control.family));
+    return Array.from(families).sort();
+  }, [allControls]);
+
+  const filteredAssessmentItems = useMemo(() => {
+    return assessmentItems
+      .filter(item => {
+        if (statusFilter === 'All') return true;
+        return item.status === statusFilter;
+      })
+      .filter(item => {
+        if (familyFilter === 'All') return true;
+        const control = controls.get(item.controlId);
+        return control?.family === familyFilter;
+      })
+      .filter(item => {
+        if (frameworkFilter === 'All') return true;
+        const control = controls.get(item.controlId);
+        return control?.framework === frameworkFilter;
+      });
+  }, [assessmentItems, statusFilter, familyFilter, frameworkFilter, controls]);
+
   return (
     <div className="glass-card rounded-lg overflow-hidden">
+      <div className="p-4 bg-slate-800/50 flex items-center space-x-4 border-b border-slate-700/50">
+        <div>
+          <label htmlFor="status-filter" className="block text-xs font-medium text-slate-400 mb-1">Filter by Status</label>
+          <select
+            id="status-filter"
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+            className="w-48 rounded-md bg-slate-700/60 border-slate-600 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 text-sm py-1.5"
+          >
+            <option>All</option>
+            <option>Compliant</option>
+            <option>Non-Compliant</option>
+            <option>In Progress</option>
+            <option>Not Applicable</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="family-filter" className="block text-xs font-medium text-slate-400 mb-1">Filter by Family</label>
+          <select
+            id="family-filter"
+            value={familyFilter}
+            onChange={(e) => setFamilyFilter(e.target.value)}
+            className="w-64 rounded-md bg-slate-700/60 border-slate-600 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 text-sm py-1.5"
+          >
+            <option>All</option>
+            {controlFamilies.map(family => (
+              <option key={family} value={family}>{family}</option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label htmlFor="framework-filter" className="block text-xs font-medium text-slate-400 mb-1">Filter by Framework</label>
+          <select
+            id="framework-filter"
+            value={frameworkFilter}
+            onChange={(e) => setFrameworkFilter(e.target.value)}
+            className="w-48 rounded-md bg-slate-700/60 border-slate-600 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 text-sm py-1.5"
+          >
+            <option>All</option>
+            {project.frameworks.map(framework => (
+              <option key={framework} value={framework}>{framework}</option>
+            ))}
+          </select>
+        </div>
+      </div>
       <table className="w-full text-sm text-left text-slate-300">
         <thead className="text-xs text-slate-400 uppercase bg-slate-800/50">
           <tr>
@@ -142,14 +231,24 @@ const AssessmentTable: React.FC<AssessmentTableProps> = ({ assessmentItems, cont
             <th scope="col" className="px-6 py-3">Control Name</th>
             <th scope="col" className="px-6 py-3">Status</th>
             <th scope="col" className="px-6 py-3">Family</th>
+            <th scope="col" className="px-6 py-3">Framework</th>
           </tr>
         </thead>
         <tbody>
-          {assessmentItems.map((item) => {
+          {filteredAssessmentItems.map((item) => {
             const control = controls.get(item.controlId);
             if (!control) return null;
-            return <AssessmentRow key={item.id} item={item} control={control} allControls={allControls} user={user} onUpdate={onUpdate} />;
+            // FIX: Pass down the project prop to each AssessmentRow.
+            return <AssessmentRow key={item.id} item={item} control={control} allControls={allControls} user={user} onUpdate={onUpdate} project={project} />;
           })}
+          {filteredAssessmentItems.length === 0 && (
+            <tr>
+              <td colSpan={5} className="text-center py-12 text-slate-500">
+                <p className="font-semibold">No Results Found</p>
+                <p className="mt-1 text-sm">No assessment items match the current filters.</p>
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>
