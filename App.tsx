@@ -2,7 +2,8 @@ import React, { useState, useMemo, useEffect } from 'react';
 import type { User, View, Organization, Project } from './types';
 import { UserRole } from './types';
 import { supabase, isSupabaseConfigured } from './services/supabaseClient';
-import { mockOrganizations, consultantClientLinks } from './services/api'; 
+import { mockOrganizations, consultantClientLinks } from './services/api';
+import { logger } from './utils/logger'; 
 
 import EnvironmentNotice from './components/setup/EnvironmentNotice';
 import LandingPage from './components/landing/LandingPage';
@@ -48,7 +49,7 @@ const App: React.FC = () => {
                 });
                 setView({ type: 'dashboard' });
             } else {
-                console.error('User profile not found:', error);
+                logger.error('User profile not found', error, { userId: session.user.id });
                 setUser(null);
             }
         } else {
