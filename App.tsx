@@ -143,7 +143,16 @@ const App: React.FC = () => {
         return <div className="p-8">Loading project data...</div>
       
       case 'vendorDetail':
-        return <VendorDetailView vendorId={view.vendorId} projectId={view.projectId} setView={setView} />\n      \n      case 'tprmDashboard':\n        return <TPRMDashboard projectId={view.projectId} setView={setView} />\n      \n      case 'tprmReports':\n        return <TPRMReportsView projectId={view.projectId} setView={setView} />\n      \n      case 'remediationTracker':\n        return <RemediationTracker projectId={view.projectId} setView={setView} />
+        return <VendorDetailView vendorId={view.vendorId} projectId={view.projectId} setView={setView} />
+
+      case 'tprmDashboard':
+        return <TPRMDashboard projectId={view.projectId} setView={setView} />
+
+      case 'tprmReports':
+        return <TPRMReportsView projectId={view.projectId} setView={setView} />
+
+      case 'remediationTracker':
+        return <RemediationTracker projectId={view.projectId} setView={setView} />
 
       default:
         return <div className="p-8">Unknown view</div>;
