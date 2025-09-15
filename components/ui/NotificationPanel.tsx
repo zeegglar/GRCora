@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNotifications, setGlobalNotificationHandler } from '../context/NotificationContext';
 
 const BellIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
@@ -9,21 +10,23 @@ const BellIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 
 const NotificationPanel: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const { notifications, addNotification, removeNotification, clearNotifications } = useNotifications();
 
-    const notifications = [
-        { id: 1, text: 'Evidence for control SOC2-CC6.1 has been approved.', time: '2h ago' },
-        { id: 2, text: 'New risk "Delayed patch management" was added to HealthPlus project.', time: '1d ago' },
-        { id: 3, text: 'Reminder: Quarterly access reviews are due next week.', time: '3d ago' },
-    ];
+    // Set up the global notification handler for use outside React components
+    useEffect(() => {
+        setGlobalNotificationHandler(addNotification);
+    }, [addNotification]);
 
     return (
         <div className="relative">
             <button onClick={() => setIsOpen(!isOpen)} className="relative p-2 rounded-full text-slate-400 hover:bg-slate-700/50 hover:text-white">
                 <BellIcon className="h-6 w-6" />
-                <span className="absolute top-1 right-1 flex h-3 w-3">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
-                </span>
+                {notifications.length > 0 && (
+                    <span className="absolute top-1 right-1 flex h-3 w-3">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                    </span>
+                )}
             </button>
             {isOpen && (
                 <div className="absolute right-0 mt-2 w-80 bg-slate-800 border border-slate-700 rounded-lg shadow-2xl z-10 animate-fade-in-scale-up">

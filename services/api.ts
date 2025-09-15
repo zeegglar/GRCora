@@ -83,6 +83,10 @@ export const mockApi = {
     await delay(300);
     return mockProjects.find(p => p.organizationId === orgId);
   },
+  getProjectById: async (projectId: string): Promise<Project | undefined> => {
+    await delay(200);
+    return mockProjects.find(p => p.id === projectId);
+  },
   getAllRisksForProjects: async (projectIds: string[]): Promise<Risk[]> => {
     await delay(500);
     return mockRisks.filter(r => projectIds.includes(r.projectId));

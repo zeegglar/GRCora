@@ -3,6 +3,7 @@ import type { User, View, Project, AssessmentItem, Risk, Policy, Vendor, Evidenc
 import { UserRole } from './types';
 import { mockApi, mockUsers } from './services/api';
 import { isSupabaseConfigured } from './services/supabaseClient';
+import { NotificationProvider } from './components/context/NotificationContext';
 
 import Sidebar from './components/layout/Sidebar';
 import Header from './components/layout/Header';
@@ -27,10 +28,28 @@ const App: React.FC = () => {
       return;
     }
     setIsLoading(true);
-    
-    // Simulate fetching data based on user role and current view
+
+    // Handle different scenarios based on user role and current view
     if (user.role.startsWith('CONSULTANT')) {
-        // Consultant data is fetched inside ConsultantDashboard
+        // For consultants viewing a specific project, load that project's data
+        if (view.type === 'project') {
+            const project = await mockApi.getProjectById(view.projectId);
+            if (project) {
+                const [assessmentItems, risks, policies, vendors, evidence, controls] = await Promise.all([
+                    mockApi.getAssessmentItems(project.id),
+                    mockApi.getRisks(project.id),
+                    mockApi.getPolicies(project.id),
+                    mockApi.getVendors(project.id),
+                    mockApi.getEvidence(project.id),
+                    mockApi.getControls(project.frameworks)
+                ]);
+                const controlsMap = new Map(controls.map(c => [c.id, c]));
+                setData({ project, assessmentItems, risks, policies, vendors, evidence, controls: controlsMap });
+            }
+        } else {
+            // For consultant dashboard, data is fetched inside ConsultantDashboard
+            setData({});
+        }
     } else {
         // Client user data
         const project = await mockApi.getProjectForClient(user.organizationId);
@@ -52,7 +71,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     fetchData();
-  }, [user]);
+  }, [user, view]);
 
   const handleLogin = (userId: string) => {
     const foundUser = mockUsers.find(u => u.id === userId);
@@ -129,21 +148,23 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="flex h-screen bg-slate-900 text-white">
-      <Sidebar 
-        user={user} 
-        currentView={view} 
-        setView={setView} 
-        onLogout={handleLogout}
-        currentProjectName={currentProjectName}
-      />
-      <div className="flex-1 flex flex-col overflow-hidden">
-        {/* The header is removed as the main content areas have their own headers now. */}
-        <main className="flex-1 overflow-y-auto">
-          {renderContent()}
-        </main>
+    <NotificationProvider>
+      <div className="flex h-screen bg-slate-900 text-white">
+        <Sidebar
+          user={user}
+          currentView={view}
+          setView={setView}
+          onLogout={handleLogout}
+          currentProjectName={currentProjectName}
+        />
+        <div className="flex-1 flex flex-col overflow-hidden">
+          <Header user={user} />
+          <main className="flex-1 overflow-y-auto">
+            {renderContent()}
+          </main>
+        </div>
       </div>
-    </div>
+    </NotificationProvider>
   );
 };
 
