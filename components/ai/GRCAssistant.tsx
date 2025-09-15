@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import type { Project, Risk, AssessmentItem, Control, Vendor } from '../../types';
+import { VendorCriticality } from '../../types';
 
 interface GRCAssistantProps {
   project?: Project;
@@ -85,7 +86,7 @@ const GRCAssistant: React.FC<GRCAssistantProps> = ({
     }
 
     // Vendor risk analysis
-    const highRiskVendors = vendors.filter(v => v.riskLevel === 'HIGH' || v.riskLevel === 'CRITICAL');
+    const highRiskVendors = vendors.filter(v => v.riskLevel === VendorCriticality.HIGH || v.riskLevel === VendorCriticality.CRITICAL);
     if (highRiskVendors.length > 0) {
       newInsights.push({
         type: 'vendor_alert',
@@ -218,8 +219,8 @@ Feel free to ask me about any GRC-related topic!`,
 
 🏢 **Vendor Portfolio:**
 • Total vendors: ${vendors.length}
-• High-risk vendors: ${vendors.filter(v => v.riskLevel === 'HIGH').length}
-• Critical vendors: ${vendors.filter(v => v.riskLevel === 'CRITICAL').length}
+• High-risk vendors: ${vendors.filter(v => v.riskLevel === VendorCriticality.HIGH).length}
+• Critical vendors: ${vendors.filter(v => v.riskLevel === VendorCriticality.CRITICAL).length}
 
 ⚠️ **Risk Indicators:**
 • Vendors with expired certifications: 12%

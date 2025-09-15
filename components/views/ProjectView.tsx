@@ -64,7 +64,13 @@ const ProjectView: React.FC<ProjectViewProps> = ({ user, view, projectData, setV
      // In a real app, this would call mockApi.createEvidence
     console.log('Creating evidence', evidenceData);
     onUpdate();
-  }
+  };
+
+  const handleUpdateAssessment = async (assessmentData: AssessmentItem) => {
+    // In a real app, this would call mockApi.updateAssessment
+    console.log('Updating assessment', assessmentData);
+    onUpdate();
+  };
 
 
   const renderTabContent = () => {
