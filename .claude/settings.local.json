@@ -3,7 +3,9 @@
     "allow": [
       "Read(//c/**)",
       "Bash(cat:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(git clean:*)",
+      "Bash(git check-ignore:*)"
     ],
     "deny": [],
     "ask": []
