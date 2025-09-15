@@ -1,7 +1,8 @@
 
 
 import React, { useState } from 'react';
-import type { Vendor, VendorCriticality } from '../../../types';
+import type { Vendor } from '../../../types';
+import { VendorCriticality } from '../../../types';
 
 interface NewVendorModalProps {
   isOpen: boolean;

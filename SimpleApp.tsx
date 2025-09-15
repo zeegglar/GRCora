@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import LandingPage from './components/landing/LandingPage';
-
-type View = { type: 'landing' } | { type: 'login' } | { type: 'dashboard' };
+import type { View } from './types';
 
 const SimpleApp: React.FC = () => {
   const [view, setView] = useState<View>({ type: 'landing' });
