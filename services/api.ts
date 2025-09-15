@@ -1,5 +1,5 @@
-import type { User, Organization, Project, Control, AssessmentItem, Risk, Policy, PolicyVersion, Vendor, Evidence, ControlMapping } from '../types';
-import { UserRole, RiskLevel, PolicyStatus, VendorLifecycleStage } from '../types';
+import type { User, Organization, Project, Control, AssessmentItem, Risk, Policy, PolicyVersion, Vendor, Evidence, ControlMapping, VendorRiskAssessment, VendorDueDiligence, VendorContract, VendorPerformanceMetric, VendorIncident, VendorCertification } from '../types';
+import { UserRole, RiskLevel, PolicyStatus, VendorLifecycleStage, VendorCriticality, VendorRiskCategory, DueDiligenceStatus, ContractStatus } from '../types';
 
 // Mock Data
 export const mockUsers: User[] = [
@@ -60,7 +60,126 @@ let mockPolicyVersions: PolicyVersion[] = [
 ]
 
 let mockVendors: Vendor[] = [
-    { id: 'ven-1', name: 'AWS', service: 'Cloud Hosting', tier: '1', status: VendorLifecycleStage.ACTIVE, owner: 'CTO', projectId: 'proj-1' },
+    {
+        id: 'ven-1',
+        name: 'Amazon Web Services (AWS)',
+        description: 'Leading cloud computing platform providing scalable infrastructure services',
+        website: 'https://aws.amazon.com',
+        industry: 'Cloud Computing',
+        headquarters: 'Seattle, WA, USA',
+        foundedYear: 2006,
+        employeeCount: '100,000+',
+        annualRevenue: '$80B+',
+        serviceCategory: 'Infrastructure & Platform Services',
+        servicesProvided: ['Cloud Computing', 'Data Storage', 'Content Delivery', 'Database Services'],
+        criticality: VendorCriticality.CRITICAL,
+        tier: '1',
+        overallRiskScore: 25,
+        riskLevel: VendorCriticality.LOW,
+        lastRiskAssessment: '2024-01-15',
+        nextRiskAssessment: '2024-07-15',
+        regulatoryRequirements: ['SOC 2', 'ISO 27001', 'GDPR', 'HIPAA'],
+        status: VendorLifecycleStage.ACTIVE,
+        onboardingDate: '2023-06-15',
+        nextReviewDate: '2024-06-15',
+        businessOwner: 'CTO',
+        technicalOwner: 'Lead DevOps Engineer',
+        procurementOwner: 'VP Finance',
+        contacts: [
+            { name: 'John Smith', role: 'Technical Account Manager', email: 'j.smith@aws.amazon.com', phone: '+1-555-0123', isPrimary: true },
+            { name: 'Sarah Johnson', role: 'Security Specialist', email: 's.johnson@aws.amazon.com', isPrimary: false }
+        ],
+        dataTypes: ['Customer Data', 'Application Data', 'Logs'],
+        accessLevel: 'Administrative',
+        hasSystemAccess: true,
+        systemsAccessed: ['Production Environment', 'Staging Environment', 'Backup Systems'],
+        annualSpend: 250000,
+        currency: 'USD',
+        paymentTerms: 'Net 30',
+        certifications: [],
+        complianceFrameworks: ['SOC 2 Type II', 'ISO 27001', 'PCI DSS'],
+        projectId: 'proj-1',
+        subVendors: ['ven-2']
+    },
+    {
+        id: 'ven-2',
+        name: 'DataGuard Solutions',
+        description: 'Specialized cybersecurity firm providing threat monitoring and incident response',
+        website: 'https://dataguard.example.com',
+        industry: 'Cybersecurity',
+        headquarters: 'Austin, TX, USA',
+        foundedYear: 2018,
+        employeeCount: '50-100',
+        annualRevenue: '$10M-25M',
+        serviceCategory: 'Security Services',
+        servicesProvided: ['SOC Services', 'Incident Response', 'Vulnerability Assessment'],
+        criticality: VendorCriticality.HIGH,
+        tier: '2',
+        overallRiskScore: 45,
+        riskLevel: VendorCriticality.MEDIUM,
+        lastRiskAssessment: '2024-02-01',
+        nextRiskAssessment: '2024-08-01',
+        regulatoryRequirements: ['SOC 2', 'ISO 27001'],
+        status: VendorLifecycleStage.ACTIVE,
+        onboardingDate: '2023-09-01',
+        nextReviewDate: '2024-09-01',
+        businessOwner: 'CISO',
+        technicalOwner: 'Security Manager',
+        procurementOwner: 'Procurement Manager',
+        contacts: [
+            { name: 'Mike Chen', role: 'Account Manager', email: 'm.chen@dataguard.example.com', phone: '+1-555-0456', isPrimary: true }
+        ],
+        dataTypes: ['Security Logs', 'Incident Data'],
+        accessLevel: 'Privileged',
+        hasSystemAccess: true,
+        systemsAccessed: ['SIEM Systems', 'Security Tools'],
+        annualSpend: 120000,
+        currency: 'USD',
+        paymentTerms: 'Net 15',
+        certifications: [],
+        complianceFrameworks: ['SOC 2 Type II', 'ISO 27001'],
+        projectId: 'proj-1',
+        parentVendorId: 'ven-1'
+    },
+    {
+        id: 'ven-3',
+        name: 'HealthTech Analytics',
+        description: 'Healthcare data analytics platform for patient outcomes analysis',
+        website: 'https://healthtech-analytics.example.com',
+        industry: 'Healthcare Technology',
+        headquarters: 'Boston, MA, USA',
+        foundedYear: 2020,
+        employeeCount: '25-50',
+        annualRevenue: '$5M-10M',
+        serviceCategory: 'Data Analytics',
+        servicesProvided: ['Patient Analytics', 'Reporting Dashboard', 'Data Integration'],
+        criticality: VendorCriticality.HIGH,
+        tier: '2',
+        overallRiskScore: 55,
+        riskLevel: VendorCriticality.MEDIUM,
+        lastRiskAssessment: '2024-01-20',
+        nextRiskAssessment: '2024-07-20',
+        regulatoryRequirements: ['HIPAA', 'SOC 2'],
+        status: VendorLifecycleStage.ONBOARDING,
+        nextReviewDate: '2024-05-15',
+        businessOwner: 'Chief Medical Officer',
+        technicalOwner: 'Data Engineering Lead',
+        procurementOwner: 'VP Operations',
+        contacts: [
+            { name: 'Dr. Lisa Williams', role: 'Clinical Solutions Lead', email: 'l.williams@healthtech.example.com', phone: '+1-555-0789', isPrimary: true },
+            { name: 'Tom Rodriguez', role: 'Implementation Manager', email: 't.rodriguez@healthtech.example.com', isPrimary: false }
+        ],
+        dataTypes: ['PHI', 'Clinical Data', 'Analytics Data'],
+        accessLevel: 'Standard',
+        hasSystemAccess: true,
+        systemsAccessed: ['Analytics Platform', 'Data Warehouse'],
+        annualSpend: 85000,
+        currency: 'USD',
+        paymentTerms: 'Net 30',
+        certifications: [],
+        complianceFrameworks: ['HIPAA', 'SOC 2 Type I'],
+        projectId: 'proj-2'
+    }
 ];
 
 let mockEvidence: Evidence[] = [
