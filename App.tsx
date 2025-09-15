@@ -84,7 +84,7 @@ const App: React.FC = () => {
       if (foundUser.role.startsWith('CLIENT')) {
           // Find client project and set view
           mockApi.getProjectForClient(foundUser.organizationId).then(p => {
-              if (p) setView({type: 'project', projectId: p.id, tab: 'assessments' });
+              if (p) setView({type: 'project', projectId: p.id, tab: 'dashboard' });
               else setView({type: 'dashboard'});
           })
       } else {

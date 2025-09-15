@@ -4,6 +4,7 @@ import { mockApi, mockOrganizations, consultantClientLinks } from '../../service
 import { RiskLevel, VendorCriticality } from '../../types';
 import { PlusCircleIcon, ArrowUpRightIcon, ArrowDownRightIcon, ChartBarIcon, ClockIcon, ExclamationTriangleIcon, CheckCircleIcon } from '../ui/Icons';
 import NewEngagementModal from './NewEngagementModal';
+import InteractiveDashboard from './InteractiveDashboard';
 import { useNotifications } from '../context/NotificationContext';
 
 interface ConsultantDashboardProps {

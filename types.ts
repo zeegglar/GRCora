@@ -325,7 +325,7 @@ export type View =
   | { type: 'landing' }
   | { type: 'login' }
   | { type: 'dashboard' }
-  | { type: 'project'; projectId: string; tab: 'assessments' | 'evidence' | 'risks' | 'policies' | 'vendors' | 'workflows' | 'reports' }
+  | { type: 'project'; projectId: string; tab: 'dashboard' | 'assessments' | 'evidence' | 'risks' | 'policies' | 'vendors' | 'workflows' | 'reports' }
   | { type: 'vendorDetail'; projectId: string; vendorId: string; tab?: 'overview' | 'risk' | 'contracts' | 'performance' | 'incidents' | 'due-diligence' }
   | { type: 'vendorRiskAssessment'; projectId: string; vendorId: string; assessmentId?: string }
   | { type: 'tprmDashboard'; projectId: string }

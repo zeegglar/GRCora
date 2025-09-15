@@ -7,14 +7,16 @@ import RiskTable from './risks/RiskTable';
 import PolicyTable from './policies/PolicyTable';
 import VendorTable from './vendors/VendorTable';
 import EvidenceTable from './evidence/EvidenceTable';
-import ReportsView from './reports/ReportsView';
+import EnhancedReportsView from '../reports/EnhancedReportsView';
+import EnhancedControlTracker from '../controls/EnhancedControlTracker';
+import InteractiveDashboard from '../dashboard/InteractiveDashboard';
 import NewPolicyModal from './policies/NewPolicyModal';
 import WorkflowEngine from '../workflows/WorkflowEngine';
 import { PolicyStatus } from '../../types';
 
 interface ProjectViewProps {
   user: User;
-  view: { type: 'project'; projectId: string; tab: 'assessments' | 'evidence' | 'risks' | 'policies' | 'vendors' | 'reports' | 'workflows' };
+  view: { type: 'project'; projectId: string; tab: 'assessments' | 'evidence' | 'risks' | 'policies' | 'vendors' | 'reports' | 'workflows' | 'dashboard' };
   projectData: {
     project: Project;
     assessmentItems: AssessmentItem[];
@@ -67,9 +69,28 @@ const ProjectView: React.FC<ProjectViewProps> = ({ user, view, projectData, setV
 
   const renderTabContent = () => {
     switch (tab) {
+      case 'dashboard':
+        return (
+          <InteractiveDashboard
+            user={user}
+            project={project}
+            risks={risks}
+            assessmentItems={assessmentItems}
+            vendors={vendors}
+            controls={controls}
+            onNavigate={setView}
+          />
+        );
       case 'assessments':
-        // FIX: Pass the full project object to AssessmentTable to provide necessary context for child components.
-        return <AssessmentTable assessmentItems={assessmentItems} controls={controls} onUpdate={onUpdate} user={user} project={project} />;
+        return (
+          <EnhancedControlTracker
+            project={project}
+            assessmentItems={assessmentItems}
+            controls={controls}
+            risks={risks}
+            onUpdateAssessment={handleUpdateAssessment}
+          />
+        );
       case 'risks':
         return <RiskTable risks={risks} controls={controls} onCreateRisk={handleCreateRisk} projectId={project.id} />;
       case 'policies':
@@ -79,7 +100,16 @@ const ProjectView: React.FC<ProjectViewProps> = ({ user, view, projectData, setV
       case 'evidence':
         return <EvidenceTable evidence={evidence} controls={controls} projectId={project.id} onCreateEvidence={handleCreateEvidence} />;
       case 'reports':
-        return <ReportsView project={project} assessmentItems={assessmentItems} risks={risks} controls={controls} />;
+        return (
+          <EnhancedReportsView
+            project={project}
+            user={user}
+            assessmentItems={assessmentItems}
+            risks={risks}
+            controls={controls}
+            vendors={vendors}
+          />
+        );
       case 'workflows':
         return <WorkflowEngine user={user} projectId={project.id} assessmentItems={assessmentItems} risks={risks} vendors={vendors} setView={setView} />;
       default:
@@ -88,13 +118,14 @@ const ProjectView: React.FC<ProjectViewProps> = ({ user, view, projectData, setV
   };
 
   const tabs = [
-    { id: 'assessments', label: 'Assessments' },
-    { id: 'evidence', label: 'Evidence' },
-    { id: 'risks', label: 'Risks' },
-    { id: 'policies', label: 'Policies' },
-    { id: 'vendors', label: 'Vendors' },
-    { id: 'workflows', label: 'Workflows' },
-    { id: 'reports', label: 'Reports' },
+    { id: 'dashboard', label: '🏠 Dashboard' },
+    { id: 'assessments', label: '✅ Controls' },
+    { id: 'risks', label: '⚠️ Risks' },
+    { id: 'vendors', label: '🏢 Vendors' },
+    { id: 'policies', label: '📋 Policies' },
+    { id: 'evidence', label: '📁 Evidence' },
+    { id: 'reports', label: '📊 Reports' },
+    { id: 'workflows', label: '🔄 Workflows' },
   ];
 
   return (

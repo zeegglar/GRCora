@@ -346,8 +346,6 @@ const RealTimeSystem: React.FC<RealTimeSystemProps> = ({ user, currentProjectId 
           </div>
         )}
       </div>
-
-      </div>
       )}
 
       {/* Footer */}
