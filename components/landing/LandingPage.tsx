@@ -110,12 +110,50 @@ const LandingPage: React.FC<LandingPageProps> = ({ setView, onLogin }) => {
                 <p className="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-slate-400">
                     Manage multiple client engagements, streamline complex audits, and collaborate securely in a single, audit-ready platform. GRCora brings clarity and control to your entire compliance lifecycle.
                 </p>
+
+                {/* Live Demo Preview */}
+                <div className="mt-12 max-w-4xl mx-auto">
+                  <div className="glass-card p-6 rounded-lg">
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-lg font-semibold text-white">🔴 Live Platform Demo</h3>
+                      <div className="flex space-x-2">
+                        <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                        <span className="text-sm text-green-400">Real-time Updates</span>
+                      </div>
+                    </div>
+                    <div className="bg-slate-800/50 rounded-lg p-4 text-left">
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between">
+                          <span className="text-slate-300">{demoFeatures[currentDemo].title}</span>
+                          <span className={`font-mono font-bold ${demoFeatures[currentDemo].color}`}>
+                            {demoFeatures[currentDemo].metrics}
+                          </span>
+                        </div>
+                        <div className="text-sm text-slate-400">
+                          {demoFeatures[currentDemo].description}
+                        </div>
+                        <div className="w-full bg-slate-700 rounded-full h-2">
+                          <div
+                            className={`h-2 rounded-full transition-all duration-1000 ${
+                              currentDemo === 0 ? 'bg-red-400 w-3/4' :
+                              currentDemo === 1 ? 'bg-green-400 w-5/6' : 'bg-blue-400 w-1/2'
+                            }`}
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <div className="mt-10 flex justify-center space-x-4">
                     <button onClick={() => handleContact('GRCora Demo Request')} className="px-8 py-3 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors">
                         Book a Demo
                     </button>
                     <button onClick={() => onLogin('user-1')} className="px-8 py-3 font-semibold text-white bg-slate-700/50 border border-slate-600 rounded-lg hover:bg-slate-700 transition-colors">
                         Explore Consultant View
+                    </button>
+                    <button onClick={() => onLogin('user-4')} className="px-8 py-3 font-semibold text-white bg-green-600/20 border border-green-600 rounded-lg hover:bg-green-600/30 transition-colors">
+                        Try Client Portal
                     </button>
                 </div>
             </div>
@@ -129,15 +167,54 @@ const LandingPage: React.FC<LandingPageProps> = ({ setView, onLogin }) => {
               Stop juggling spreadsheets and siloed tools. GRCora provides the purpose-built infrastructure to scale your practice and deliver exceptional value to every client.
             </p>
             <div className="grid md:grid-cols-3 gap-8 mt-12">
-               <FeatureCard icon={<ClientsIcon className="h-6 w-6" />} title="Centralized Client Management">
-                Oversee your entire client portfolio from a single, powerful dashboard with strict data isolation.
+               <FeatureCard icon={<ClientsIcon className="h-6 w-6" />} title="Interactive Portfolio Dashboard">
+                Advanced consultant dashboard with health scoring, real-time analytics, and interactive project management for your entire client portfolio.
               </FeatureCard>
-              <FeatureCard icon={<ReportsIcon className="h-6 w-6" />} title="Audit-Ready Reporting">
-                Generate comprehensive reports like Gap Analysis and Statements of Applicability in minutes.
+              <FeatureCard icon={<ReportsIcon className="h-6 w-6" />} title="Real-Time Event Monitoring">
+                Live notifications for risks, compliance changes, vendor incidents, and automated workflow triggers to keep you ahead of issues.
               </FeatureCard>
-              <FeatureCard icon={<ArrowsRightLeftIcon className="h-6 w-6" />} title="Cross-Framework Intelligence">
-                Map controls and evidence across standards like ISO 27001, SOC 2, and NIST to eliminate redundant work.
+              <FeatureCard icon={<ArrowsRightLeftIcon className="h-6 w-6" />} title="Automated Workflow Engine">
+                Smart task generation, automated assessment workflows, and intelligent remediation planning to streamline your GRC processes.
               </FeatureCard>
+            </div>
+
+            {/* NEW: Enhanced Features Showcase */}
+            <div className="mt-16 bg-slate-800/20 rounded-lg p-8">
+              <h3 className="text-2xl font-bold text-white text-center mb-8">🚀 Latest Platform Enhancements</h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-green-400 rounded-full mt-2"></div>
+                    <div>
+                      <h4 className="font-semibold text-white">Advanced Analytics Dashboard</h4>
+                      <p className="text-slate-400 text-sm">Interactive charts, trend analysis, and predictive risk scoring with real-time updates</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-blue-400 rounded-full mt-2"></div>
+                    <div>
+                      <h4 className="font-semibold text-white">Smart Workflow Automation</h4>
+                      <p className="text-slate-400 text-sm">AI-powered task generation and priority-based remediation planning</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2"></div>
+                    <div>
+                      <h4 className="font-semibold text-white">Live Event Streaming</h4>
+                      <p className="text-slate-400 text-sm">Real-time risk detection, compliance monitoring, and vendor incident tracking</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-purple-400 rounded-full mt-2"></div>
+                    <div>
+                      <h4 className="font-semibold text-white">Enhanced Client Experience</h4>
+                      <p className="text-slate-400 text-sm">Intuitive client portals with interactive dashboards and progress visualization</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
