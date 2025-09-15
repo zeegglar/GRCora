@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import LandingPage from './components/landing/LandingPage';
+import BasicLanding from './BasicLanding';
 
 type View = { type: 'landing' } | { type: 'login' };
 
@@ -14,7 +14,7 @@ const SimpleApp: React.FC = () => {
   return (
     <div className="min-h-screen">
       {view.type === 'landing' ? (
-        <LandingPage setView={setView} onLogin={handleLogin} />
+        <BasicLanding setView={setView} onLogin={handleLogin} />
       ) : (
         <div className="flex items-center justify-center min-h-screen bg-slate-900 text-white">
           <div className="text-center">
