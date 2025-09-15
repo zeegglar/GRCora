@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import type { View } from '../../types';
 import {
@@ -8,6 +6,7 @@ import {
 
 interface LandingPageProps {
   setView: (view: View) => void;
+  onLogin: (userId: string) => void;
 }
 
 const CheckIcon: React.FC<{className?: string}> = ({className}) => (
@@ -27,11 +26,11 @@ const FeatureCard: React.FC<{ icon: React.ReactNode; title: string; children: Re
 );
 
 
-const LandingPage: React.FC<LandingPageProps> = ({ setView }) => {
+const LandingPage: React.FC<LandingPageProps> = ({ setView, onLogin }) => {
 
-  const handleBookDemo = () => {
-    window.location.href = "mailto:demo@grcora.test?subject=GRCora Demo Request";
-  }
+  const handleContact = (subject: string) => {
+    window.location.href = `mailto:demo@grcora.test?subject=${encodeURIComponent(subject)}`;
+  };
 
   return (
     <div className="bg-slate-900 text-slate-300">
@@ -49,7 +48,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ setView }) => {
             <button onClick={() => setView({ type: 'login' })} className="text-sm font-semibold hover:text-white">
               Sign In
             </button>
-            <button onClick={handleBookDemo} className="px-5 py-2.5 text-sm font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors">
+            <button onClick={() => handleContact('GRCora Demo Request')} className="px-5 py-2.5 text-sm font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors">
               Book a Demo
             </button>
           </div>
@@ -67,10 +66,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ setView }) => {
                     Manage multiple client engagements, streamline complex audits, and collaborate securely in a single, audit-ready platform. GRCora brings clarity and control to your entire compliance lifecycle.
                 </p>
                 <div className="mt-10 flex justify-center space-x-4">
-                    <button onClick={handleBookDemo} className="px-8 py-3 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors">
+                    <button onClick={() => handleContact('GRCora Demo Request')} className="px-8 py-3 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors">
                         Book a Demo
                     </button>
-                    <button className="px-8 py-3 font-semibold text-white bg-slate-700/50 border border-slate-600 rounded-lg hover:bg-slate-700 transition-colors">
+                    <button onClick={() => onLogin('user-1')} className="px-8 py-3 font-semibold text-white bg-slate-700/50 border border-slate-600 rounded-lg hover:bg-slate-700 transition-colors">
                         Explore Consultant View
                     </button>
                 </div>
@@ -142,7 +141,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ setView }) => {
                 <div className="glass-card p-8 rounded-lg text-left flex flex-col">
                     <h3 className="text-2xl font-semibold text-white">Consultant Edition</h3>
                     <p className="mt-2 text-slate-400 flex-grow">For GRC professionals, advisory firms, and vCISOs. Manage unlimited clients and projects from one central command center.</p>
-                    <button className="mt-6 w-full text-center px-4 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors font-semibold text-white">Request Pricing</button>
+                    <button onClick={() => handleContact('GRCora Pricing Request')} className="mt-6 w-full text-center px-4 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors font-semibold text-white">Request Pricing</button>
                 </div>
                 <div className="glass-card p-8 rounded-lg text-left flex flex-col">
                     <h3 className="text-2xl font-semibold text-white">Client Portal</h3>
@@ -161,10 +160,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ setView }) => {
                     See how GRCora can bring clarity, efficiency, and control to your compliance engagements. Book a personalized demo or start a free trial for your consultancy today.
                 </p>
                 <div className="mt-10 flex justify-center space-x-4">
-                    <button onClick={handleBookDemo} className="px-8 py-3 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors">
+                    <button onClick={() => handleContact('GRCora Demo Request')} className="px-8 py-3 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors">
                         Book a Demo
                     </button>
-                    <button onClick={handleBookDemo} className="px-8 py-3 font-semibold text-slate-800 bg-white rounded-lg hover:bg-slate-200 transition-colors">
+                    <button onClick={() => handleContact('GRCora Free Trial Request')} className="px-8 py-3 font-semibold text-slate-800 bg-white rounded-lg hover:bg-slate-200 transition-colors">
                         Start Free Trial
                     </button>
                 </div>

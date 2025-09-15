@@ -48,12 +48,6 @@ const NewEngagementModal: React.FC<NewEngagementModalProps> = ({ isOpen, onClose
     }
 
     onCreate(projectName, finalClientId, selectedFrameworks);
-
-    // Reset all form state after successful submission
-    setClientId('');
-    setNewClientName('');
-    setProjectName('');
-    setSelectedFrameworks([]);
   };
 
   return (

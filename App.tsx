@@ -3,7 +3,6 @@ import type { User, View, Project, AssessmentItem, Risk, Policy, Vendor, Evidenc
 import { UserRole } from './types';
 import { mockApi, mockUsers } from './services/api';
 import { isSupabaseConfigured } from './services/supabaseClient';
-import { NotificationProvider } from './components/context/NotificationContext';
 
 import Sidebar from './components/layout/Sidebar';
 import Header from './components/layout/Header';
@@ -73,6 +72,7 @@ const App: React.FC = () => {
 
   const handleLogout = () => {
     setUser(null);
+    setData({});
     setView({type: 'landing'}); // Show landing page after logout
   };
 
@@ -92,10 +92,10 @@ const App: React.FC = () => {
   }
 
   if (!user) {
-    if (view.type === 'login') {
-      return <LoginPage onLogin={handleLogin} />;
+    if (view.type === 'landing') {
+      return <LandingPage setView={setView} onLogin={handleLogin} />;
     }
-    return <LandingPage setView={setView} />;
+    return <LoginPage onLogin={handleLogin} />;
   }
 
   const renderContent = () => {
@@ -117,29 +117,33 @@ const App: React.FC = () => {
         if (data.project?.id === view.projectId) {
             return <ProjectView user={user} view={view} projectData={data} setView={setView} onUpdate={fetchData} />;
         }
-        // Handle case for consultant viewing a project - would need different data loading logic
-        return <div className="p-8">Loading project data...</div>;
-
+        // Placeholder for consultant viewing a client project
+        return <div className="p-8">Loading project data...</div>
+      
       case 'vendorDetail':
-          return <VendorDetailView vendorId={view.vendorId} projectId={view.projectId} setView={setView} />;
+        return <VendorDetailView vendorId={view.vendorId} projectId={view.projectId} setView={setView} />
 
       default:
-        return <div>Unhandled view</div>;
+        return <div className="p-8">Unknown view</div>;
     }
   };
 
   return (
-    <NotificationProvider>
-      <div className="flex h-screen bg-slate-950 text-slate-300">
-        <Sidebar user={user} currentView={view} setView={setView} onLogout={handleLogout} currentProjectName={currentProjectName} />
-        <div className="flex-1 flex flex-col overflow-hidden">
-          <Header user={user} />
-          <main className="flex-1 overflow-y-auto">
-            {renderContent()}
-          </main>
-        </div>
+    <div className="flex h-screen bg-slate-900 text-white">
+      <Sidebar 
+        user={user} 
+        currentView={view} 
+        setView={setView} 
+        onLogout={handleLogout}
+        currentProjectName={currentProjectName}
+      />
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* The header is removed as the main content areas have their own headers now. */}
+        <main className="flex-1 overflow-y-auto">
+          {renderContent()}
+        </main>
       </div>
-    </NotificationProvider>
+    </div>
   );
 };
 
