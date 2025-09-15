@@ -21,6 +21,8 @@ interface RealTimeSystemProps {
 const RealTimeSystem: React.FC<RealTimeSystemProps> = ({ user, currentProjectId }) => {
   const [isConnected, setIsConnected] = useState(false);
   const [events, setEvents] = useState<RealTimeEvent[]>([]);
+  const [isMinimized, setIsMinimized] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const { addNotification } = useNotifications();
 
   useEffect(() => {
@@ -38,12 +40,12 @@ const RealTimeSystem: React.FC<RealTimeSystemProps> = ({ user, currentProjectId 
       ];
 
       const eventInterval = setInterval(() => {
-        // Generate random events with decreasing probability
-        if (Math.random() < 0.3) {
+        // Generate random events with much lower probability
+        if (Math.random() < 0.05) {
           const generator = eventGenerators[Math.floor(Math.random() * eventGenerators.length)];
           generator();
         }
-      }, 10000); // Every 10 seconds
+      }, 30000); // Every 30 seconds
 
       // Generate initial events
       setTimeout(() => generateRiskEvent(), 2000);
@@ -279,18 +281,43 @@ const RealTimeSystem: React.FC<RealTimeSystemProps> = ({ user, currentProjectId 
     return `${Math.floor(diffInMinutes / 1440)}d ago`;
   };
 
+  if (!isVisible) return null;
+
   return (
-    <div className="fixed bottom-4 right-4 w-96 max-h-96 bg-slate-800 border border-slate-700 rounded-lg shadow-2xl z-50">
+    <div className={`fixed bottom-4 right-4 bg-slate-800 border border-slate-700 rounded-lg shadow-2xl z-50 transition-all duration-300 ${
+      isMinimized ? 'w-64 h-12' : 'w-96 max-h-96'
+    }`}>
       {/* Header */}
       <div className="p-3 border-b border-slate-700 flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <div className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-400' : 'bg-red-400'}`}></div>
           <span className="text-sm font-medium text-white">Real-Time Events</span>
         </div>
-        <div className="text-xs text-slate-400">{events.length} events</div>
+        <div className="flex items-center space-x-2">
+          <div className="text-xs text-slate-400">{events.length} events</div>
+          <button
+            onClick={() => setIsMinimized(!isMinimized)}
+            className="text-slate-400 hover:text-white transition-colors"
+            title={isMinimized ? 'Expand' : 'Minimize'}
+          >
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d={isMinimized ? "M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" : "M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"} clipRule="evenodd" />
+            </svg>
+          </button>
+          <button
+            onClick={() => setIsVisible(false)}
+            className="text-slate-400 hover:text-white transition-colors"
+            title="Hide"
+          >
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+            </svg>
+          </button>
+        </div>
       </div>
 
       {/* Events List */}
+      {!isMinimized && (
       <div className="max-h-80 overflow-y-auto">
         {events.length === 0 ? (
           <div className="p-4 text-center text-slate-500 text-sm">
@@ -320,8 +347,11 @@ const RealTimeSystem: React.FC<RealTimeSystemProps> = ({ user, currentProjectId 
         )}
       </div>
 
+      </div>
+      )}
+
       {/* Footer */}
-      {events.length > 0 && (
+      {!isMinimized && events.length > 0 && (
         <div className="p-2 border-t border-slate-700">
           <button
             onClick={() => setEvents([])}
