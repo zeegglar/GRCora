@@ -328,4 +328,6 @@ export type View =
   | { type: 'project'; projectId: string; tab: 'assessments' | 'evidence' | 'risks' | 'policies' | 'vendors' | 'workflows' | 'reports' }
   | { type: 'vendorDetail'; projectId: string; vendorId: string; tab?: 'overview' | 'risk' | 'contracts' | 'performance' | 'incidents' | 'due-diligence' }
   | { type: 'vendorRiskAssessment'; projectId: string; vendorId: string; assessmentId?: string }
-  | { type: 'tprmDashboard'; projectId: string };
+  | { type: 'tprmDashboard'; projectId: string }
+  | { type: 'tprmReports'; projectId: string }
+  | { type: 'remediationTracker'; projectId: string };
