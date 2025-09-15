@@ -30,14 +30,48 @@ const NotificationPanel: React.FC = () => {
             </button>
             {isOpen && (
                 <div className="absolute right-0 mt-2 w-80 bg-slate-800 border border-slate-700 rounded-lg shadow-2xl z-10 animate-fade-in-scale-up">
-                    <div className="p-3 font-semibold text-white border-b border-slate-700">Notifications</div>
+                    <div className="p-3 font-semibold text-white border-b border-slate-700 flex justify-between items-center">
+                        <span>Notifications</span>
+                        {notifications.length > 0 && (
+                            <button
+                                onClick={clearNotifications}
+                                className="text-xs text-slate-400 hover:text-white transition-colors"
+                            >
+                                Clear All
+                            </button>
+                        )}
+                    </div>
                     <ul className="max-h-80 overflow-y-auto">
-                        {notifications.map(n => (
-                            <li key={n.id} className="p-3 border-b border-slate-700/50 hover:bg-slate-700/50">
-                                <p className="text-sm text-slate-300">{n.text}</p>
-                                <p className="text-xs text-slate-500 mt-1">{n.time}</p>
-                            </li>
-                        ))}
+                        {notifications.length === 0 ? (
+                            <li className="p-4 text-center text-slate-500">No notifications</li>
+                        ) : (
+                            notifications.map(n => (
+                                <li key={n.id} className="p-3 border-b border-slate-700/50 hover:bg-slate-700/50 group">
+                                    <div className="flex justify-between items-start">
+                                        <div className="flex-1">
+                                            <div className="flex items-center space-x-2">
+                                                <div className={`w-2 h-2 rounded-full ${
+                                                    n.type === 'success' ? 'bg-green-400' :
+                                                    n.type === 'warning' ? 'bg-yellow-400' :
+                                                    n.type === 'error' ? 'bg-red-400' :
+                                                    'bg-blue-400'
+                                                }`} />
+                                                <p className="text-sm text-slate-300">{n.text}</p>
+                                            </div>
+                                            <p className="text-xs text-slate-500 mt-1 ml-4">{n.time}</p>
+                                        </div>
+                                        <button
+                                            onClick={() => removeNotification(n.id)}
+                                            className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity text-slate-400 hover:text-white"
+                                        >
+                                            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </li>
+                            ))
+                        )}
                     </ul>
                 </div>
             )}
