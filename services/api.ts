@@ -190,6 +190,349 @@ let mockMappings: ControlMapping[] = [
     { id: 'map-1', sourceControlId: 'SOC2-CC6.1', targetControlId: 'ISO-A.5.15' }
 ];
 
+// TPRM Mock Data
+let mockVendorRiskAssessments: VendorRiskAssessment[] = [
+    {
+        id: 'vra-1',
+        vendorId: 'ven-1',
+        assessmentDate: '2024-01-15',
+        assessorId: 'user-4',
+        overallRiskScore: 25,
+        riskLevel: VendorCriticality.LOW,
+        categories: {
+            [VendorRiskCategory.OPERATIONAL]: { score: 20, notes: 'Excellent uptime and service reliability', lastUpdated: '2024-01-15' },
+            [VendorRiskCategory.FINANCIAL]: { score: 15, notes: 'Strong financial position, publicly traded', lastUpdated: '2024-01-15' },
+            [VendorRiskCategory.COMPLIANCE]: { score: 25, notes: 'Maintains multiple compliance certifications', lastUpdated: '2024-01-15' },
+            [VendorRiskCategory.SECURITY]: { score: 30, notes: 'Industry-leading security practices', lastUpdated: '2024-01-15' },
+            [VendorRiskCategory.REPUTATION]: { score: 20, notes: 'Market leader with strong reputation', lastUpdated: '2024-01-15' }
+        },
+        mitigationActions: [
+            {
+                id: 'vma-1',
+                description: 'Review and update data encryption configurations',
+                priority: 'Medium',
+                status: 'In Progress',
+                assignedTo: 'user-4',
+                dueDate: '2024-03-15',
+            }
+        ],
+        nextReviewDate: '2024-07-15'
+    },
+    {
+        id: 'vra-2',
+        vendorId: 'ven-2',
+        assessmentDate: '2024-02-01',
+        assessorId: 'user-4',
+        overallRiskScore: 45,
+        riskLevel: VendorCriticality.MEDIUM,
+        categories: {
+            [VendorRiskCategory.OPERATIONAL]: { score: 40, notes: 'Growing company with some operational scaling challenges', lastUpdated: '2024-02-01' },
+            [VendorRiskCategory.FINANCIAL]: { score: 55, notes: 'Private company, limited financial transparency', lastUpdated: '2024-02-01' },
+            [VendorRiskCategory.COMPLIANCE]: { score: 35, notes: 'Working towards additional certifications', lastUpdated: '2024-02-01' },
+            [VendorRiskCategory.SECURITY]: { score: 30, notes: 'Strong security focus as core business', lastUpdated: '2024-02-01' },
+            [VendorRiskCategory.REPUTATION]: { score: 45, notes: 'Good reputation in cybersecurity space', lastUpdated: '2024-02-01' }
+        },
+        mitigationActions: [
+            {
+                id: 'vma-2',
+                description: 'Obtain additional financial references',
+                priority: 'High',
+                status: 'Open',
+                assignedTo: 'user-2',
+                dueDate: '2024-04-01',
+            },
+            {
+                id: 'vma-3',
+                description: 'Review service level agreements and penalties',
+                priority: 'Medium',
+                status: 'Completed',
+                assignedTo: 'user-4',
+                dueDate: '2024-02-15',
+                completedDate: '2024-02-14'
+            }
+        ],
+        nextReviewDate: '2024-08-01'
+    }
+];
+
+let mockVendorContracts: VendorContract[] = [
+    {
+        id: 'vc-1',
+        vendorId: 'ven-1',
+        title: 'Cloud Services Master Agreement',
+        type: 'MSA',
+        status: ContractStatus.EXECUTED,
+        startDate: '2023-06-15',
+        endDate: '2025-06-14',
+        renewalDate: '2025-04-15',
+        annualValue: 250000,
+        currency: 'USD',
+        documentUrl: '/contracts/aws-msa-2023.pdf',
+        keyTerms: ['Data residency requirements', 'SLA 99.9% uptime', 'Right to audit', 'GDPR compliance'],
+        rightToAudit: true,
+        dataProcessing: true,
+        notifications: { renewal: 60, expiry: 30 }
+    },
+    {
+        id: 'vc-2',
+        vendorId: 'ven-1',
+        title: 'Data Processing Agreement',
+        type: 'DPA',
+        status: ContractStatus.EXECUTED,
+        startDate: '2023-06-15',
+        endDate: '2025-06-14',
+        annualValue: 0,
+        currency: 'USD',
+        keyTerms: ['GDPR Article 28 compliance', 'Data subject rights', 'Breach notification 24hrs'],
+        rightToAudit: true,
+        dataProcessing: true,
+        notifications: { renewal: 90, expiry: 60 }
+    },
+    {
+        id: 'vc-3',
+        vendorId: 'ven-2',
+        title: 'Security Services Agreement',
+        type: 'MSA',
+        status: ContractStatus.EXECUTED,
+        startDate: '2023-09-01',
+        endDate: '2024-08-31',
+        renewalDate: '2024-06-01',
+        annualValue: 120000,
+        currency: 'USD',
+        keyTerms: ['24/7 SOC monitoring', 'Incident response SLA 1hr', 'Monthly security reports'],
+        rightToAudit: true,
+        dataProcessing: false,
+        notifications: { renewal: 90, expiry: 30 }
+    }
+];
+
+let mockVendorDueDiligence: VendorDueDiligence[] = [
+    {
+        id: 'vdd-1',
+        vendorId: 'ven-1',
+        status: DueDiligenceStatus.COMPLETED,
+        checklist: [
+            {
+                id: 'ddi-1',
+                category: 'Financial',
+                requirement: 'Audited financial statements for last 2 years',
+                status: 'Approved',
+                evidence: 'AWS 10-K SEC filings 2022-2023',
+                reviewNotes: 'Strong financial position confirmed',
+                dueDate: '2023-05-15',
+                completedDate: '2023-05-10'
+            },
+            {
+                id: 'ddi-2',
+                category: 'Security',
+                requirement: 'SOC 2 Type II certification',
+                status: 'Approved',
+                evidence: 'AWS SOC 2 Type II Report 2023',
+                reviewNotes: 'Current certification verified',
+                dueDate: '2023-05-15',
+                completedDate: '2023-05-12'
+            },
+            {
+                id: 'ddi-3',
+                category: 'Insurance',
+                requirement: 'Cyber liability insurance minimum $10M',
+                status: 'Approved',
+                evidence: 'Insurance certificate on file',
+                reviewNotes: 'Coverage exceeds requirements',
+                dueDate: '2023-05-15',
+                completedDate: '2023-05-14'
+            }
+        ],
+        startDate: '2023-05-01',
+        completedDate: '2023-05-20',
+        reviewedBy: 'user-4',
+        approvedBy: 'user-1',
+        notes: 'All requirements met. Vendor approved for critical services.'
+    },
+    {
+        id: 'vdd-2',
+        vendorId: 'ven-2',
+        status: DueDiligenceStatus.COMPLETED,
+        checklist: [
+            {
+                id: 'ddi-4',
+                category: 'Financial',
+                requirement: 'Financial references from 3 clients',
+                status: 'Approved',
+                evidence: 'Reference letters on file',
+                reviewNotes: 'Positive references received',
+                dueDate: '2023-08-15',
+                completedDate: '2023-08-12'
+            },
+            {
+                id: 'ddi-5',
+                category: 'Security',
+                requirement: 'ISO 27001 certification',
+                status: 'Approved',
+                evidence: 'ISO 27001 certificate 2023',
+                reviewNotes: 'Valid certification confirmed',
+                dueDate: '2023-08-15',
+                completedDate: '2023-08-10'
+            }
+        ],
+        startDate: '2023-08-01',
+        completedDate: '2023-08-20',
+        reviewedBy: 'user-4',
+        approvedBy: 'user-1',
+        notes: 'Satisfactory completion of due diligence requirements.'
+    },
+    {
+        id: 'vdd-3',
+        vendorId: 'ven-3',
+        status: DueDiligenceStatus.IN_PROGRESS,
+        checklist: [
+            {
+                id: 'ddi-6',
+                category: 'Healthcare',
+                requirement: 'HIPAA compliance documentation',
+                status: 'Submitted',
+                evidence: 'HIPAA compliance checklist submitted',
+                reviewNotes: 'Under review by compliance team',
+                dueDate: '2024-03-01'
+            },
+            {
+                id: 'ddi-7',
+                category: 'Security',
+                requirement: 'Penetration testing report',
+                status: 'Pending',
+                dueDate: '2024-03-15'
+            },
+            {
+                id: 'ddi-8',
+                category: 'Financial',
+                requirement: 'Proof of cyber insurance',
+                status: 'Submitted',
+                evidence: 'Insurance certificate provided',
+                reviewNotes: 'Reviewing coverage limits',
+                dueDate: '2024-02-28'
+            }
+        ],
+        startDate: '2024-01-15',
+        notes: 'Healthcare vendor onboarding in progress. HIPAA compliance is priority.'
+    }
+];
+
+let mockVendorPerformanceMetrics: VendorPerformanceMetric[] = [
+    {
+        id: 'vpm-1',
+        vendorId: 'ven-1',
+        metricType: 'Availability',
+        name: 'Service Uptime',
+        target: 99.9,
+        actual: 99.95,
+        unit: '%',
+        period: '2024-Q1',
+        lastUpdated: '2024-03-31'
+    },
+    {
+        id: 'vpm-2',
+        vendorId: 'ven-1',
+        metricType: 'Response Time',
+        name: 'Support Response Time',
+        target: 4,
+        actual: 2.5,
+        unit: 'hours',
+        period: '2024-Q1',
+        lastUpdated: '2024-03-31'
+    },
+    {
+        id: 'vpm-3',
+        vendorId: 'ven-2',
+        metricType: 'SLA',
+        name: 'Incident Response Time',
+        target: 1,
+        actual: 0.75,
+        unit: 'hours',
+        period: '2024-Q1',
+        lastUpdated: '2024-03-31'
+    },
+    {
+        id: 'vpm-4',
+        vendorId: 'ven-2',
+        metricType: 'Quality Score',
+        name: 'Threat Detection Accuracy',
+        target: 95,
+        actual: 97.5,
+        unit: '%',
+        period: '2024-Q1',
+        lastUpdated: '2024-03-31'
+    }
+];
+
+let mockVendorIncidents: VendorIncident[] = [
+    {
+        id: 'vi-1',
+        vendorId: 'ven-1',
+        title: 'Regional Service Outage - US-East-1',
+        description: 'Partial service degradation affecting compute instances in US-East-1 region',
+        severity: 'Medium',
+        status: 'Resolved',
+        reportedDate: '2024-02-15T14:30:00Z',
+        resolvedDate: '2024-02-15T16:45:00Z',
+        impact: 'Some services experienced increased latency. No data loss occurred.',
+        rootCause: 'Network configuration change caused routing issues',
+        preventiveActions: 'Enhanced change management procedures implemented'
+    },
+    {
+        id: 'vi-2',
+        vendorId: 'ven-2',
+        title: 'False Positive Alert Storm',
+        description: 'SIEM system generated excessive false positive alerts due to signature update',
+        severity: 'Low',
+        status: 'Resolved',
+        reportedDate: '2024-03-02T09:15:00Z',
+        resolvedDate: '2024-03-02T11:30:00Z',
+        impact: 'Temporary increase in alert volume, no security impact',
+        rootCause: 'Signature update contained overly broad detection rules',
+        preventiveActions: 'Enhanced testing procedures for signature updates'
+    },
+    {
+        id: 'vi-3',
+        vendorId: 'ven-3',
+        title: 'Data Processing Delay',
+        description: 'Analytics pipeline experiencing delays in processing patient data',
+        severity: 'Medium',
+        status: 'Investigating',
+        reportedDate: '2024-03-10T08:00:00Z',
+        impact: 'Reporting delays of 2-4 hours for some analytics dashboards'
+    }
+];
+
+let mockVendorCertifications: VendorCertification[] = [
+    {
+        id: 'cert-1',
+        name: 'SOC 2 Type II',
+        issuer: 'AICPA',
+        validFrom: '2023-01-01',
+        validUntil: '2024-12-31',
+        status: 'Valid',
+        documentUrl: '/certifications/aws-soc2-2023.pdf'
+    },
+    {
+        id: 'cert-2',
+        name: 'ISO 27001:2013',
+        issuer: 'BSI',
+        validFrom: '2023-03-15',
+        validUntil: '2026-03-14',
+        status: 'Valid',
+        documentUrl: '/certifications/aws-iso27001-2023.pdf'
+    },
+    {
+        id: 'cert-3',
+        name: 'PCI DSS Level 1',
+        issuer: 'PCI Security Standards Council',
+        validFrom: '2023-06-01',
+        validUntil: '2024-05-31',
+        status: 'Expiring Soon',
+        documentUrl: '/certifications/aws-pcidss-2023.pdf'
+    }
+];
+
 // Mock API functions
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
@@ -292,5 +635,94 @@ export const mockApi = {
   deleteMapping: async (mappingId: string): Promise<void> => {
     await delay(300);
     mockMappings = mockMappings.filter(m => m.id !== mappingId);
+  },
+
+  // TPRM API functions
+  getVendorRiskAssessments: async (vendorId: string): Promise<VendorRiskAssessment[]> => {
+    await delay(300);
+    return mockVendorRiskAssessments.filter(vra => vra.vendorId === vendorId);
+  },
+
+  getVendorContracts: async (vendorId: string): Promise<VendorContract[]> => {
+    await delay(300);
+    return mockVendorContracts.filter(vc => vc.vendorId === vendorId);
+  },
+
+  getVendorDueDiligence: async (vendorId: string): Promise<VendorDueDiligence[]> => {
+    await delay(300);
+    return mockVendorDueDiligence.filter(vdd => vdd.vendorId === vendorId);
+  },
+
+  getVendorPerformanceMetrics: async (vendorId: string): Promise<VendorPerformanceMetric[]> => {
+    await delay(300);
+    return mockVendorPerformanceMetrics.filter(vpm => vpm.vendorId === vendorId);
+  },
+
+  getVendorIncidents: async (vendorId: string): Promise<VendorIncident[]> => {
+    await delay(300);
+    return mockVendorIncidents.filter(vi => vi.vendorId === vendorId);
+  },
+
+  getVendorCertifications: async (vendorId: string): Promise<VendorCertification[]> => {
+    await delay(300);
+    return mockVendorCertifications.filter(cert =>
+      // For this mock, we'll associate certifications with specific vendors
+      vendorId === 'ven-1' && ['cert-1', 'cert-2', 'cert-3'].includes(cert.id)
+    );
+  },
+
+  createVendorRiskAssessment: async (assessmentData: Omit<VendorRiskAssessment, 'id'>): Promise<VendorRiskAssessment> => {
+    await delay(500);
+    const newAssessment: VendorRiskAssessment = {
+      ...assessmentData,
+      id: `vra-${Date.now()}`
+    };
+    mockVendorRiskAssessments.push(newAssessment);
+    return newAssessment;
+  },
+
+  updateVendorRiskScore: async (vendorId: string, riskScore: number, riskLevel: VendorCriticality): Promise<Vendor> => {
+    await delay(400);
+    const vendor = mockVendors.find(v => v.id === vendorId);
+    if (vendor) {
+      vendor.overallRiskScore = riskScore;
+      vendor.riskLevel = riskLevel;
+      vendor.lastRiskAssessment = new Date().toISOString().split('T')[0];
+    }
+    return vendor!;
+  },
+
+  updateDueDiligenceStatus: async (dueDiligenceId: string, status: DueDiligenceStatus): Promise<VendorDueDiligence> => {
+    await delay(400);
+    const dueDiligence = mockVendorDueDiligence.find(dd => dd.id === dueDiligenceId);
+    if (dueDiligence) {
+      dueDiligence.status = status;
+      if (status === DueDiligenceStatus.COMPLETED) {
+        dueDiligence.completedDate = new Date().toISOString().split('T')[0];
+      }
+    }
+    return dueDiligence!;
+  },
+
+  addVendorIncident: async (incidentData: Omit<VendorIncident, 'id'>): Promise<VendorIncident> => {
+    await delay(400);
+    const newIncident: VendorIncident = {
+      ...incidentData,
+      id: `vi-${Date.now()}`
+    };
+    mockVendorIncidents.push(newIncident);
+    return newIncident;
+  },
+
+  resolveVendorIncident: async (incidentId: string, resolution: { rootCause?: string; preventiveActions?: string }): Promise<VendorIncident> => {
+    await delay(400);
+    const incident = mockVendorIncidents.find(i => i.id === incidentId);
+    if (incident) {
+      incident.status = 'Resolved';
+      incident.resolvedDate = new Date().toISOString();
+      if (resolution.rootCause) incident.rootCause = resolution.rootCause;
+      if (resolution.preventiveActions) incident.preventiveActions = resolution.preventiveActions;
+    }
+    return incident!;
   }
 };
