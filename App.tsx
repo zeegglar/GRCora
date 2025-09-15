@@ -17,7 +17,7 @@ import EnvironmentNotice from './components/setup/EnvironmentNotice';
 
 const App: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
-  const [view, setView] = useState<View>({ type: 'dashboard' });
+  const [view, setView] = useState<View>({ type: 'landing' });
   const [data, setData] = useState<any>({});
   const [isLoading, setIsLoading] = useState(true);
 
@@ -73,7 +73,7 @@ const App: React.FC = () => {
 
   const handleLogout = () => {
     setUser(null);
-    setView({type: 'login'}); // Show landing page after logout, for example
+    setView({type: 'landing'}); // Show landing page after logout
   };
 
   const currentProjectName = useMemo(() => {
@@ -92,7 +92,10 @@ const App: React.FC = () => {
   }
 
   if (!user) {
-    return <LoginPage onLogin={handleLogin} />;
+    if (view.type === 'login') {
+      return <LoginPage onLogin={handleLogin} />;
+    }
+    return <LandingPage setView={setView} />;
   }
 
   const renderContent = () => {

@@ -125,6 +125,7 @@ export interface ControlMapping {
 }
 
 export type View =
+  | { type: 'landing' }
   | { type: 'login' }
   | { type: 'dashboard' }
   | { type: 'project'; projectId: string; tab: 'assessments' | 'evidence' | 'risks' | 'policies' | 'vendors' | 'reports' }
