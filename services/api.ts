@@ -104,7 +104,7 @@ let mockPolicies: Policy[] = [
     { id: 'pol-2', title: 'Data Classification and Handling Policy', content: 'Guidelines for classifying and handling sensitive information...', version: '2.1', status: PolicyStatus.APPROVED, ownerId: 'user-2', projectId: 'proj-2', lastUpdated: '2023-09-22', controlId: 'ISO-A.8.2' },
     { id: 'pol-3', title: 'Incident Response Policy', content: 'Procedures for detecting, responding to, and recovering from security incidents...', version: '1.0', status: PolicyStatus.DRAFT, ownerId: 'user-1', projectId: 'proj-1', lastUpdated: '2023-11-01', controlId: 'SOC2-CC7.1' },
     { id: 'pol-4', title: 'PCI DSS Cardholder Data Protection Policy', content: 'Policy outlining protection requirements for payment card data...', version: '3.0', status: PolicyStatus.APPROVED, ownerId: 'user-1', projectId: 'proj-3', lastUpdated: '2023-08-15', controlId: 'PCI-3.2.1' },
-    { id: 'pol-5', title: 'HIPAA Privacy and Security Policy', content: 'Comprehensive policy covering PHI protection and privacy requirements...', version: '1.5', status: PolicyStatus.UNDER_REVIEW, ownerId: 'user-2', projectId: 'proj-4', lastUpdated: '2023-10-30', controlId: 'HIPAA-164.308' },
+    { id: 'pol-5', title: 'HIPAA Privacy and Security Policy', content: 'Comprehensive policy covering PHI protection and privacy requirements...', version: '1.5', status: PolicyStatus.IN_REVIEW, ownerId: 'user-2', projectId: 'proj-4', lastUpdated: '2023-10-30', controlId: 'HIPAA-164.308' },
 ];
 
 let mockPolicyVersions: PolicyVersion[] = [
