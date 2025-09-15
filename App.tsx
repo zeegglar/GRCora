@@ -175,6 +175,7 @@ const App: React.FC = () => {
             {renderContent()}
           </main>
         </div>
+        {user && <RealTimeSystem user={user} currentProjectId={view.type === 'project' ? view.projectId : undefined} />}
       </div>
     </NotificationProvider>
   );
