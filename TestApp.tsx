@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TestApp: React.FC = () => {
+const TestApp = () => {
   return (
     <div style={{
       backgroundColor: '#1e293b',
