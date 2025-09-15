@@ -13,6 +13,9 @@ import ConsultantDashboard from './components/dashboard/ConsultantDashboard';
 import ClientDashboard from './components/dashboard/ClientDashboard';
 import ProjectView from './components/views/ProjectView';
 import VendorDetailView from './components/views/vendors/VendorDetailView';
+import TPRMDashboard from './components/views/tprm/TPRMDashboard';
+import TPRMReportsView from './components/views/reports/TPRMReportsView';
+import RemediationTracker from './components/views/remediation/RemediationTracker';
 import EnvironmentNotice from './components/setup/EnvironmentNotice';
 
 const App: React.FC = () => {
@@ -96,7 +99,7 @@ const App: React.FC = () => {
   };
 
   const currentProjectName = useMemo(() => {
-    if (view.type === 'project' || view.type === 'vendorDetail') {
+    if (view.type === 'project' || view.type === 'vendorDetail' || view.type === 'tprmDashboard') {
       if (data.project?.id === view.projectId) {
         return data.project.name;
       }
@@ -140,7 +143,7 @@ const App: React.FC = () => {
         return <div className="p-8">Loading project data...</div>
       
       case 'vendorDetail':
-        return <VendorDetailView vendorId={view.vendorId} projectId={view.projectId} setView={setView} />
+        return <VendorDetailView vendorId={view.vendorId} projectId={view.projectId} setView={setView} />\n      \n      case 'tprmDashboard':\n        return <TPRMDashboard projectId={view.projectId} setView={setView} />\n      \n      case 'tprmReports':\n        return <TPRMReportsView projectId={view.projectId} setView={setView} />\n      \n      case 'remediationTracker':\n        return <RemediationTracker projectId={view.projectId} setView={setView} />
 
       default:
         return <div className="p-8">Unknown view</div>;
