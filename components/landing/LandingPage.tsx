@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import type { View } from '../../types';
 import {
     ClientsIcon, ReportsIcon, ArrowsRightLeftIcon, LockClosedIcon, TrendingUpIcon, ChatBubbleLeftRightIcon
@@ -27,10 +27,55 @@ const FeatureCard: React.FC<{ icon: React.ReactNode; title: string; children: Re
 
 
 const LandingPage: React.FC<LandingPageProps> = ({ setView, onLogin }) => {
+  const [currentDemo, setCurrentDemo] = useState(0);
+  const [riskCount, setRiskCount] = useState(0);
+  const [complianceScore, setComplianceScore] = useState(0);
 
   const handleContact = (subject: string) => {
     window.location.href = `mailto:demo@grcora.test?subject=${encodeURIComponent(subject)}`;
   };
+
+  // Animate stats on mount
+  useEffect(() => {
+    const riskTimer = setInterval(() => {
+      setRiskCount(prev => prev < 247 ? prev + 3 : 247);
+    }, 20);
+
+    const complianceTimer = setInterval(() => {
+      setComplianceScore(prev => prev < 94 ? prev + 1 : 94);
+    }, 30);
+
+    const demoTimer = setInterval(() => {
+      setCurrentDemo(prev => (prev + 1) % 3);
+    }, 4000);
+
+    return () => {
+      clearInterval(riskTimer);
+      clearInterval(complianceTimer);
+      clearInterval(demoTimer);
+    };
+  }, []);
+
+  const demoFeatures = [
+    {
+      title: "Real-Time Risk Monitoring",
+      description: "Watch as critical risks are detected and classified instantly",
+      metrics: `${riskCount} Risks Identified`,
+      color: "text-red-400"
+    },
+    {
+      title: "Live Compliance Scoring",
+      description: "See compliance scores update in real-time as controls are validated",
+      metrics: `${complianceScore}% Compliance Score`,
+      color: "text-green-400"
+    },
+    {
+      title: "Automated Workflow Engine",
+      description: "Tasks and assessments generated automatically based on your requirements",
+      metrics: "12 Tasks Auto-Generated",
+      color: "text-blue-400"
+    }
+  ];
 
   return (
     <div className="bg-slate-900 text-slate-300">
