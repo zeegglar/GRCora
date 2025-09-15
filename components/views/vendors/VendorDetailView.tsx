@@ -281,10 +281,6 @@ const VendorDetailView: React.FC<VendorDetailViewProps> = ({ vendorId, projectId
             </div>
           </>
         )}
-      </main>
-    </div>
-  );
-};
 
         {activeTab === 'risk' && (
           <div className="space-y-6">

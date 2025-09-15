@@ -15,7 +15,8 @@ import ProjectView from './components/views/ProjectView';
 import VendorDetailView from './components/views/vendors/VendorDetailView';
 import TPRMDashboard from './components/views/tprm/TPRMDashboard';
 import TPRMReportsView from './components/views/reports/TPRMReportsView';
-import RemediationTracker from './components/views/remediation/RemediationTracker';\nimport RealTimeSystem from './components/realtime/RealTimeSystem';
+import RemediationTracker from './components/views/remediation/RemediationTracker';
+import RealTimeSystem from './components/realtime/RealTimeSystem';
 import EnvironmentNotice from './components/setup/EnvironmentNotice';
 
 const App: React.FC = () => {
