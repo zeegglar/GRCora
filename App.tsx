@@ -3,6 +3,7 @@ import type { User, View, Project, AssessmentItem, Risk, Policy, Vendor, Evidenc
 import { UserRole } from './types';
 import { mockApi, mockUsers } from './services/api';
 import { isSupabaseConfigured } from './services/supabaseClient';
+import { NotificationProvider } from './components/context/NotificationContext';
 
 import Sidebar from './components/layout/Sidebar';
 import Header from './components/layout/Header';
@@ -125,15 +126,17 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="flex h-screen bg-slate-950 text-slate-300">
-      <Sidebar user={user} currentView={view} setView={setView} onLogout={handleLogout} currentProjectName={currentProjectName} />
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <Header user={user} />
-        <main className="flex-1 overflow-y-auto">
-          {renderContent()}
-        </main>
+    <NotificationProvider>
+      <div className="flex h-screen bg-slate-950 text-slate-300">
+        <Sidebar user={user} currentView={view} setView={setView} onLogout={handleLogout} currentProjectName={currentProjectName} />
+        <div className="flex-1 flex flex-col overflow-hidden">
+          <Header user={user} />
+          <main className="flex-1 overflow-y-auto">
+            {renderContent()}
+          </main>
+        </div>
       </div>
-    </div>
+    </NotificationProvider>
   );
 };
 
