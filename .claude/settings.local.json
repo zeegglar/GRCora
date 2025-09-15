@@ -6,7 +6,8 @@
       "Bash(curl:*)",
       "Bash(git clean:*)",
       "Bash(git check-ignore:*)",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "Bash(npx tsc:*)"
     ],
     "deny": [],
     "ask": []
