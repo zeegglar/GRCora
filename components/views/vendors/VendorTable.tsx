@@ -47,14 +47,14 @@ const VendorTable: React.FC<VendorTableProps> = ({ vendors, setView, projectId, 
                   className="border-b border-slate-700 hover:bg-slate-800/40 cursor-pointer"
                 >
                   <td className="px-6 py-4 font-medium text-white">{vendor.name}</td>
-                  <td className="px-6 py-4">{vendor.service}</td>
+                  <td className="px-6 py-4">{vendor.serviceCategory}</td>
                   <td className="px-6 py-4">{`Tier ${vendor.tier}`}</td>
                   <td className="px-6 py-4">
-                    <span className={`px-2 py-1 text-xs font-semibold rounded-full ${vendor.status === 'Active' ? 'bg-green-500/20 text-green-400' : 'bg-slate-600/50 text-slate-400'}`}>
+                    <span className={`px-2 py-1 text-xs font-semibold rounded-full ${vendor.status === 'ACTIVE' ? 'bg-green-500/20 text-green-400' : 'bg-slate-600/50 text-slate-400'}`}>
                       {vendor.status}
                     </span>
                   </td>
-                  <td className="px-6 py-4">{vendor.owner}</td>
+                  <td className="px-6 py-4">{vendor.businessOwner}</td>
                 </tr>
               ))}
               {vendors.length === 0 && (

@@ -1,7 +1,7 @@
 
 
 import React, { useState } from 'react';
-import type { Vendor } from '../../../types';
+import type { Vendor, VendorCriticality } from '../../../types';
 
 interface NewVendorModalProps {
   isOpen: boolean;
@@ -32,10 +32,10 @@ const NewVendorModal: React.FC<NewVendorModalProps> = ({ isOpen, onClose, onSave
       headquarters: '',
       serviceCategory,
       servicesProvided: [serviceCategory],
-      criticality: 'LOW',
+      criticality: VendorCriticality.LOW,
       tier,
       overallRiskScore: 0,
-      riskLevel: 'LOW',
+      riskLevel: VendorCriticality.LOW,
       nextRiskAssessment: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
       nextReviewDate: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
       businessOwner,
