@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Page</title>
+    <style>
+        body {
+            background-color: #0f172a;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="test">
+        <h1>🔧 Debug Mode</h1>
+        <p>Testing basic JavaScript functionality...</p>
+    </div>
+
+    <script>
+        console.log('Debug script starting...');
+
+        try {
+            // Test basic DOM manipulation
+            const testDiv = document.getElementById('test');
+            if (testDiv) {
+                testDiv.innerHTML += '<p style="color: #22c55e;">✓ DOM manipulation works</p>';
+                console.log('✓ DOM manipulation successful');
+            }
+
+            // Test if we can load the React entry point
+            import('/index.tsx').then(() => {
+                console.log('✓ React entry point loaded successfully');
+                document.getElementById('test').innerHTML += '<p style="color: #22c55e;">✓ React module loaded</p>';
+            }).catch(error => {
+                console.error('❌ React entry point failed:', error);
+                document.getElementById('test').innerHTML += '<p style="color: #ef4444;">❌ React module failed: ' + error.message + '</p>';
+            });
+
+        } catch (error) {
+            console.error('❌ Script error:', error);
+            document.getElementById('test').innerHTML += '<p style="color: #ef4444;">❌ Script error: ' + error.message + '</p>';
+        }
+    </script>
+</body>
+</html>
