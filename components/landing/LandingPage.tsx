@@ -152,7 +152,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ setView, onLogin }) => {
                     <button onClick={() => onLogin('user-1')} className="px-8 py-3 font-semibold text-white bg-slate-700/50 border border-slate-600 rounded-lg hover:bg-slate-700 transition-colors">
                         Explore Consultant View
                     </button>
-                    <button onClick={() => onLogin('user-4')} className="px-8 py-3 font-semibold text-white bg-green-600/20 border border-green-600 rounded-lg hover:bg-green-600/30 transition-colors">
+                    <button onClick={() => onLogin('user-2')} className="px-8 py-3 font-semibold text-white bg-green-600/20 border border-green-600 rounded-lg hover:bg-green-600/30 transition-colors">
                         Try Client Portal
                     </button>
                 </div>

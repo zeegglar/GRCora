@@ -21,8 +21,8 @@ interface RealTimeSystemProps {
 const RealTimeSystem: React.FC<RealTimeSystemProps> = ({ user, currentProjectId }) => {
   const [isConnected, setIsConnected] = useState(false);
   const [events, setEvents] = useState<RealTimeEvent[]>([]);
-  const [isMinimized, setIsMinimized] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
+  const [isMinimized, setIsMinimized] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
   const { addNotification } = useNotifications();
 
   useEffect(() => {
@@ -40,17 +40,15 @@ const RealTimeSystem: React.FC<RealTimeSystemProps> = ({ user, currentProjectId 
       ];
 
       const eventInterval = setInterval(() => {
-        // Generate random events with much lower probability
-        if (Math.random() < 0.05) {
+        // Generate random events with extremely low probability
+        if (Math.random() < 0.001) {
           const generator = eventGenerators[Math.floor(Math.random() * eventGenerators.length)];
           generator();
         }
-      }, 30000); // Every 30 seconds
+      }, 60000); // Every 60 seconds
 
-      // Generate initial events
-      setTimeout(() => generateRiskEvent(), 2000);
-      setTimeout(() => generateComplianceEvent(), 5000);
-      setTimeout(() => generateVendorEvent(), 8000);
+      // Don't generate initial events automatically
+      // User can enable via dashboard if needed
 
       return () => {
         clearInterval(eventInterval);

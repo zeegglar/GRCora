@@ -163,33 +163,44 @@ const InteractiveDashboard: React.FC<InteractiveDashboardProps> = ({
   const actionableInsights = getActionableInsights();
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="space-y-8">
       {/* Header with AI Assistant */}
-      <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-bold text-white">GRC Dashboard</h1>
-          <p className="text-slate-400 mt-1">{project.name} - {project.frameworks.join(', ')}</p>
-        </div>
-        <div className="flex items-center space-x-4">
-          <button
-            onClick={handleRefresh}
-            disabled={refreshing}
-            className="flex items-center space-x-2 px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors text-white disabled:opacity-50"
-          >
-            <div className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`}>
-              <svg fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clipRule="evenodd" />
-              </svg>
+      <div className="glass-card p-6">
+        <div className="flex justify-between items-center">
+          <div>
+            <h1 className="text-heading text-3xl font-bold">GRC Dashboard</h1>
+            <p className="text-muted mt-2 text-lg">{project.name}</p>
+            <div className="flex items-center space-x-3 mt-3">
+              {project.frameworks.map((framework, index) => (
+                <span key={index} className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary-500/10 text-primary-400 border border-primary-500/20">
+                  {framework}
+                </span>
+              ))}
             </div>
-            <span className="text-sm">Refresh</span>
-          </button>
-          <button
-            onClick={() => setShowAIAssistant(true)}
-            className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 rounded-lg transition-all text-white font-semibold"
-          >
-            <span className="text-lg">🤖</span>
-            <span>GRC Assistant</span>
-          </button>
+          </div>
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={handleRefresh}
+              disabled={refreshing}
+              className="btn-secondary"
+            >
+              <div className={`w-4 h-4 ${refreshing ? 'loading-spinner' : ''}`}>
+                {!refreshing && (
+                  <svg fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clipRule="evenodd" />
+                  </svg>
+                )}
+              </div>
+              <span>Refresh</span>
+            </button>
+            <button
+              onClick={() => setShowAIAssistant(true)}
+              className="btn-primary"
+            >
+              <span className="text-lg">🤖</span>
+              <span>AI Assistant</span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -226,71 +237,99 @@ const InteractiveDashboard: React.FC<InteractiveDashboardProps> = ({
       {/* Key Metrics Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* Risk Metrics */}
-        <div className="glass-card p-6 hover:bg-slate-700/20 transition-all cursor-pointer" onClick={() => onNavigate({ type: 'project', projectId: project.id, tab: 'risks' })}>
+        <div className="metric-card group" onClick={() => onNavigate({ type: 'project', projectId: project.id, tab: 'risks' })}>
           <div className="flex items-center justify-between mb-4">
-            <div className="p-3 bg-red-600/20 rounded-lg">
-              <ExclamationTriangleIcon className="w-6 h-6 text-red-400" />
+            <div className="p-3 bg-gradient-to-br from-red-500/20 to-red-600/30 rounded-xl border border-red-500/20">
+              <ExclamationTriangleIcon className="w-7 h-7 icon-error" />
             </div>
-            <div className="flex items-center space-x-1">
+            <div className="flex items-center space-x-1 opacity-70 group-hover:opacity-100 transition-opacity">
               {getTrendIcon(metrics.riskTrend)}
             </div>
           </div>
-          <div className="space-y-1">
-            <h3 className="text-sm font-medium text-slate-400">Active Risks</h3>
-            <div className="text-2xl font-bold text-white">{metrics.totalRisks}</div>
-            <div className="text-xs text-slate-400">
-              {metrics.criticalRisks} Critical • {metrics.highRisks} High
+          <div className="space-y-2">
+            <h3 className="text-sm font-medium text-muted">Active Risks</h3>
+            <div className="text-3xl font-bold text-heading">{metrics.totalRisks}</div>
+            <div className="text-xs text-muted">
+              <span className="inline-flex items-center gap-1">
+                <span className="w-2 h-2 bg-red-400 rounded-full"></span>
+                {metrics.criticalRisks} Critical
+              </span>
+              <span className="mx-2">•</span>
+              <span className="inline-flex items-center gap-1">
+                <span className="w-2 h-2 bg-orange-400 rounded-full"></span>
+                {metrics.highRisks} High
+              </span>
             </div>
           </div>
         </div>
 
         {/* Compliance Metrics */}
-        <div className="glass-card p-6 hover:bg-slate-700/20 transition-all cursor-pointer" onClick={() => onNavigate({ type: 'project', projectId: project.id, tab: 'assessments' })}>
+        <div className="metric-card group" onClick={() => onNavigate({ type: 'project', projectId: project.id, tab: 'assessments' })}>
           <div className="flex items-center justify-between mb-4">
-            <div className="p-3 bg-green-600/20 rounded-lg">
-              <CheckCircleIcon className="w-6 h-6 text-green-400" />
+            <div className="p-3 bg-gradient-to-br from-emerald-500/20 to-emerald-600/30 rounded-xl border border-emerald-500/20">
+              <CheckCircleIcon className="w-7 h-7 icon-success" />
             </div>
-            <div className="flex items-center space-x-1">
+            <div className="flex items-center space-x-1 opacity-70 group-hover:opacity-100 transition-opacity">
               {getComplianceTrendIcon(metrics.complianceTrend)}
             </div>
           </div>
-          <div className="space-y-1">
-            <h3 className="text-sm font-medium text-slate-400">Compliance Rate</h3>
-            <div className="text-2xl font-bold text-white">{metrics.complianceRate}%</div>
-            <div className="text-xs text-slate-400">
-              {metrics.compliantItems} Compliant • {metrics.nonCompliantItems} Gaps
+          <div className="space-y-2">
+            <h3 className="text-sm font-medium text-muted">Compliance Rate</h3>
+            <div className="text-3xl font-bold text-heading">{metrics.complianceRate}%</div>
+            <div className="text-xs text-muted">
+              <span className="inline-flex items-center gap-1">
+                <span className="w-2 h-2 bg-emerald-400 rounded-full"></span>
+                {metrics.compliantItems} Compliant
+              </span>
+              <span className="mx-2">•</span>
+              <span className="inline-flex items-center gap-1">
+                <span className="w-2 h-2 bg-red-400 rounded-full"></span>
+                {metrics.nonCompliantItems} Gaps
+              </span>
             </div>
           </div>
         </div>
 
         {/* Vendor Metrics */}
-        <div className="glass-card p-6 hover:bg-slate-700/20 transition-all cursor-pointer" onClick={() => onNavigate({ type: 'project', projectId: project.id, tab: 'vendors' })}>
+        <div className="metric-card group" onClick={() => onNavigate({ type: 'project', projectId: project.id, tab: 'vendors' })}>
           <div className="flex items-center justify-between mb-4">
-            <div className="p-3 bg-blue-600/20 rounded-lg">
-              <UsersIcon className="w-6 h-6 text-blue-400" />
+            <div className="p-3 bg-gradient-to-br from-blue-500/20 to-blue-600/30 rounded-xl border border-blue-500/20">
+              <UsersIcon className="w-7 h-7 icon-primary" />
+            </div>
+            <div className="opacity-70 group-hover:opacity-100 transition-opacity">
+              <span className="text-xs text-muted">Portfolio</span>
             </div>
           </div>
-          <div className="space-y-1">
-            <h3 className="text-sm font-medium text-slate-400">Vendor Portfolio</h3>
-            <div className="text-2xl font-bold text-white">{metrics.totalVendors}</div>
-            <div className="text-xs text-slate-400">
-              {metrics.highRiskVendors} High Risk
+          <div className="space-y-2">
+            <h3 className="text-sm font-medium text-muted">Vendor Portfolio</h3>
+            <div className="text-3xl font-bold text-heading">{metrics.totalVendors}</div>
+            <div className="text-xs text-muted">
+              <span className="inline-flex items-center gap-1">
+                <span className="w-2 h-2 bg-orange-400 rounded-full"></span>
+                {metrics.highRiskVendors} High Risk
+              </span>
             </div>
           </div>
         </div>
 
         {/* Control Metrics */}
-        <div className="glass-card p-6 hover:bg-slate-700/20 transition-all cursor-pointer">
+        <div className="metric-card group" onClick={() => onNavigate({ type: 'project', projectId: project.id, tab: 'assessments' })}>
           <div className="flex items-center justify-between mb-4">
-            <div className="p-3 bg-purple-600/20 rounded-lg">
-              <ShieldCheckIcon className="w-6 h-6 text-purple-400" />
+            <div className="p-3 bg-gradient-to-br from-purple-500/20 to-purple-600/30 rounded-xl border border-purple-500/20">
+              <ShieldCheckIcon className="w-7 h-7 text-purple-400" />
+            </div>
+            <div className="opacity-70 group-hover:opacity-100 transition-opacity">
+              <span className="text-xs text-muted">Active</span>
             </div>
           </div>
-          <div className="space-y-1">
-            <h3 className="text-sm font-medium text-slate-400">Active Controls</h3>
-            <div className="text-2xl font-bold text-white">{metrics.totalControls}</div>
-            <div className="text-xs text-slate-400">
-              {metrics.inProgressItems} In Progress
+          <div className="space-y-2">
+            <h3 className="text-sm font-medium text-muted">Active Controls</h3>
+            <div className="text-3xl font-bold text-heading">{metrics.totalControls}</div>
+            <div className="text-xs text-muted">
+              <span className="inline-flex items-center gap-1">
+                <span className="w-2 h-2 bg-amber-400 rounded-full"></span>
+                {metrics.inProgressItems} In Progress
+              </span>
             </div>
           </div>
         </div>

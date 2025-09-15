@@ -162,7 +162,7 @@ const App: React.FC = () => {
 
   return (
     <NotificationProvider>
-      <div className="flex h-screen bg-slate-900 text-white">
+      <div className="flex h-screen">
         <Sidebar
           user={user}
           currentView={view}
@@ -172,8 +172,10 @@ const App: React.FC = () => {
         />
         <div className="flex-1 flex flex-col overflow-hidden">
           <Header user={user} />
-          <main className="flex-1 overflow-y-auto">
-            {renderContent()}
+          <main className="flex-1 overflow-y-auto px-4 pb-4">
+            <div className="fade-in">
+              {renderContent()}
+            </div>
           </main>
         </div>
         {user && <RealTimeSystem user={user} currentProjectId={view.type === 'project' ? view.projectId : undefined} />}
