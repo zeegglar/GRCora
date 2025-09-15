@@ -9,13 +9,13 @@ import Sidebar from './components/layout/Sidebar';
 import Header from './components/layout/Header';
 import LoginPage from './components/auth/LoginPage';
 import LandingPage from './components/landing/LandingPage';
-import ConsultantDashboard from './components/dashboard/ConsultantDashboard';
-import ClientDashboard from './components/dashboard/ClientDashboard';
+import ConsultantDashboard from './components/dashboard/EnhancedConsultantDashboard';
+import ClientDashboard from './components/dashboard/EnhancedClientDashboard';
 import ProjectView from './components/views/ProjectView';
 import VendorDetailView from './components/views/vendors/VendorDetailView';
 import TPRMDashboard from './components/views/tprm/TPRMDashboard';
 import TPRMReportsView from './components/views/reports/TPRMReportsView';
-import RemediationTracker from './components/views/remediation/RemediationTracker';
+import RemediationTracker from './components/views/remediation/RemediationTracker';\nimport RealTimeSystem from './components/realtime/RealTimeSystem';
 import EnvironmentNotice from './components/setup/EnvironmentNotice';
 
 const App: React.FC = () => {

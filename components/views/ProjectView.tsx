@@ -9,11 +9,12 @@ import VendorTable from './vendors/VendorTable';
 import EvidenceTable from './evidence/EvidenceTable';
 import ReportsView from './reports/ReportsView';
 import NewPolicyModal from './policies/NewPolicyModal';
+import WorkflowEngine from '../workflows/WorkflowEngine';
 import { PolicyStatus } from '../../types';
 
 interface ProjectViewProps {
   user: User;
-  view: { type: 'project'; projectId: string; tab: 'assessments' | 'evidence' | 'risks' | 'policies' | 'vendors' | 'reports' };
+  view: { type: 'project'; projectId: string; tab: 'assessments' | 'evidence' | 'risks' | 'policies' | 'vendors' | 'reports' | 'workflows' };
   projectData: {
     project: Project;
     assessmentItems: AssessmentItem[];
@@ -79,6 +80,8 @@ const ProjectView: React.FC<ProjectViewProps> = ({ user, view, projectData, setV
         return <EvidenceTable evidence={evidence} controls={controls} projectId={project.id} onCreateEvidence={handleCreateEvidence} />;
       case 'reports':
         return <ReportsView project={project} assessmentItems={assessmentItems} risks={risks} controls={controls} />;
+      case 'workflows':
+        return <WorkflowEngine user={user} projectId={project.id} assessmentItems={assessmentItems} risks={risks} vendors={vendors} setView={setView} />;
       default:
         return <div>Select a tab</div>;
     }
@@ -90,6 +93,7 @@ const ProjectView: React.FC<ProjectViewProps> = ({ user, view, projectData, setV
     { id: 'risks', label: 'Risks' },
     { id: 'policies', label: 'Policies' },
     { id: 'vendors', label: 'Vendors' },
+    { id: 'workflows', label: 'Workflows' },
     { id: 'reports', label: 'Reports' },
   ];
 
