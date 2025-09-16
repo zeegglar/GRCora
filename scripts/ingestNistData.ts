@@ -39,6 +39,12 @@ interface RawNISTControl {
   IG1?: string;
   IG2?: string;
   IG3?: string;
+  // ISO 27001 format properties
+  control_id?: string;
+  full_id?: string;
+  evidence_types?: string[];
+  csf_mapping?: string[];
+  tags?: string[];
 }
 
 interface ProcessedNISTControl {
