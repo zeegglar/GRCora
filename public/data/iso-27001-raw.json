@@ -1,0 +1,2246 @@
+{
+  "framework": "ISO/IEC 27001:2022 Annex A",
+  "generated_on": "2025-08-26",
+  "license_note": "This file contains paraphrased summaries and does not include verbatim ISO text. Purchase the official standard for authoritative wording.",
+  "controls": [
+    {
+      "id": "ISO27001:2022-A.5.1",
+      "theme": "Organizational",
+      "ref": "A.5.1",
+      "short_title": "Policies for infosec",
+      "paraphrased_requirement": "Implement risk-appropriate measures to meet this control\u2019s objective and demonstrate effectiveness with evidence.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "ID",
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.2",
+      "theme": "Organizational",
+      "ref": "A.5.2",
+      "short_title": "InfoSec roles and responsibilities",
+      "paraphrased_requirement": "Define and communicate role-based accountability for InfoSec across the organization.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "ID"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.3",
+      "theme": "Organizational",
+      "ref": "A.5.3",
+      "short_title": "Separation of duties",
+      "paraphrased_requirement": "Reduce fraud and error risk by separating critical duties and enforcing dual control where appropriate.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.4",
+      "theme": "Organizational",
+      "ref": "A.5.4",
+      "short_title": "Management accountability for InfoSec",
+      "paraphrased_requirement": "Ensure leadership provides direction, resources, and oversight for the ISMS.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "ID",
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.5",
+      "theme": "Organizational",
+      "ref": "A.5.5",
+      "short_title": "Liaison with regulators/authorities",
+      "paraphrased_requirement": "Maintain channels to engage with regulators and authorities for reporting and guidance.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "ID",
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.6",
+      "theme": "Organizational",
+      "ref": "A.5.6",
+      "short_title": "Engagement with industry groups",
+      "paraphrased_requirement": "Participate in relevant industry groups to share threat, risk, and best-practice insights.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "ID",
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.7",
+      "theme": "Organizational",
+      "ref": "A.5.7",
+      "short_title": "Threat intel program",
+      "paraphrased_requirement": "Collect, assess, and use threat intelligence to inform risk treatment and controls.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "DE"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.8",
+      "theme": "Organizational",
+      "ref": "A.5.8",
+      "short_title": "Embed InfoSec into project management",
+      "paraphrased_requirement": "Embed InfoSec criteria and reviews into project and change lifecycles.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "ID"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.9",
+      "theme": "Organizational",
+      "ref": "A.5.9",
+      "short_title": "Asset & information inventory",
+      "paraphrased_requirement": "Maintain an accurate inventory of information and supporting assets with ownership and classification.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "ID"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.10",
+      "theme": "Organizational",
+      "ref": "A.5.10",
+      "short_title": "Acceptable use of information/assets",
+      "paraphrased_requirement": "Define acceptable use rules for information and assets and enforce them through awareness and monitoring.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "ID",
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.11",
+      "theme": "Organizational",
+      "ref": "A.5.11",
+      "short_title": "Asset return on exit/transfer",
+      "paraphrased_requirement": "Retrieve and sanitize organization assets upon role change or termination.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "ID",
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.12",
+      "theme": "Organizational",
+      "ref": "A.5.12",
+      "short_title": "Information classification",
+      "paraphrased_requirement": "Classify information by sensitivity and apply handling protections accordingly.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "ID"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.13",
+      "theme": "Organizational",
+      "ref": "A.5.13",
+      "short_title": "Information labelling",
+      "paraphrased_requirement": "Label information to reflect sensitivity and handling requirements.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "ID"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.14",
+      "theme": "Organizational",
+      "ref": "A.5.14",
+      "short_title": "Secure information transfer",
+      "paraphrased_requirement": "Protect information in transit with approved channels, encryption, and handling rules.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "ID",
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.15",
+      "theme": "Organizational",
+      "ref": "A.5.15",
+      "short_title": "Access control governance",
+      "paraphrased_requirement": "Define and enforce access control principles based on least privilege and need-to-know.",
+      "tasks": [
+        "Define RBAC/ABAC rules",
+        "Implement joiner/mover/leaver process",
+        "Quarterly access reviews and recertification"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Access requests/approvals",
+        "Quarterly recertification reports",
+        "JML process docs"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.16",
+      "theme": "Organizational",
+      "ref": "A.5.16",
+      "short_title": "Identity lifecycle management",
+      "paraphrased_requirement": "Manage identities across their lifecycle: create, update, disable, and remove consistently.",
+      "tasks": [
+        "Centralize identity (IdP) and MFA",
+        "Rotate and protect secrets",
+        "Automate deprovisioning on exit"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.17",
+      "theme": "Organizational",
+      "ref": "A.5.17",
+      "short_title": "Authentication secret management",
+      "paraphrased_requirement": "Protect authentication secrets and enforce strong, multi-factor authentication where relevant.",
+      "tasks": [
+        "Centralize identity (IdP) and MFA",
+        "Rotate and protect secrets",
+        "Automate deprovisioning on exit"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.18",
+      "theme": "Organizational",
+      "ref": "A.5.18",
+      "short_title": "Provisioning and deprovisioning access rights",
+      "paraphrased_requirement": "Provision, review, and revoke access rights using a formal, auditable process.",
+      "tasks": [
+        "Define RBAC/ABAC rules",
+        "Implement joiner/mover/leaver process",
+        "Quarterly access reviews and recertification"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Access requests/approvals",
+        "Quarterly recertification reports",
+        "JML process docs"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.19",
+      "theme": "Organizational",
+      "ref": "A.5.19",
+      "short_title": "Supplier security management",
+      "paraphrased_requirement": "Manage supplier/ICT supply-chain risks via due diligence, contract clauses, and ongoing oversight.",
+      "tasks": [
+        "Due diligence and security questionnaire",
+        "Security clauses/SLA in contract",
+        "Ongoing monitoring and annual review"
+      ],
+      "csf_function": [
+        "ID"
+      ],
+      "suggested_evidence": [
+        "DD questionnaires",
+        "Contract security clauses",
+        "Vendor risk reviews"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.20",
+      "theme": "Organizational",
+      "ref": "A.5.20",
+      "short_title": "Security clauses in supplier contracts",
+      "paraphrased_requirement": "Manage supplier/ICT supply-chain risks via due diligence, contract clauses, and ongoing oversight.",
+      "tasks": [
+        "Due diligence and security questionnaire",
+        "Security clauses/SLA in contract",
+        "Ongoing monitoring and annual review"
+      ],
+      "csf_function": [
+        "ID"
+      ],
+      "suggested_evidence": [
+        "DD questionnaires",
+        "Contract security clauses",
+        "Vendor risk reviews"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.21",
+      "theme": "Organizational",
+      "ref": "A.5.21",
+      "short_title": "ICT supply chain security",
+      "paraphrased_requirement": "Manage supplier/ICT supply-chain risks via due diligence, contract clauses, and ongoing oversight.",
+      "tasks": [
+        "Due diligence and security questionnaire",
+        "Security clauses/SLA in contract",
+        "Ongoing monitoring and annual review"
+      ],
+      "csf_function": [
+        "ID",
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.22",
+      "theme": "Organizational",
+      "ref": "A.5.22",
+      "short_title": "Oversight of supplier services (monitor/review/change)",
+      "paraphrased_requirement": "Manage supplier/ICT supply-chain risks via due diligence, contract clauses, and ongoing oversight.",
+      "tasks": [
+        "Due diligence and security questionnaire",
+        "Security clauses/SLA in contract",
+        "Ongoing monitoring and annual review"
+      ],
+      "csf_function": [
+        "DE",
+        "ID",
+        "PR"
+      ],
+      "suggested_evidence": [
+        "DD questionnaires",
+        "Contract security clauses",
+        "Vendor risk reviews"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.23",
+      "theme": "Organizational",
+      "ref": "A.5.23",
+      "short_title": "Cloud service security management",
+      "paraphrased_requirement": "Implement risk-appropriate measures to meet this control\u2019s objective and demonstrate effectiveness with evidence.",
+      "tasks": [
+        "Due diligence and security questionnaire",
+        "Security clauses/SLA in contract",
+        "Ongoing monitoring and annual review"
+      ],
+      "csf_function": [
+        "ID",
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.24",
+      "theme": "Organizational",
+      "ref": "A.5.24",
+      "short_title": "Incident response planning & readiness",
+      "paraphrased_requirement": "Define and test incident response plans, roles, and communications before incidents occur.",
+      "tasks": [
+        "Define IR plan and roles",
+        "Run tabletop exercise",
+        "Capture metrics and lessons learned"
+      ],
+      "csf_function": [
+        "RS"
+      ],
+      "suggested_evidence": [
+        "IR plan",
+        "Tabletop notes",
+        "Incident tickets and post\u2011mortems"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.25",
+      "theme": "Organizational",
+      "ref": "A.5.25",
+      "short_title": "Triage & decisioning of security events",
+      "paraphrased_requirement": "Triage reported security events and decide whether to declare incidents.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "DE"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.26",
+      "theme": "Organizational",
+      "ref": "A.5.26",
+      "short_title": "Security incident response",
+      "paraphrased_requirement": "Respond to security incidents to contain impact, eradicate causes, and communicate.",
+      "tasks": [
+        "Define IR plan and roles",
+        "Run tabletop exercise",
+        "Capture metrics and lessons learned"
+      ],
+      "csf_function": [
+        "RS"
+      ],
+      "suggested_evidence": [
+        "IR plan",
+        "Tabletop notes",
+        "Incident tickets and post\u2011mortems"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.27",
+      "theme": "Organizational",
+      "ref": "A.5.27",
+      "short_title": "Post-incident lessons learned",
+      "paraphrased_requirement": "Run post-incident reviews and feed lessons into improvements.",
+      "tasks": [
+        "Define IR plan and roles",
+        "Run tabletop exercise",
+        "Capture metrics and lessons learned"
+      ],
+      "csf_function": [
+        "RS"
+      ],
+      "suggested_evidence": [
+        "IR plan",
+        "Tabletop notes",
+        "Incident tickets and post\u2011mortems"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.28",
+      "theme": "Organizational",
+      "ref": "A.5.28",
+      "short_title": "Evidence collection & preservation",
+      "paraphrased_requirement": "Collect, store, and preserve digital evidence in a forensically sound manner.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "RS"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.29",
+      "theme": "Organizational",
+      "ref": "A.5.29",
+      "short_title": "InfoSec during business disruption",
+      "paraphrased_requirement": "Ensure InfoSec is upheld during business disruption scenarios.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "RC"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.30",
+      "theme": "Organizational",
+      "ref": "A.5.30",
+      "short_title": "ICT readiness for BC/DR",
+      "paraphrased_requirement": "Prepare ICT services to meet business continuity and recovery objectives.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "RC"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.31",
+      "theme": "Organizational",
+      "ref": "A.5.31",
+      "short_title": "Identify applicable legal/regulatory/contractual obligations",
+      "paraphrased_requirement": "Maintain channels to engage with regulators and authorities for reporting and guidance.",
+      "tasks": [
+        "Due diligence and security questionnaire",
+        "Security clauses/SLA in contract",
+        "Ongoing monitoring and annual review"
+      ],
+      "csf_function": [
+        "ID"
+      ],
+      "suggested_evidence": [
+        "DD questionnaires",
+        "Contract security clauses",
+        "Vendor risk reviews"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.32",
+      "theme": "Organizational",
+      "ref": "A.5.32",
+      "short_title": "Intellectual property protection",
+      "paraphrased_requirement": "Protect IP with appropriate controls, licensing, and monitoring.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.33",
+      "theme": "Organizational",
+      "ref": "A.5.33",
+      "short_title": "Records protection & retention",
+      "paraphrased_requirement": "Protect, retain, and dispose of records per policy and regulation.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "ID"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.34",
+      "theme": "Organizational",
+      "ref": "A.5.34",
+      "short_title": "Privacy & PII protection",
+      "paraphrased_requirement": "Protect personal data with privacy-by-design, minimization, and lawful processing.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "ID"
+      ],
+      "suggested_evidence": [
+        "RoPA/PIA/DPIA",
+        "Consent/notice templates",
+        "Data minimization records"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.35",
+      "theme": "Organizational",
+      "ref": "A.5.35",
+      "short_title": "Independent InfoSec review",
+      "paraphrased_requirement": "Schedule independent reviews of the ISMS and control effectiveness.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "ID"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.36",
+      "theme": "Organizational",
+      "ref": "A.5.36",
+      "short_title": "Compliance with InfoSec policies/standards",
+      "paraphrased_requirement": "Monitor and enforce compliance with InfoSec policies and standards.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "ID",
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.5.37",
+      "theme": "Organizational",
+      "ref": "A.5.37",
+      "short_title": "Documented operating procedures (DOPs)",
+      "paraphrased_requirement": "Create, maintain, and follow documented procedures for consistent operations.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "ID"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.6.1",
+      "theme": "People",
+      "ref": "A.6.1",
+      "short_title": "Pre-employment screening",
+      "paraphrased_requirement": "Screen candidates proportionately to role risk before employment.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "hr"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.6.2",
+      "theme": "People",
+      "ref": "A.6.2",
+      "short_title": "Employment terms include InfoSec obligations",
+      "paraphrased_requirement": "Include InfoSec responsibilities in employment agreements and handbooks.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "hr"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.6.3",
+      "theme": "People",
+      "ref": "A.6.3",
+      "short_title": "Security awareness & training",
+      "paraphrased_requirement": "Deliver ongoing security awareness and role-based training.",
+      "tasks": [
+        "Run new\u2011hire and annual training",
+        "Role\u2011based modules for engineers",
+        "Phishing simulations and feedback"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Training records and completion reports",
+        "Campaign materials",
+        "Quiz results and sign\u2011offs"
+      ],
+      "tags": [
+        "hr"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.6.4",
+      "theme": "People",
+      "ref": "A.6.4",
+      "short_title": "Disciplinary process for security breaches",
+      "paraphrased_requirement": "Define a fair disciplinary process to address policy breaches.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "hr"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.6.5",
+      "theme": "People",
+      "ref": "A.6.5",
+      "short_title": "Post-employment/role-change responsibilities",
+      "paraphrased_requirement": "Define and communicate role-based accountability for InfoSec across the organization.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "hr"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.6.6",
+      "theme": "People",
+      "ref": "A.6.6",
+      "short_title": "NDAs & confidentiality agreements",
+      "paraphrased_requirement": "Use NDAs to protect sensitive information with staff and third parties.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "hr"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.6.7",
+      "theme": "People",
+      "ref": "A.6.7",
+      "short_title": "Remote working security",
+      "paraphrased_requirement": "Set and enforce security requirements for remote and hybrid work.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "hr"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.6.8",
+      "theme": "People",
+      "ref": "A.6.8",
+      "short_title": "Security event reporting by personnel",
+      "paraphrased_requirement": "Provide clear channels for personnel to report security events promptly.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "DE"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "hr"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.7.1",
+      "theme": "Physical",
+      "ref": "A.7.1",
+      "short_title": "Define physical security perimeters",
+      "paraphrased_requirement": "Establish physical perimeters to protect secure areas.",
+      "tasks": [
+        "Badge access with logging",
+        "Visitor management",
+        "Quarterly access review and CCTV audit"
+      ],
+      "csf_function": [
+        "DE",
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Access logs",
+        "Visitor logs",
+        "CCTV retention/config docs"
+      ],
+      "tags": [
+        "facilities"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.7.2",
+      "theme": "Physical",
+      "ref": "A.7.2",
+      "short_title": "Physical entry controls",
+      "paraphrased_requirement": "Control and log access to facilities and secure areas.",
+      "tasks": [
+        "Badge access with logging",
+        "Visitor management",
+        "Quarterly access review and CCTV audit"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Access logs",
+        "Visitor logs",
+        "CCTV retention/config docs"
+      ],
+      "tags": [
+        "facilities"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.7.3",
+      "theme": "Physical",
+      "ref": "A.7.3",
+      "short_title": "Secure offices, rooms & facilities",
+      "paraphrased_requirement": "Harden offices/rooms to deter unauthorized access and tampering.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "DE",
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "facilities"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.7.4",
+      "theme": "Physical",
+      "ref": "A.7.4",
+      "short_title": "Monitoring of physical security",
+      "paraphrased_requirement": "Monitor systems and alerts to detect anomalies and attacks.",
+      "tasks": [
+        "Centralize logs to SIEM",
+        "Define use cases and alerts",
+        "Retain logs per policy; test detection"
+      ],
+      "csf_function": [
+        "DE",
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Access logs",
+        "Visitor logs",
+        "CCTV retention/config docs"
+      ],
+      "tags": [
+        "facilities"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.7.5",
+      "theme": "Physical",
+      "ref": "A.7.5",
+      "short_title": "Protection from physical/environmental threats",
+      "paraphrased_requirement": "Protect against fire, flood, temperature, and other environmental threats.",
+      "tasks": [
+        "Badge access with logging",
+        "Visitor management",
+        "Quarterly access review and CCTV audit"
+      ],
+      "csf_function": [
+        "DE",
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Access logs",
+        "Visitor logs",
+        "CCTV retention/config docs"
+      ],
+      "tags": [
+        "facilities"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.7.6",
+      "theme": "Physical",
+      "ref": "A.7.6",
+      "short_title": "Working in secure areas",
+      "paraphrased_requirement": "Define stricter controls for activities in secure areas.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "facilities"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.7.7",
+      "theme": "Physical",
+      "ref": "A.7.7",
+      "short_title": "Clear desk/clear screen practices",
+      "paraphrased_requirement": "Keep sensitive info off desks/screens; lock screens; clean printers.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "DE",
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "facilities"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.7.8",
+      "theme": "Physical",
+      "ref": "A.7.8",
+      "short_title": "Equipment placement & protection",
+      "paraphrased_requirement": "Place equipment to reduce risks from accidents, interference, and unauthorized access.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "DE",
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "facilities"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.7.9",
+      "theme": "Physical",
+      "ref": "A.7.9",
+      "short_title": "Off\u2011premises asset security",
+      "paraphrased_requirement": "Protect organization assets when used off-site or at home.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "DE",
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "facilities"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.7.10",
+      "theme": "Physical",
+      "ref": "A.7.10",
+      "short_title": "Storage media handling",
+      "paraphrased_requirement": "Control the handling, transport, and sanitization of storage media.",
+      "tasks": [
+        "Maintain media register",
+        "Sanitize with approved methods",
+        "Document disposal with certificates"
+      ],
+      "csf_function": [
+        "DE",
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "facilities"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.7.11",
+      "theme": "Physical",
+      "ref": "A.7.11",
+      "short_title": "Utilities resilience (power, HVAC)",
+      "paraphrased_requirement": "Ensure power, HVAC, and other utilities support secure, continuous operations.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "DE",
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "facilities"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.7.12",
+      "theme": "Physical",
+      "ref": "A.7.12",
+      "short_title": "Secure cabling",
+      "paraphrased_requirement": "Protect power/telecom cabling from interception and damage.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "DE",
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "facilities"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.7.13",
+      "theme": "Physical",
+      "ref": "A.7.13",
+      "short_title": "Equipment maintenance",
+      "paraphrased_requirement": "Maintain equipment securely and track service history.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "DE",
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "facilities"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.7.14",
+      "theme": "Physical",
+      "ref": "A.7.14",
+      "short_title": "Secure disposal/reuse of equipment",
+      "paraphrased_requirement": "Sanitize and securely dispose or reuse equipment at end-of-life.",
+      "tasks": [
+        "Maintain media register",
+        "Sanitize with approved methods",
+        "Document disposal with certificates"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "facilities"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.1",
+      "theme": "Technological",
+      "ref": "A.8.1",
+      "short_title": "Endpoint device security",
+      "paraphrased_requirement": "Define baseline controls for laptops, mobiles, and other endpoints.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.2",
+      "theme": "Technological",
+      "ref": "A.8.2",
+      "short_title": "Privileged access management (PAM)",
+      "paraphrased_requirement": "Control and monitor privileged accounts and sessions.",
+      "tasks": [
+        "Enforce PAM (MFA, vault, session recording)",
+        "Limit standing admin; use just\u2011in\u2011time access",
+        "Review admin access monthly"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Access requests/approvals",
+        "Quarterly recertification reports",
+        "JML process docs"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.3",
+      "theme": "Technological",
+      "ref": "A.8.3",
+      "short_title": "Restrict information access",
+      "paraphrased_requirement": "Implement risk-appropriate measures to meet this control\u2019s objective and demonstrate effectiveness with evidence.",
+      "tasks": [
+        "Define RBAC/ABAC rules",
+        "Implement joiner/mover/leaver process",
+        "Quarterly access reviews and recertification"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Access requests/approvals",
+        "Quarterly recertification reports",
+        "JML process docs"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.4",
+      "theme": "Technological",
+      "ref": "A.8.4",
+      "short_title": "Secure access to source code",
+      "paraphrased_requirement": "Limit and monitor who can view or change source code repositories.",
+      "tasks": [
+        "Define RBAC/ABAC rules",
+        "Implement joiner/mover/leaver process",
+        "Quarterly access reviews and recertification"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Access requests/approvals",
+        "Quarterly recertification reports",
+        "JML process docs"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.5",
+      "theme": "Technological",
+      "ref": "A.8.5",
+      "short_title": "Strong authentication mechanisms",
+      "paraphrased_requirement": "Protect authentication secrets and enforce strong, multi-factor authentication where relevant.",
+      "tasks": [
+        "Centralize identity (IdP) and MFA",
+        "Rotate and protect secrets",
+        "Automate deprovisioning on exit"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.6",
+      "theme": "Technological",
+      "ref": "A.8.6",
+      "short_title": "Capacity & performance management",
+      "paraphrased_requirement": "Plan and monitor capacity to meet performance and availability needs.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.7",
+      "theme": "Technological",
+      "ref": "A.8.7",
+      "short_title": "Anti\u2011malware protections",
+      "paraphrased_requirement": "Deploy anti-malware, update signatures, and harden endpoints/servers.",
+      "tasks": [
+        "Deploy endpoint protection",
+        "Enable real-time scanning and updates",
+        "Block macros/unsigned code"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.8",
+      "theme": "Technological",
+      "ref": "A.8.8",
+      "short_title": "Vulnerability management",
+      "paraphrased_requirement": "Continuously identify, assess, prioritize, and remediate vulnerabilities.",
+      "tasks": [
+        "Scan weekly; risk-rate findings",
+        "Patch timelines by severity",
+        "Track exceptions with owner/date"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Scan reports",
+        "Patch metrics",
+        "Exception register"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.9",
+      "theme": "Technological",
+      "ref": "A.8.9",
+      "short_title": "Configuration management baseline",
+      "paraphrased_requirement": "Define, baseline, and enforce secure configurations; track drift.",
+      "tasks": [
+        "Define secure baselines (CIS/benchmarks)",
+        "Automate drift detection",
+        "Peer-review changes"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.10",
+      "theme": "Technological",
+      "ref": "A.8.10",
+      "short_title": "Secure information deletion",
+      "paraphrased_requirement": "Securely erase information per policy and legal holds.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.11",
+      "theme": "Technological",
+      "ref": "A.8.11",
+      "short_title": "Data masking/obfuscation",
+      "paraphrased_requirement": "Mask or tokenize data to limit exposure in non-prod and analytics.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.12",
+      "theme": "Technological",
+      "ref": "A.8.12",
+      "short_title": "Data loss/leakage prevention (DLP)",
+      "paraphrased_requirement": "Detect and block unauthorized data exfiltration through DLP controls.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "DE",
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.13",
+      "theme": "Technological",
+      "ref": "A.8.13",
+      "short_title": "Backup & restore management",
+      "paraphrased_requirement": "Back up critical data; protect, test, and document restores.",
+      "tasks": [
+        "Define RPO/RTO",
+        "Test restore/failover",
+        "Harden backups (immutable/offline)"
+      ],
+      "csf_function": [
+        "PR",
+        "RC"
+      ],
+      "suggested_evidence": [
+        "Backup configs",
+        "Restore test results",
+        "RPO/RTO documentation"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.14",
+      "theme": "Technological",
+      "ref": "A.8.14",
+      "short_title": "Resilience via redundancy",
+      "paraphrased_requirement": "Use NDAs to protect sensitive information with staff and third parties.",
+      "tasks": [
+        "Define RPO/RTO",
+        "Test restore/failover",
+        "Harden backups (immutable/offline)"
+      ],
+      "csf_function": [
+        "PR",
+        "RC"
+      ],
+      "suggested_evidence": [
+        "Backup configs",
+        "Restore test results",
+        "RPO/RTO documentation"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.15",
+      "theme": "Technological",
+      "ref": "A.8.15",
+      "short_title": "Security logging",
+      "paraphrased_requirement": "Generate tamper-resistant logs for security-relevant events.",
+      "tasks": [
+        "Centralize logs to SIEM",
+        "Define use cases and alerts",
+        "Retain logs per policy; test detection"
+      ],
+      "csf_function": [
+        "DE",
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.16",
+      "theme": "Technological",
+      "ref": "A.8.16",
+      "short_title": "Security monitoring",
+      "paraphrased_requirement": "Monitor systems and alerts to detect anomalies and attacks.",
+      "tasks": [
+        "Centralize logs to SIEM",
+        "Define use cases and alerts",
+        "Retain logs per policy; test detection"
+      ],
+      "csf_function": [
+        "DE",
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.17",
+      "theme": "Technological",
+      "ref": "A.8.17",
+      "short_title": "Time synchronisation",
+      "paraphrased_requirement": "Synchronize time across systems to support accurate logs and forensics.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.18",
+      "theme": "Technological",
+      "ref": "A.8.18",
+      "short_title": "Use of privileged utilities",
+      "paraphrased_requirement": "Ensure power, HVAC, and other utilities support secure, continuous operations.",
+      "tasks": [
+        "Enforce PAM (MFA, vault, session recording)",
+        "Limit standing admin; use just\u2011in\u2011time access",
+        "Review admin access monthly"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.19",
+      "theme": "Technological",
+      "ref": "A.8.19",
+      "short_title": "Software installation on production systems",
+      "paraphrased_requirement": "Implement risk-appropriate measures to meet this control\u2019s objective and demonstrate effectiveness with evidence.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.20",
+      "theme": "Technological",
+      "ref": "A.8.20",
+      "short_title": "Network security controls",
+      "paraphrased_requirement": "Design and operate secure networks with segmentation and protections.",
+      "tasks": [
+        "Segment networks (user/app/data)",
+        "Harden perimeters and internal controls",
+        "Monitor traffic and block anomalies"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.21",
+      "theme": "Technological",
+      "ref": "A.8.21",
+      "short_title": "Secure network services",
+      "paraphrased_requirement": "Ensure external and internal network services meet security requirements.",
+      "tasks": [
+        "Segment networks (user/app/data)",
+        "Harden perimeters and internal controls",
+        "Monitor traffic and block anomalies"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.22",
+      "theme": "Technological",
+      "ref": "A.8.22",
+      "short_title": "Network segmentation",
+      "paraphrased_requirement": "Segment networks to reduce blast radius and enforce trust boundaries.",
+      "tasks": [
+        "Segment networks (user/app/data)",
+        "Harden perimeters and internal controls",
+        "Monitor traffic and block anomalies"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.23",
+      "theme": "Technological",
+      "ref": "A.8.23",
+      "short_title": "Web filtering/URL controls",
+      "paraphrased_requirement": "Filter web access to block malicious or inappropriate content.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.24",
+      "theme": "Technological",
+      "ref": "A.8.24",
+      "short_title": "Cryptography usage & key mgmt",
+      "paraphrased_requirement": "Use approved cryptographic algorithms, key management, and HSMs where appropriate.",
+      "tasks": [
+        "Define crypto policy and key lifecycles",
+        "Rotate keys; enforce TLS minimums",
+        "Inventory and remediate weak ciphers"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.25",
+      "theme": "Technological",
+      "ref": "A.8.25",
+      "short_title": "Secure SDLC",
+      "paraphrased_requirement": "Integrate security activities throughout the software development lifecycle.",
+      "tasks": [
+        "Define security gates in CI/CD",
+        "Run SAST/DAST/dep scans",
+        "Fix high/critical before release"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.26",
+      "theme": "Technological",
+      "ref": "A.8.26",
+      "short_title": "Application security requirements",
+      "paraphrased_requirement": "Define and verify application security requirements early in development.",
+      "tasks": [
+        "Define security gates in CI/CD",
+        "Run SAST/DAST/dep scans",
+        "Fix high/critical before release"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.27",
+      "theme": "Technological",
+      "ref": "A.8.27",
+      "short_title": "Secure architecture & engineering principles",
+      "paraphrased_requirement": "Apply secure architecture patterns and engineering principles.",
+      "tasks": [
+        "Define security gates in CI/CD",
+        "Run SAST/DAST/dep scans",
+        "Fix high/critical before release"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.28",
+      "theme": "Technological",
+      "ref": "A.8.28",
+      "short_title": "Secure coding practices",
+      "paraphrased_requirement": "Adopt secure coding standards and static analysis to prevent defects.",
+      "tasks": [
+        "Define security gates in CI/CD",
+        "Run SAST/DAST/dep scans",
+        "Fix high/critical before release"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.29",
+      "theme": "Technological",
+      "ref": "A.8.29",
+      "short_title": "Security testing (dev/acceptance)",
+      "paraphrased_requirement": "Plan and execute security testing (SAST/DAST/IAST/pentest) before release.",
+      "tasks": [
+        "Define security gates in CI/CD",
+        "Run SAST/DAST/dep scans",
+        "Fix high/critical before release"
+      ],
+      "csf_function": [
+        "DE"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.30",
+      "theme": "Technological",
+      "ref": "A.8.30",
+      "short_title": "Outsourced development security",
+      "paraphrased_requirement": "Control third-party development with security requirements and reviews.",
+      "tasks": [
+        "Define security gates in CI/CD",
+        "Run SAST/DAST/dep scans",
+        "Fix high/critical before release"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.31",
+      "theme": "Technological",
+      "ref": "A.8.31",
+      "short_title": "Separate dev/test/prod environments",
+      "paraphrased_requirement": "Implement risk-appropriate measures to meet this control\u2019s objective and demonstrate effectiveness with evidence.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.32",
+      "theme": "Technological",
+      "ref": "A.8.32",
+      "short_title": "Change management process",
+      "paraphrased_requirement": "Use controlled change processes with approval, testing, and rollback plans.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.33",
+      "theme": "Technological",
+      "ref": "A.8.33",
+      "short_title": "Protection of test data/information",
+      "paraphrased_requirement": "Implement risk-appropriate measures to meet this control\u2019s objective and demonstrate effectiveness with evidence.",
+      "tasks": [
+        "Define process and owner",
+        "Implement tooling/procedure",
+        "Collect evidence and review periodically"
+      ],
+      "csf_function": [
+        "PR"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "id": "ISO27001:2022-A.8.34",
+      "theme": "Technological",
+      "ref": "A.8.34",
+      "short_title": "Protect systems during audit/testing",
+      "paraphrased_requirement": "Plan audit/testing so production systems remain protected and stable.",
+      "tasks": [
+        "Define security gates in CI/CD",
+        "Run SAST/DAST/dep scans",
+        "Fix high/critical before release"
+      ],
+      "csf_function": [
+        "DE"
+      ],
+      "suggested_evidence": [
+        "Policy/standard or SOP",
+        "Screenshots/configs",
+        "Logs/records",
+        "Review minutes or approvals"
+      ],
+      "tags": [
+        "tech"
+      ]
+    }
+  ]
+}
