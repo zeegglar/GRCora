@@ -264,6 +264,55 @@ function processCISControl(raw: RawNISTControl): ProcessedNISTControl {
 }
 
 /**
+ * Process ISO 27001:2022 format
+ */
+function processISOControl(raw: RawNISTControl): ProcessedNISTControl {
+  const contentText = `${raw.title || ''} ${raw.description || ''} ${raw.guidance || ''}`;
+  const content_hash = generateContentHash(contentText);
+
+  // Map ISO themes to cleaner family names
+  const isoThemeFamilies: Record<string, string> = {
+    'Organizational': 'Organizational Security',
+    'People': 'Human Resource Security',
+    'Physical': 'Physical and Environmental Security',
+    'Technological': 'Technical Security'
+  };
+
+  const family = isoThemeFamilies[raw.family || ''] || raw.family || 'Information Security Management';
+
+  // Use CSF mapping if available
+  const csfFunctions = raw.csf_mapping || [];
+  const guidance = raw.guidance || '';
+
+  // Build comprehensive guidance including evidence types
+  let fullGuidance = guidance;
+  if (raw.evidence_types && raw.evidence_types.length > 0) {
+    fullGuidance += ` Evidence types: ${raw.evidence_types.join(', ')}.`;
+  }
+  if (csfFunctions.length > 0) {
+    fullGuidance += ` NIST CSF Functions: ${csfFunctions.join(', ')}.`;
+  }
+
+  return {
+    id: raw.control_id || `ISO_${Date.now()}_${Math.random().toString(36).substring(7)}`,
+    family,
+    title: raw.title || '',
+    description: raw.description || '',
+    guidance: fullGuidance,
+    assessment_objectives: raw.evidence_types || [],
+    assessment_methods: ['Examine', 'Interview', 'Test'],
+    parameters: raw.tags || undefined,
+    related_controls: [], // ISO controls don't typically cross-reference in this format
+    framework: 'ISO_27001' as const,
+    category: raw.family,
+    subcategory: raw.tags?.join(', '),
+    informative_references: csfFunctions,
+    embedding: generateMockEmbedding(contentText),
+    content_hash
+  };
+}
+
+/**
  * Extract assessment objectives from text
  */
 function extractAssessmentObjectives(text: string): string[] {
@@ -329,6 +378,10 @@ async function processJSONLFile(filePath: string): Promise<ProcessedNISTControl[
         } else if (raw.CIS_Control && (raw.Title || raw.Description)) {
           // CIS v8 format
           const control = processCISControl(raw);
+          controls.push(control);
+        } else if (raw.control_id && raw.framework?.includes('ISO 27001')) {
+          // ISO 27001 format
+          const control = processISOControl(raw);
           controls.push(control);
         } else {
           console.warn(`   ⚠️ Unrecognized format in line ${i + 1}:`, Object.keys(raw));
@@ -495,7 +548,8 @@ async function main() {
     path.join(dataDir, 'nist-csf.jsonl'),
     path.join(dataDir, 'nist-800-53.jsonl'),
     path.join(dataDir, 'nist-ai-rmf.jsonl'),
-    path.join(dataDir, 'cis-v8.jsonl')
+    path.join(dataDir, 'cis-v8.jsonl'),
+    path.join(dataDir, 'iso-27001.jsonl')
   ];
 
   let allControls: ProcessedNISTControl[] = [];

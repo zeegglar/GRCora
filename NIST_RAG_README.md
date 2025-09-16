@@ -1,15 +1,20 @@
-# NIST RAG Knowledge Base Setup
+# Multi-Framework RAG Knowledge Base Setup
 
-This document explains how to set up and use the NIST Retrieval-Augmented Generation (RAG) system for intelligent compliance guidance.
+This document explains how to set up and use the comprehensive Retrieval-Augmented Generation (RAG) system for intelligent compliance guidance across multiple security frameworks.
 
 ## Overview
 
-The NIST RAG system provides:
-- **Intelligent querying** of NIST frameworks (CSF 2.0, SP 800-53, AI RMF)
-- **Vector similarity search** for finding relevant controls
-- **Automated gap analysis** for compliance assessment
-- **Contextual recommendations** based on industry and organization size
-- **Implementation roadmaps** with phased approaches
+The Multi-Framework RAG system provides:
+- **Intelligent querying** across multiple frameworks:
+  - NIST Cybersecurity Framework 2.0 (CSF)
+  - NIST SP 800-53 Rev 5 Security Controls
+  - NIST AI Risk Management Framework 1.0 (AI RMF)
+  - CIS Controls Version 8.1.2
+  - ISO/IEC 27001:2022 Annex A Controls
+- **Vector similarity search** for finding relevant controls across frameworks
+- **Cross-framework gap analysis** for comprehensive compliance assessment
+- **Contextual recommendations** based on industry, organization size, and framework combinations
+- **Implementation roadmaps** with phased approaches across multiple standards
 
 ## Quick Start
 
@@ -37,12 +42,16 @@ supabase db reset
 psql -d your_database < supabase/migrations/20250916120000_nist_knowledge_base.sql
 ```
 
-### 3. Ingest NIST Data
+### 3. Ingest Framework Data
 
-The NIST files have already been processed and placed in `public/data/`:
-- `nist-csf.jsonl` - NIST Cybersecurity Framework 2.0
-- `nist-800-53.jsonl` - NIST SP 800-53 Rev 5 Controls
-- `nist-ai-rmf.jsonl` - NIST AI Risk Management Framework 1.0
+The framework files have been processed and placed in `public/data/`:
+- `nist-csf.jsonl` - NIST Cybersecurity Framework 2.0 (108 subcategories)
+- `nist-800-53.jsonl` - NIST SP 800-53 Rev 5 Controls (1,006 controls)
+- `nist-ai-rmf.jsonl` - NIST AI Risk Management Framework 1.0 (26 controls)
+- `cis-v8.jsonl` - CIS Controls Version 8.1.2 (171 safeguards)
+- `iso-27001.jsonl` - ISO/IEC 27001:2022 Annex A (93 controls)
+
+**Total: ~1,400+ controls across 5 major frameworks**
 
 Ingest the data into your database:
 

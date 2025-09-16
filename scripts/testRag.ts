@@ -19,7 +19,7 @@ async function testRAG() {
     try {
       const result = await nistKnowledgeService.queryControls(
         query,
-        ['NIST_CSF', 'NIST_800_53', 'NIST_AI_RMF', 'CIS_V8'],
+        ['NIST_CSF', 'NIST_800_53', 'NIST_AI_RMF', 'CIS_V8', 'ISO_27001'],
         3
       );
 
@@ -54,7 +54,7 @@ async function testRAG() {
   try {
     const gaps = await nistKnowledgeService.performGapAnalysis(
       'test-project-id',
-      ['NIST_CSF', 'NIST_800_53', 'CIS_V8']
+      ['NIST_CSF', 'NIST_800_53', 'CIS_V8', 'ISO_27001']
     );
     console.log(`📊 Found ${gaps.length} potential gaps`);
 

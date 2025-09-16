@@ -174,7 +174,7 @@ class NISTKnowledgeService {
    */
   async queryControls(
     query: string,
-    frameworks: ('NIST_CSF' | 'NIST_800_53' | 'NIST_AI_RMF' | 'CIS_V8' | 'ISO_27001')[] = ['NIST_CSF', 'NIST_800_53', 'NIST_AI_RMF', 'CIS_V8'],
+    frameworks: ('NIST_CSF' | 'NIST_800_53' | 'NIST_AI_RMF' | 'CIS_V8' | 'ISO_27001')[] = ['NIST_CSF', 'NIST_800_53', 'NIST_AI_RMF', 'CIS_V8', 'ISO_27001'],
     limit: number = 10
   ): Promise<NISTQueryResult> {
     try {
