@@ -25,7 +25,8 @@ import {
   BrainIcon,
   TrendingIcon
 } from '../ui/Icons';
-import NewEngagementModal from './NewEngagementModal';
+import EnhancedEngagementModal from './EnhancedEngagementModal';
+import NotificationCenter from './NotificationCenter';
 import { useNotifications } from '../context/NotificationContext';
 
 interface ConsultantDashboardProps {
@@ -264,6 +265,7 @@ const ProfessionalConsultantDashboard: React.FC<ConsultantDashboardProps> = ({ u
   const [clients, setClients] = useState<Organization[]>([]);
   const [allRisks, setAllRisks] = useState<Risk[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isNotificationCenterOpen, setIsNotificationCenterOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [viewMode, setViewMode] = useState<'portfolio' | 'analytics' | 'pipeline'>('portfolio');
   const [timeRange, setTimeRange] = useState<'week' | 'month' | 'quarter'>('month');
@@ -360,12 +362,15 @@ const ProfessionalConsultantDashboard: React.FC<ConsultantDashboardProps> = ({ u
     });
   }, [projects, clients, allRisks]);
 
-  const handleCreateEngagement = async (name: string, organizationId: string, frameworks: string[]) => {
+  const handleCreateEngagement = async (name: string, organizationId: string, frameworks: string[], settings: any) => {
     try {
       await mockApi.createProject(name, organizationId, frameworks);
       fetchData();
       setIsModalOpen(false);
-      addNotification(`New engagement "${name}" created successfully`, 'success');
+      addNotification(`New engagement "${name}" created successfully with automated notifications`, 'success');
+
+      // Here you would typically save the engagement settings to trigger automated notifications
+      console.log('Engagement settings:', settings);
     } catch (error) {
       addNotification('Failed to create engagement', 'error');
     }
@@ -396,6 +401,17 @@ const ProfessionalConsultantDashboard: React.FC<ConsultantDashboardProps> = ({ u
             </div>
 
             <div className="flex items-center space-x-4">
+              <button
+                onClick={() => setIsNotificationCenterOpen(true)}
+                className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 transition-colors text-white text-sm relative"
+              >
+                <BellIcon className="h-5 w-5" />
+                <span>Notifications</span>
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
+                  3
+                </span>
+              </button>
+
               <select
                 value={timeRange}
                 onChange={(e) => setTimeRange(e.target.value as any)}
@@ -543,12 +559,17 @@ const ProfessionalConsultantDashboard: React.FC<ConsultantDashboardProps> = ({ u
         </main>
       </div>
 
-      <NewEngagementModal
+      <EnhancedEngagementModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         clients={clients}
         onCreate={handleCreateEngagement}
         onClientCreated={fetchData}
+      />
+
+      <NotificationCenter
+        isOpen={isNotificationCenterOpen}
+        onClose={() => setIsNotificationCenterOpen(false)}
       />
     </>
   );
