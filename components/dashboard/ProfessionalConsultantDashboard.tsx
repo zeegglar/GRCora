@@ -27,6 +27,7 @@ import {
 } from '../ui/Icons';
 import EnhancedEngagementModal from './EnhancedEngagementModal';
 import NotificationCenter from './NotificationCenter';
+import IntelligentDocumentProcessor from '../documents/IntelligentDocumentProcessor';
 import { useNotifications } from '../context/NotificationContext';
 
 interface ConsultantDashboardProps {
@@ -266,6 +267,7 @@ const ProfessionalConsultantDashboard: React.FC<ConsultantDashboardProps> = ({ u
   const [allRisks, setAllRisks] = useState<Risk[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isNotificationCenterOpen, setIsNotificationCenterOpen] = useState(false);
+  const [isDocumentProcessorOpen, setIsDocumentProcessorOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [viewMode, setViewMode] = useState<'portfolio' | 'analytics' | 'pipeline'>('portfolio');
   const [timeRange, setTimeRange] = useState<'week' | 'month' | 'quarter'>('month');
@@ -450,6 +452,14 @@ const ProfessionalConsultantDashboard: React.FC<ConsultantDashboardProps> = ({ u
               </div>
 
               <button
+                onClick={() => setIsDocumentProcessorOpen(true)}
+                className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 transition-colors font-semibold text-white text-sm"
+              >
+                <BrainIcon className="h-5 w-5" />
+                <span>AI Document Processor</span>
+              </button>
+
+              <button
                 onClick={() => setIsModalOpen(true)}
                 className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 transition-colors font-semibold text-white text-sm"
               >
@@ -571,6 +581,31 @@ const ProfessionalConsultantDashboard: React.FC<ConsultantDashboardProps> = ({ u
         isOpen={isNotificationCenterOpen}
         onClose={() => setIsNotificationCenterOpen(false)}
       />
+
+      {isDocumentProcessorOpen && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-slate-900 rounded-xl max-w-7xl w-full max-h-[95vh] overflow-hidden">
+            <div className="flex items-center justify-between p-6 border-b border-slate-700">
+              <h2 className="text-2xl font-bold text-white">AI Document Processor</h2>
+              <button
+                onClick={() => setIsDocumentProcessorOpen(false)}
+                className="text-slate-400 hover:text-white transition-colors p-2 hover:bg-slate-700/50 rounded-lg"
+              >
+                <XMarkIcon className="w-6 h-6" />
+              </button>
+            </div>
+            <div className="overflow-y-auto max-h-[calc(95vh-80px)]">
+              <IntelligentDocumentProcessor
+                clientId={projects[0]?.organizationId || ''}
+                projectId={projects[0]?.id || ''}
+                onProcessingComplete={(results) => {
+                  addNotification(`Processed ${results.length} documents successfully`, 'success');
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
