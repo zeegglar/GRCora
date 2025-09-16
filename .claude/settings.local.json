@@ -12,7 +12,9 @@
       "Bash(npm install:*)",
       "Bash(winget:*)",
       "Bash(npx supabase:*)",
-      "Bash(del \"supabase\\migrations\\20250916032802_create_grcora_schema.sql\")"
+      "Bash(del \"supabase\\migrations\\20250916032802_create_grcora_schema.sql\")",
+      "Read(//c/Users/abbas/**)",
+      "Read(//tmp/grc_prejson_extract/json//**)"
     ],
     "deny": [],
     "ask": []
