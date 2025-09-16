@@ -489,7 +489,10 @@ const EnhancedClientDashboard: React.FC<ClientDashboardProps> = ({ user, project
           </div>
 
           {/* Vendor Summary */}
-          <div className="glass-card p-6 rounded-lg">
+          <div
+            onClick={() => onNavigate?.('vendors')}
+            className="glass-card p-6 rounded-lg cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-slate-700/30"
+          >
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold text-white">Vendor Overview</h2>
               <UsersIcon className="w-6 h-6 text-slate-400" />
