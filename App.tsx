@@ -132,7 +132,15 @@ const App: React.FC = () => {
           return <ConsultantDashboard user={user} setView={setView} />;
         }
         if (data.project) {
-          return <ClientDashboard user={user} project={data.project} assessmentItems={data.assessmentItems} risks={data.risks} />;
+          return (
+            <ClientDashboard
+              user={user}
+              project={data.project}
+              assessmentItems={data.assessmentItems}
+              risks={data.risks}
+              onNavigate={(tab) => setView({ type: 'project', projectId: data.project.id, tab })}
+            />
+          );
         }
         return <div className="p-8">No project assigned.</div>
         
@@ -140,7 +148,15 @@ const App: React.FC = () => {
         if (data.project?.id === view.projectId) {
             // If client user with dashboard tab, show ClientDashboard
             if (user.role.startsWith('CLIENT') && view.tab === 'dashboard') {
-                return <ClientDashboard user={user} project={data.project} assessmentItems={data.assessmentItems} risks={data.risks} />;
+                return (
+                    <ClientDashboard
+                        user={user}
+                        project={data.project}
+                        assessmentItems={data.assessmentItems}
+                        risks={data.risks}
+                        onNavigate={(tab) => setView({ type: 'project', projectId: view.projectId, tab })}
+                    />
+                );
             }
             return <ProjectView user={user} view={view} projectData={data} setView={setView} onUpdate={fetchData} />;
         }
