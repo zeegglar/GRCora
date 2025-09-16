@@ -19,7 +19,7 @@ async function testRAG() {
     try {
       const result = await nistKnowledgeService.queryControls(
         query,
-        ['NIST_CSF', 'NIST_800_53', 'NIST_AI_RMF'],
+        ['NIST_CSF', 'NIST_800_53', 'NIST_AI_RMF', 'CIS_V8'],
         3
       );
 
