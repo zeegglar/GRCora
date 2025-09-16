@@ -25,7 +25,7 @@ import LandingPage from './components/landing/LandingPage';
 
 // Feature Components
 import ConsultantDashboard from './components/dashboard/ProfessionalConsultantDashboard';
-import ClientDashboard from './components/dashboard/EnhancedClientDashboard';
+import ClientDashboard from './components/dashboard/EnhancedClientCollaborationDashboard';
 import ProjectView from './components/views/ProjectView';
 import VendorDetailView from './components/views/vendors/VendorDetailView';
 import TPRMDashboard from './components/views/tprm/TPRMDashboard';
