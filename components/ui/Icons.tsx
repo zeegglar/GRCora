@@ -3,7 +3,15 @@ import React from 'react';
 type IconProps = React.SVGProps<SVGSVGElement>;
 
 export const DashboardIcon: React.FC<IconProps> = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" /></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" {...props}>
+    <defs>
+      <linearGradient id="dashboardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="currentColor" stopOpacity="1" />
+        <stop offset="100%" stopColor="currentColor" stopOpacity="0.7" />
+      </linearGradient>
+    </defs>
+    <path fill="url(#dashboardGradient)" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+  </svg>
 );
 
 export const AssessmentIcon: React.FC<IconProps> = (props) => (
@@ -15,7 +23,17 @@ export const EvidenceIcon: React.FC<IconProps> = (props) => (
 );
 
 export const RiskIcon: React.FC<IconProps> = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" {...props}>
+    <defs>
+      <linearGradient id="riskGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#ff6b6b" />
+        <stop offset="100%" stopColor="#ee5a52" />
+      </linearGradient>
+    </defs>
+    <path fill="url(#riskGradient)" d="M12 2.25c-.66 0-1.26.35-1.59.92L1.08 18.17c-.33.57-.33 1.27 0 1.84.33.57.93.92 1.59.92h18.66c.66 0 1.26-.35 1.59-.92.33-.57.33-1.27 0-1.84L13.59 3.17c-.33-.57-.93-.92-1.59-.92z" />
+    <circle cx="12" cy="16" r="1" fill="white" />
+    <rect x="11" y="8" width="2" height="6" rx="1" fill="white" />
+  </svg>
 );
 
 export const PolicyIcon: React.FC<IconProps> = (props) => (
@@ -23,7 +41,21 @@ export const PolicyIcon: React.FC<IconProps> = (props) => (
 );
 
 export const VendorIcon: React.FC<IconProps> = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" /></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" {...props}>
+    <defs>
+      <linearGradient id="vendorGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#3b82f6" />
+        <stop offset="100%" stopColor="#1d4ed8" />
+      </linearGradient>
+    </defs>
+    <path fill="url(#vendorGradient)" d="M2 21h20V3H12v18zm8-18v18zm6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
+    <rect x="7" y="6.5" width="1" height="1" rx="0.2" fill="white" />
+    <rect x="7" y="9.5" width="1" height="1" rx="0.2" fill="white" />
+    <rect x="7" y="12.5" width="1" height="1" rx="0.2" fill="white" />
+    <rect x="10" y="6.5" width="1" height="1" rx="0.2" fill="white" />
+    <rect x="10" y="9.5" width="1" height="1" rx="0.2" fill="white" />
+    <rect x="10" y="12.5" width="1" height="1" rx="0.2" fill="white" />
+  </svg>
 );
 
 export const ReportsIcon: React.FC<IconProps> = (props) => (
@@ -95,7 +127,16 @@ export const ChatBubbleLeftRightIcon: React.FC<IconProps> = (props) => (
 );
 
 export const ShieldCheckIcon: React.FC<IconProps> = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" {...props}>
+    <defs>
+      <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#10b981" />
+        <stop offset="100%" stopColor="#059669" />
+      </linearGradient>
+    </defs>
+    <path fill="url(#shieldGradient)" d="M12 2.75A11.97 11.97 0 003.6 6C3.21 7.18 3 8.46 3 9.75c0 5.59 3.82 10.29 9 11.62 5.18-1.33 9-6.03 9-11.62 0-1.29-.21-2.57-.6-3.75A11.96 11.96 0 0012 2.75z" />
+    <path d="M9 12.75L11.25 15 15 9.75" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+  </svg>
 );
 
 export const TrendingDownIcon: React.FC<IconProps> = (props) => (

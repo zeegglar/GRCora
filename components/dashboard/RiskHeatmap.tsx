@@ -13,10 +13,10 @@ const riskMatrix = [
 ];
 
 const levelStyles: { [key in RiskLevel]: string } = {
-  [RiskLevel.LOW]: 'bg-blue-500/80 hover:bg-blue-500',
-  [RiskLevel.MEDIUM]: 'bg-yellow-500/80 hover:bg-yellow-500',
-  [RiskLevel.HIGH]: 'bg-orange-500/80 hover:bg-orange-500',
-  [RiskLevel.CRITICAL]: 'bg-red-500/80 hover:bg-red-500',
+  [RiskLevel.LOW]: 'bg-gradient-to-br from-emerald-500/90 to-emerald-600/90 hover:from-emerald-400 hover:to-emerald-500 border border-emerald-400/30 shadow-lg shadow-emerald-500/20',
+  [RiskLevel.MEDIUM]: 'bg-gradient-to-br from-amber-500/90 to-amber-600/90 hover:from-amber-400 hover:to-amber-500 border border-amber-400/30 shadow-lg shadow-amber-500/20',
+  [RiskLevel.HIGH]: 'bg-gradient-to-br from-orange-500/90 to-red-500/90 hover:from-orange-400 hover:to-red-400 border border-orange-400/30 shadow-lg shadow-orange-500/20',
+  [RiskLevel.CRITICAL]: 'bg-gradient-to-br from-red-600/95 to-red-700/95 hover:from-red-500 hover:to-red-600 border border-red-400/40 shadow-lg shadow-red-500/30',
 };
 
 const RiskHeatmap: React.FC<RiskHeatmapProps> = ({ risks }) => {
@@ -34,8 +34,15 @@ const RiskHeatmap: React.FC<RiskHeatmapProps> = ({ risks }) => {
             {riskMatrix.flat().map((level, index) => {
               const count = openRisks.filter(r => r.level === level).length;
               return (
-                <div key={index} className={`h-24 w-full rounded-md flex items-center justify-center text-white font-bold text-3xl transition-colors ${levelStyles[level]} ${count === 0 ? 'opacity-30' : ''}`}>
-                  {count > 0 ? count : ''}
+                <div key={index} className={`h-28 w-full rounded-xl flex items-center justify-center text-white font-bold text-3xl transition-all duration-300 transform hover:scale-105 ${levelStyles[level]} ${count === 0 ? 'opacity-40 grayscale' : 'drop-shadow-lg'}`}>
+                  {count > 0 ? (
+                    <div className="text-center">
+                      <div className="text-4xl font-extrabold mb-1">{count}</div>
+                      <div className="text-xs font-medium opacity-80">{count === 1 ? 'risk' : 'risks'}</div>
+                    </div>
+                  ) : (
+                    <div className="text-slate-400/60 text-xl">·</div>
+                  )}
                 </div>
               );
             })}
