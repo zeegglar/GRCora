@@ -23,6 +23,7 @@ interface ClientDashboardProps {
   project: Project;
   assessmentItems: AssessmentItem[];
   risks: Risk[];
+  onNavigate?: (tab: string) => void;
 }
 
 interface DashboardAlert {
@@ -34,7 +35,7 @@ interface DashboardAlert {
   actionLabel?: string;
 }
 
-const EnhancedClientDashboard: React.FC<ClientDashboardProps> = ({ user, project, assessmentItems, risks }) => {
+const EnhancedClientDashboard: React.FC<ClientDashboardProps> = ({ user, project, assessmentItems, risks, onNavigate }) => {
   const [vendors, setVendors] = useState<Vendor[]>([]);
   const [incidents, setIncidents] = useState<VendorIncident[]>([]);
   const [contracts, setContracts] = useState<VendorContract[]>([]);
@@ -252,7 +253,10 @@ const EnhancedClientDashboard: React.FC<ClientDashboardProps> = ({ user, project
 
         {/* Key Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-          <div className="glass-card p-6 rounded-lg">
+          <div
+            onClick={() => onNavigate?.('assessments')}
+            className="glass-card p-6 rounded-lg cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-slate-700/30"
+          >
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h3 className="text-sm font-medium text-slate-400">Compliance Score</h3>
@@ -273,9 +277,13 @@ const EnhancedClientDashboard: React.FC<ClientDashboardProps> = ({ user, project
                 style={{ width: `${complianceSummary.percentage}%` }}
               ></div>
             </div>
+            <div className="mt-2 text-xs text-slate-500 text-center opacity-75">Click to view assessments</div>
           </div>
 
-          <div className="glass-card p-6 rounded-lg">
+          <div
+            onClick={() => onNavigate?.('risks')}
+            className="glass-card p-6 rounded-lg cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-slate-700/30"
+          >
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h3 className="text-sm font-medium text-slate-400">Risk Score</h3>
@@ -297,9 +305,13 @@ const EnhancedClientDashboard: React.FC<ClientDashboardProps> = ({ user, project
             <div className="text-sm text-slate-400">
               {riskAnalysis.openRisks} open risk(s), {riskAnalysis.recentRisks} recent
             </div>
+            <div className="mt-2 text-xs text-slate-500 text-center opacity-75">Click to view risks</div>
           </div>
 
-          <div className="glass-card p-6 rounded-lg">
+          <div
+            onClick={() => onNavigate?.('vendors')}
+            className="glass-card p-6 rounded-lg cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-slate-700/30"
+          >
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h3 className="text-sm font-medium text-slate-400">Vendor Portfolio</h3>
@@ -312,6 +324,7 @@ const EnhancedClientDashboard: React.FC<ClientDashboardProps> = ({ user, project
               <span className="text-slate-400"> • </span>
               <span className="text-white">${(vendorAnalysis.totalSpend / 1000000).toFixed(1)}M spend</span>
             </div>
+            <div className="mt-2 text-xs text-slate-500 text-center opacity-75">Click to view vendors</div>
           </div>
 
           <div className="glass-card p-6 rounded-lg">

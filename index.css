@@ -355,12 +355,58 @@ body {
   border-color: var(--primary-500);
 }
 
-/* Enhanced Icon Colors */
-.icon-primary { color: var(--primary-400); }
-.icon-success { color: var(--emerald-400); }
-.icon-warning { color: var(--amber-400); }
-.icon-error { color: var(--red-400); }
-.icon-muted { color: var(--slate-400); }
+/* Enhanced Icon Colors with Hover Effects */
+.icon-primary {
+  color: var(--primary-400);
+  transition: all 0.2s ease;
+}
+
+.icon-success {
+  color: var(--emerald-400);
+  transition: all 0.2s ease;
+}
+
+.icon-warning {
+  color: var(--amber-400);
+  transition: all 0.2s ease;
+}
+
+.icon-error {
+  color: var(--red-400);
+  transition: all 0.2s ease;
+}
+
+.icon-muted {
+  color: var(--slate-400);
+  transition: all 0.2s ease;
+}
+
+/* Icon Hover Effects */
+.nav-icon {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.nav-icon:hover {
+  transform: translateY(-1px);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+}
+
+/* Dashboard Icon Animations */
+svg[data-icon="dashboard"],
+svg[data-icon="risk"],
+svg[data-icon="shield"],
+svg[data-icon="vendor"] {
+  transition: all 0.3s ease;
+}
+
+svg[data-icon="dashboard"]:hover,
+svg[data-icon="risk"]:hover,
+svg[data-icon="shield"]:hover,
+svg[data-icon="vendor"]:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {
