@@ -437,7 +437,10 @@ const EnhancedClientDashboard: React.FC<ClientDashboardProps> = ({ user, project
           </div>
 
           {/* Risk Breakdown */}
-          <div className="glass-card p-6 rounded-lg">
+          <div
+            onClick={() => onNavigate?.('risks')}
+            className="glass-card p-6 rounded-lg cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-slate-700/30"
+          >
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold text-white">Risk Breakdown</h2>
               <ChartBarIcon className="w-6 h-6 text-slate-400" />
