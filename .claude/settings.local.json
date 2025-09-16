@@ -11,7 +11,8 @@
       "Bash(npm run build:*)",
       "Bash(npm install:*)",
       "Bash(winget:*)",
-      "Bash(npx supabase:*)"
+      "Bash(npx supabase:*)",
+      "Bash(del \"supabase\\migrations\\20250916032802_create_grcora_schema.sql\")"
     ],
     "deny": [],
     "ask": []
