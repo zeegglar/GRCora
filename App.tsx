@@ -82,11 +82,8 @@ const App: React.FC = () => {
     if (foundUser) {
       setUser(foundUser);
       if (foundUser.role.startsWith('CLIENT')) {
-          // Find client project and set view
-          mockApi.getProjectForClient(foundUser.organizationId).then(p => {
-              if (p) setView({type: 'project', projectId: p.id, tab: 'dashboard' });
-              else setView({type: 'dashboard'});
-          })
+          // Set to dashboard for client users - data will be loaded automatically
+          setView({type: 'dashboard'});
       } else {
         setView({ type: 'dashboard' });
       }

@@ -344,7 +344,6 @@ const RealTimeSystem: React.FC<RealTimeSystemProps> = ({ user, currentProjectId 
           </div>
         )}
       </div>
-      )}
 
       {/* Footer */}
       {!isMinimized && events.length > 0 && (
