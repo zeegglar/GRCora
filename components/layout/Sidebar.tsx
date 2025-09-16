@@ -73,8 +73,8 @@ const Sidebar: React.FC<SidebarProps> = ({ user, currentView, setView, onLogout,
             <NavItem
                 icon={<DashboardIcon className="h-6 w-6" />}
                 label={isConsultant ? 'Project Home' : 'Dashboard'}
-                isActive={currentView.type === 'project' && currentView.tab === 'assessments'}
-                onClick={() => setView({ type: 'project', projectId: projectId, tab: 'assessments' })}
+                isActive={currentView.type === 'project' && currentView.tab === 'dashboard'}
+                onClick={() => setView({ type: 'project', projectId: projectId, tab: 'dashboard' })}
             />
             <hr className="my-2 border-slate-700"/>
             <NavItem icon={<AssessmentIcon className="h-6 w-6" />} label="Assessments" isActive={currentView.type === 'project' && currentView.tab === 'assessments'} onClick={() => setView({ type: 'project', projectId, tab: 'assessments'})} />

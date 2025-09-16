@@ -82,8 +82,11 @@ const App: React.FC = () => {
     if (foundUser) {
       setUser(foundUser);
       if (foundUser.role.startsWith('CLIENT')) {
-          // Set to dashboard for client users - data will be loaded automatically
-          setView({type: 'dashboard'});
+          // Find client project and set project view with dashboard tab
+          mockApi.getProjectForClient(foundUser.organizationId).then(p => {
+              if (p) setView({type: 'project', projectId: p.id, tab: 'dashboard' });
+              else setView({type: 'dashboard'});
+          })
       } else {
         setView({ type: 'dashboard' });
       }
@@ -135,6 +138,10 @@ const App: React.FC = () => {
         
       case 'project':
         if (data.project?.id === view.projectId) {
+            // If client user with dashboard tab, show ClientDashboard
+            if (user.role.startsWith('CLIENT') && view.tab === 'dashboard') {
+                return <ClientDashboard user={user} project={data.project} assessmentItems={data.assessmentItems} risks={data.risks} />;
+            }
             return <ProjectView user={user} view={view} projectData={data} setView={setView} onUpdate={fetchData} />;
         }
         // Placeholder for consultant viewing a client project
