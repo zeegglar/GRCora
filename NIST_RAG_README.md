@@ -53,6 +53,16 @@ The framework files have been processed and placed in `public/data/`:
 
 **Total: ~1,400+ controls across 5 major frameworks**
 
+## Framework Comparison
+
+| Framework | Version | Controls | Focus Area | Best For |
+|-----------|---------|----------|------------|----------|
+| **NIST CSF** | 2.0 | 108 subcategories | Risk-based cybersecurity | Strategic cybersecurity planning |
+| **NIST 800-53** | Rev 5 | 1,006 controls | Federal security standards | Government and high-assurance environments |
+| **NIST AI RMF** | 1.0 | 26 principles | AI risk management | AI/ML system governance |
+| **CIS Controls** | v8.1.2 | 171 safeguards | Practical implementation | Operational security teams |
+| **ISO 27001** | 2022 | 93 controls | Information security management | ISMS certification and compliance |
+
 Ingest the data into your database:
 
 ```bash
@@ -70,10 +80,12 @@ npm run test-rag
 ## File Structure
 
 ```
-├── public/data/                    # NIST data files
-│   ├── nist-csf.jsonl
-│   ├── nist-800-53.jsonl
-│   └── nist-ai-rmf.jsonl
+├── public/data/                    # Framework data files
+│   ├── nist-csf.jsonl             # NIST CSF 2.0
+│   ├── nist-800-53.jsonl          # NIST SP 800-53 Rev 5
+│   ├── nist-ai-rmf.jsonl          # NIST AI RMF 1.0
+│   ├── cis-v8.jsonl               # CIS Controls v8.1.2
+│   └── iso-27001.jsonl            # ISO 27001:2022 Annex A
 ├── scripts/
 │   ├── ingestNistData.ts          # Database ingestion script
 │   └── testRag.ts                 # RAG testing script
@@ -94,7 +106,7 @@ import { nistKnowledgeService } from './services/nistKnowledgeService';
 
 const result = await nistKnowledgeService.queryControls(
   'access control policies',
-  ['NIST_CSF', 'NIST_800_53'],
+  ['NIST_CSF', 'NIST_800_53', 'CIS_V8', 'ISO_27001'],
   5
 );
 
@@ -107,7 +119,7 @@ console.log('Implementation guidance:', result.suggestedImplementation);
 ```typescript
 const gaps = await nistKnowledgeService.performGapAnalysis(
   'project-id',
-  ['NIST_CSF', 'NIST_800_53']
+  ['NIST_CSF', 'NIST_800_53', 'CIS_V8', 'ISO_27001']
 );
 
 gaps.forEach(gap => {
@@ -145,6 +157,18 @@ console.log('Implementation phases:', advice.implementation_roadmap);
 - AI-specific governance and risk management controls
 - Organized by functions (GOVERN, MAP, MEASURE, MANAGE)
 - Focused on AI trustworthiness and risk mitigation
+
+### CIS Controls v8 Format
+- Implementation Group prioritization (IG1, IG2, IG3)
+- Asset class categorization (Devices, Data, etc.)
+- Security function mapping (Identify, Protect, Detect, etc.)
+- 18 control families from Asset Management to Penetration Testing
+
+### ISO 27001:2022 Annex A Format
+- Four theme categories: Organizational, People, Physical, Technological
+- Evidence-based approach with specific evidence types
+- NIST CSF function mapping for cross-framework alignment
+- Practical implementation tasks and guidance
 
 ## Architecture
 
