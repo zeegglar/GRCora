@@ -3,12 +3,27 @@ import type { User, View, Project, AssessmentItem, Risk, Policy, Vendor, Evidenc
 import { UserRole } from './types';
 import { mockApi, mockUsers } from './services/api';
 import { isSupabaseConfigured } from './services/supabaseClient';
-import { NotificationProvider } from './components/context/NotificationContext';
 
+// Context Providers
+import { NotificationProvider } from './components/context/NotificationContext';
+import { AuthProvider, useAuth } from './components/context/AuthContext';
+import { ToastProvider } from './components/ui/Toast';
+
+// UI Components
+import ErrorBoundary from './components/ui/ErrorBoundary';
+import { PageLoading } from './components/ui/LoadingStates';
+import { SkipLink } from './components/ui/AccessibleComponents';
+
+// Layout Components
 import Sidebar from './components/layout/Sidebar';
 import Header from './components/layout/Header';
+
+// Auth Components
 import LoginPage from './components/auth/LoginPage';
+import AuthenticatedLoginPage from './components/auth/AuthenticatedLoginPage';
 import LandingPage from './components/landing/LandingPage';
+
+// Feature Components
 import ConsultantDashboard from './components/dashboard/EnhancedConsultantDashboard';
 import ClientDashboard from './components/dashboard/EnhancedClientDashboard';
 import ProjectView from './components/views/ProjectView';

@@ -33,6 +33,7 @@ export enum VendorLifecycleStage {
 export interface User {
   id: string;
   name: string;
+  email?: string;
   role: UserRole;
   avatarUrl: string;
   organizationId: string;
