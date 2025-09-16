@@ -34,11 +34,12 @@ import RemediationTracker from './components/views/remediation/RemediationTracke
 import RealTimeSystem from './components/realtime/RealTimeSystem';
 import EnvironmentNotice from './components/setup/EnvironmentNotice';
 
-const App: React.FC = () => {
-  const [user, setUser] = useState<User | null>(null);
+// Inner App component that uses auth context
+const AppContent: React.FC = () => {
+  const { user, isLoading: authLoading, isDemoMode, mockLogin } = useAuth();
   const [view, setView] = useState<View>({ type: 'landing' });
   const [data, setData] = useState<any>({});
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Data fetching logic
   const fetchData = async () => {
@@ -48,68 +49,70 @@ const App: React.FC = () => {
     }
     setIsLoading(true);
 
-    // Handle different scenarios based on user role and current view
-    if (user.role.startsWith('CONSULTANT')) {
-        // For consultants viewing a specific project, load that project's data
-        if (view.type === 'project') {
-            const project = await mockApi.getProjectById(view.projectId);
-            if (project) {
-                const [assessmentItems, risks, policies, vendors, evidence, controls] = await Promise.all([
-                    mockApi.getAssessmentItems(project.id),
-                    mockApi.getRisks(project.id),
-                    mockApi.getPolicies(project.id),
-                    mockApi.getVendors(project.id),
-                    mockApi.getEvidence(project.id),
-                    mockApi.getControls(project.frameworks)
-                ]);
-                const controlsMap = new Map(controls.map(c => [c.id, c]));
-                setData({ project, assessmentItems, risks, policies, vendors, evidence, controls: controlsMap });
-            }
-        } else {
-            // For consultant dashboard, data is fetched inside ConsultantDashboard
-            setData({});
-        }
-    } else {
-        // Client user data
-        const project = await mockApi.getProjectForClient(user.organizationId);
-        if (project) {
-            const [assessmentItems, risks, policies, vendors, evidence, controls] = await Promise.all([
-                mockApi.getAssessmentItems(project.id),
-                mockApi.getRisks(project.id),
-                mockApi.getPolicies(project.id),
-                mockApi.getVendors(project.id),
-                mockApi.getEvidence(project.id),
-                mockApi.getControls(project.frameworks)
-            ]);
-            const controlsMap = new Map(controls.map(c => [c.id, c]));
-            setData({ project, assessmentItems, risks, policies, vendors, evidence, controls: controlsMap });
-        }
+    try {
+      // Handle different scenarios based on user role and current view
+      if (user.role.startsWith('CONSULTANT')) {
+          // For consultants viewing a specific project, load that project's data
+          if (view.type === 'project') {
+              const project = await mockApi.getProjectById(view.projectId);
+              if (project) {
+                  const [assessmentItems, risks, policies, vendors, evidence, controls] = await Promise.all([
+                      mockApi.getAssessmentItems(project.id),
+                      mockApi.getRisks(project.id),
+                      mockApi.getPolicies(project.id),
+                      mockApi.getVendors(project.id),
+                      mockApi.getEvidence(project.id),
+                      mockApi.getControls(project.frameworks)
+                  ]);
+                  const controlsMap = new Map(controls.map(c => [c.id, c]));
+                  setData({ project, assessmentItems, risks, policies, vendors, evidence, controls: controlsMap });
+              }
+          } else {
+              // For consultant dashboard, data is fetched inside ConsultantDashboard
+              setData({});
+          }
+      } else {
+          // Client user data
+          const project = await mockApi.getProjectForClient(user.organizationId);
+          if (project) {
+              const [assessmentItems, risks, policies, vendors, evidence, controls] = await Promise.all([
+                  mockApi.getAssessmentItems(project.id),
+                  mockApi.getRisks(project.id),
+                  mockApi.getPolicies(project.id),
+                  mockApi.getVendors(project.id),
+                  mockApi.getEvidence(project.id),
+                  mockApi.getControls(project.frameworks)
+              ]);
+              const controlsMap = new Map(controls.map(c => [c.id, c]));
+              setData({ project, assessmentItems, risks, policies, vendors, evidence, controls: controlsMap });
+          }
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   useEffect(() => {
     fetchData();
   }, [user, view]);
 
-  const handleLogin = (userId: string) => {
+  const handleMockLogin = (userId: string) => {
+    mockLogin(userId);
     const foundUser = mockUsers.find(u => u.id === userId);
-    if (foundUser) {
-      setUser(foundUser);
-      if (foundUser.role.startsWith('CLIENT')) {
-          // Find client project and set project view with dashboard tab
-          mockApi.getProjectForClient(foundUser.organizationId).then(p => {
-              if (p) setView({type: 'project', projectId: p.id, tab: 'dashboard' });
-              else setView({type: 'dashboard'});
-          })
-      } else {
-        setView({ type: 'dashboard' });
-      }
+    if (foundUser?.role.startsWith('CLIENT')) {
+        // Find client project and set project view with dashboard tab
+        mockApi.getProjectForClient(foundUser.organizationId).then(p => {
+            if (p) setView({type: 'project', projectId: p.id, tab: 'dashboard' });
+            else setView({type: 'dashboard'});
+        })
+    } else {
+      setView({ type: 'dashboard' });
     }
   };
 
   const handleLogout = () => {
-    setUser(null);
     setData({});
     setView({type: 'landing'}); // Show landing page after logout
   };
@@ -125,20 +128,37 @@ const App: React.FC = () => {
     return undefined;
   }, [view, data.project]);
 
-  if (!isSupabaseConfigured) {
+  // Show environment notice if Supabase is not configured
+  if (!isSupabaseConfigured && !isDemoMode) {
     return <EnvironmentNotice />;
   }
 
+  // Show loading while auth is initializing
+  if (authLoading) {
+    return <PageLoading message="Initializing application..." />;
+  }
+
+  // Show auth flow if no user
   if (!user) {
     if (view.type === 'landing') {
-      return <LandingPage setView={setView} onLogin={handleLogin} />;
+      return <LandingPage setView={setView} onLogin={handleMockLogin} />;
     }
-    return <LoginPage onLogin={handleLogin} />;
+
+    if (isDemoMode) {
+      return <LoginPage onLogin={handleMockLogin} />;
+    }
+
+    return (
+      <AuthenticatedLoginPage
+        onLoginSuccess={() => setView({ type: 'dashboard' })}
+        fallbackToMockLogin={() => setView({ type: 'login' })}
+      />
+    );
   }
 
   const renderContent = () => {
     if (isLoading) {
-      return <div className="p-8">Loading...</div>;
+      return <PageLoading message="Loading project data..." />;
     }
 
     switch (view.type) {
@@ -158,7 +178,7 @@ const App: React.FC = () => {
           );
         }
         return <div className="p-8">No project assigned.</div>
-        
+
       case 'project':
         if (data.project?.id === view.projectId) {
             // If client user with dashboard tab, show ClientDashboard
@@ -176,8 +196,8 @@ const App: React.FC = () => {
             return <ProjectView user={user} view={view} projectData={data} setView={setView} onUpdate={fetchData} />;
         }
         // Placeholder for consultant viewing a client project
-        return <div className="p-8">Loading project data...</div>
-      
+        return <PageLoading message="Loading project data..." />
+
       case 'vendorDetail':
         return <VendorDetailView vendorId={view.vendorId} projectId={view.projectId} setView={setView} />
 
@@ -196,26 +216,42 @@ const App: React.FC = () => {
   };
 
   return (
-    <NotificationProvider>
-      <div className="flex h-screen">
-        <Sidebar
-          user={user}
-          currentView={view}
-          setView={setView}
-          onLogout={handleLogout}
-          currentProjectName={currentProjectName}
-        />
-        <div className="flex-1 flex flex-col overflow-hidden">
-          <Header user={user} />
-          <main className="flex-1 overflow-y-auto px-4 pb-4">
-            <div className="fade-in">
+    <div className="flex h-screen">
+      <SkipLink href="#main-content">Skip to main content</SkipLink>
+      <Sidebar
+        user={user}
+        currentView={view}
+        setView={setView}
+        onLogout={handleLogout}
+        currentProjectName={currentProjectName}
+      />
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <Header user={user} />
+        <main id="main-content" className="flex-1 overflow-y-auto px-4 pb-4" tabIndex={-1}>
+          <div className="fade-in">
+            <ErrorBoundary>
               {renderContent()}
-            </div>
-          </main>
-        </div>
-        {user && <RealTimeSystem user={user} currentProjectId={view.type === 'project' ? view.projectId : undefined} />}
+            </ErrorBoundary>
+          </div>
+        </main>
       </div>
-    </NotificationProvider>
+      {user && <RealTimeSystem user={user} currentProjectId={view.type === 'project' ? view.projectId : undefined} />}
+    </div>
+  );
+};
+
+// Main App component with all providers
+const App: React.FC = () => {
+  return (
+    <ErrorBoundary>
+      <ToastProvider>
+        <AuthProvider>
+          <NotificationProvider>
+            <AppContent />
+          </NotificationProvider>
+        </AuthProvider>
+      </ToastProvider>
+    </ErrorBoundary>
   );
 };
 
