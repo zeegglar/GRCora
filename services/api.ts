@@ -25,10 +25,27 @@ let mockProjects: Project[] = [
 ];
 
 let mockControls: Control[] = [
-    // ... Sample Controls
+    // SOC 2 Controls
     { id: 'SOC2-CC6.1', name: 'Logical Access Security', description: 'The entity implements logical access security measures to protect against threats to information systems.', family: 'Logical and Physical Access Controls', framework: 'SOC 2' },
+    { id: 'SOC2-CC6.2', name: 'User Access Management', description: 'The entity restricts user access to information based on their assigned authority level.', family: 'Logical and Physical Access Controls', framework: 'SOC 2' },
+    { id: 'SOC2-CC6.3', name: 'Data Access Restrictions', description: 'The entity restricts access to data and system configurations based on user authorization.', family: 'Logical and Physical Access Controls', framework: 'SOC 2' },
+    { id: 'SOC2-CC7.1', name: 'System Boundary', description: 'The entity implements controls to protect the boundaries of its systems.', family: 'System Operations', framework: 'SOC 2' },
+    { id: 'SOC2-CC8.1', name: 'Change Management', description: 'The entity implements controls related to changes to systems and software.', family: 'Change Management', framework: 'SOC 2' },
+
+    // ISO 27001 Controls
     { id: 'ISO-A.5.15', name: 'Access Control', description: 'Access to information and other associated assets should be managed based on business and information security requirements.', family: 'Access Control', framework: 'ISO 27001:2022' },
+    { id: 'ISO-A.5.16', name: 'Identity Management', description: 'The full life cycle of identities should be managed.', family: 'Access Control', framework: 'ISO 27001:2022' },
+    { id: 'ISO-A.8.1', name: 'User Endpoint Devices', description: 'Information stored on, processed by or accessible via user endpoint devices should be protected.', family: 'Technology', framework: 'ISO 27001:2022' },
+    { id: 'ISO-A.8.23', name: 'Web Filtering', description: 'Access to external websites should be managed to reduce exposure to malicious content.', family: 'Technology', framework: 'ISO 27001:2022' },
+    { id: 'ISO-A.6.4', name: 'Incident Response', description: 'Information security incidents should be responded to in accordance with documented procedures.', family: 'Incident Management', framework: 'ISO 27001:2022' },
+
+    // NIST CSF Controls
     { id: 'NIST-PR.AC-1', name: 'Access Control Policies and Procedures', description: 'Access control policies and procedures are defined and implemented.', family: 'Access Control', framework: 'NIST CSF 2.0' },
+    { id: 'NIST-PR.AC-3', name: 'Remote Access Management', description: 'Remote access is managed and monitored.', family: 'Access Control', framework: 'NIST CSF 2.0' },
+    { id: 'NIST-PR.DS-1', name: 'Data-at-rest Protection', description: 'Data-at-rest is protected using appropriate mechanisms.', family: 'Data Security', framework: 'NIST CSF 2.0' },
+    { id: 'NIST-PR.DS-2', name: 'Data-in-transit Protection', description: 'Data-in-transit is protected using appropriate mechanisms.', family: 'Data Security', framework: 'NIST CSF 2.0' },
+    { id: 'NIST-DE.CM-1', name: 'Network Monitoring', description: 'Networks and network communications are monitored to detect potential cybersecurity events.', family: 'Anomalies and Events', framework: 'NIST CSF 2.0' },
+    { id: 'NIST-RS.RP-1', name: 'Response Plan Execution', description: 'Response plan is executed during or after an incident.', family: 'Response Planning', framework: 'NIST CSF 2.0' },
 ];
 
 let mockAssessmentItems: AssessmentItem[] = [

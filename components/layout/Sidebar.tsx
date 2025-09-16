@@ -77,11 +77,11 @@ const Sidebar: React.FC<SidebarProps> = ({ user, currentView, setView, onLogout,
                 onClick={() => setView({ type: 'project', projectId: projectId, tab: 'dashboard' })}
             />
             <hr className="my-2 border-slate-700"/>
-            <NavItem icon={<AssessmentIcon className="h-6 w-6" />} label="Assessments" isActive={currentView.type === 'project' && currentView.tab === 'assessments'} onClick={() => setView({ type: 'project', projectId, tab: 'assessments'})} />
-            <NavItem icon={<EvidenceIcon className="h-6 w-6" />} label="Evidence" isActive={currentView.type === 'project' && currentView.tab === 'evidence'} onClick={() => setView({ type: 'project', projectId, tab: 'evidence'})} />
+            <NavItem icon={<AssessmentIcon className="h-6 w-6" />} label="Controls" isActive={currentView.type === 'project' && currentView.tab === 'assessments'} onClick={() => setView({ type: 'project', projectId, tab: 'assessments'})} />
             <NavItem icon={<RiskIcon className="h-6 w-6" />} label="Risks" isActive={currentView.type === 'project' && currentView.tab === 'risks'} onClick={() => setView({ type: 'project', projectId, tab: 'risks'})} />
-            <NavItem icon={<PolicyIcon className="h-6 w-6" />} label="Policies" isActive={currentView.type === 'project' && currentView.tab === 'policies'} onClick={() => setView({ type: 'project', projectId, tab: 'policies'})} />
             <NavItem icon={<VendorIcon className="h-6 w-6" />} label="Vendors" isActive={(currentView.type === 'project' && currentView.tab === 'vendors') || currentView.type === 'vendorDetail'} onClick={() => setView({ type: 'project', projectId, tab: 'vendors'})} />
+            <NavItem icon={<PolicyIcon className="h-6 w-6" />} label="Policies" isActive={currentView.type === 'project' && currentView.tab === 'policies'} onClick={() => setView({ type: 'project', projectId, tab: 'policies'})} />
+            <NavItem icon={<EvidenceIcon className="h-6 w-6" />} label="Evidence" isActive={currentView.type === 'project' && currentView.tab === 'evidence'} onClick={() => setView({ type: 'project', projectId, tab: 'evidence'})} />
             <NavItem icon={<ReportsIcon className="h-6 w-6" />} label="Reports" isActive={currentView.type === 'project' && currentView.tab === 'reports'} onClick={() => setView({ type: 'project', projectId, tab: 'reports'})} />
         </>
     );
