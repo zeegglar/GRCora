@@ -29,6 +29,16 @@ interface RawNISTControl {
       doc_identifier?: string;
     }>;
   };
+  // CIS v8 format properties
+  CIS_Control?: string | number;
+  CIS_Safeguard?: number;
+  Description?: string;
+  Title?: string;
+  Security_Function?: string;
+  Asset_Class?: string;
+  IG1?: string;
+  IG2?: string;
+  IG3?: string;
 }
 
 interface ProcessedNISTControl {
@@ -41,7 +51,7 @@ interface ProcessedNISTControl {
   assessment_methods: string[];
   parameters?: string[];
   related_controls: string[];
-  framework: 'NIST_CSF' | 'NIST_800_53' | 'NIST_AI_RMF';
+  framework: 'NIST_CSF' | 'NIST_800_53' | 'NIST_AI_RMF' | 'CIS_V8' | 'ISO_27001';
   category?: string;
   subcategory?: string;
   informative_references?: string[];
@@ -182,6 +192,72 @@ function processAIRMFControl(raw: RawNISTControl): ProcessedNISTControl {
 }
 
 /**
+ * Process CIS v8 Controls format
+ */
+function processCISControl(raw: RawNISTControl): ProcessedNISTControl {
+  const contentText = `${raw.Title || ''} ${raw.Description || ''}`;
+  const content_hash = generateContentHash(contentText);
+
+  // Handle both control-level and safeguard-level entries
+  const controlNum = raw.CIS_Control?.toString().trim() || 'UNKNOWN';
+  const safeguardNum = raw.CIS_Safeguard || null;
+
+  const id = safeguardNum
+    ? `CIS_${controlNum.padStart(2, '0')}.${safeguardNum}`
+    : `CIS_${controlNum.padStart(2, '0')}`;
+
+  // Map CIS control numbers to families
+  const cisControlFamilies: Record<string, string> = {
+    '1': 'Asset Management',
+    '2': 'Software Asset Management',
+    '3': 'Data Protection',
+    '4': 'Secure Configuration',
+    '5': 'Account Management',
+    '6': 'Access Control Management',
+    '7': 'Continuous Vulnerability Management',
+    '8': 'Audit Log Management',
+    '9': 'Email and Web Browser Protections',
+    '10': 'Malware Defenses',
+    '11': 'Data Recovery',
+    '12': 'Network Infrastructure Management',
+    '13': 'Network Monitoring and Defense',
+    '14': 'Security Awareness and Skills Training',
+    '15': 'Service Provider Management',
+    '16': 'Application Software Security',
+    '17': 'Incident Response Management',
+    '18': 'Penetration Testing'
+  };
+
+  const family = cisControlFamilies[controlNum] || 'General Security';
+
+  // Determine implementation groups priority
+  const implementationGroups = [
+    raw.IG1 === 'x' ? 'IG1' : null,
+    raw.IG2 === 'x' ? 'IG2' : null,
+    raw.IG3 === 'x' ? 'IG3' : null
+  ].filter(Boolean);
+
+  return {
+    id,
+    family,
+    title: raw.Title || '',
+    description: raw.Description || '',
+    guidance: implementationGroups.length > 0
+      ? `Implementation Groups: ${implementationGroups.join(', ')}`
+      : '',
+    assessment_objectives: [],
+    assessment_methods: ['Examine', 'Test', 'Interview'],
+    parameters: raw.Asset_Class ? [raw.Asset_Class] : undefined,
+    related_controls: [],
+    framework: 'CIS_V8' as const,
+    category: raw.Security_Function || family,
+    subcategory: safeguardNum ? `Safeguard ${safeguardNum}` : undefined,
+    embedding: generateMockEmbedding(contentText),
+    content_hash
+  };
+}
+
+/**
  * Extract assessment objectives from text
  */
 function extractAssessmentObjectives(text: string): string[] {
@@ -244,8 +320,12 @@ async function processJSONLFile(filePath: string): Promise<ProcessedNISTControl[
           // AI RMF format
           const control = processAIRMFControl(raw);
           controls.push(control);
+        } else if (raw.CIS_Control && (raw.Title || raw.Description)) {
+          // CIS v8 format
+          const control = processCISControl(raw);
+          controls.push(control);
         } else {
-          console.warn(`   ⚠️ Unrecognized format in line ${i + 1}`);
+          console.warn(`   ⚠️ Unrecognized format in line ${i + 1}:`, Object.keys(raw));
         }
       } catch (parseError) {
         console.warn(`   ⚠️ Failed to parse line ${i + 1}: ${parseError}`);
@@ -408,7 +488,8 @@ async function main() {
   const files = [
     path.join(dataDir, 'nist-csf.jsonl'),
     path.join(dataDir, 'nist-800-53.jsonl'),
-    path.join(dataDir, 'nist-ai-rmf.jsonl')
+    path.join(dataDir, 'nist-ai-rmf.jsonl'),
+    path.join(dataDir, 'cis-v8.jsonl')
   ];
 
   let allControls: ProcessedNISTControl[] = [];

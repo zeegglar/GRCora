@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS nist_controls (
   assessment_methods TEXT[],
   parameters TEXT[],
   related_controls TEXT[],
-  framework TEXT CHECK (framework IN ('NIST_CSF', 'NIST_800_53', 'NIST_AI_RMF')),
+  framework TEXT CHECK (framework IN ('NIST_CSF', 'NIST_800_53', 'NIST_AI_RMF', 'CIS_V8', 'ISO_27001')),
   category TEXT,
   subcategory TEXT,
   informative_references TEXT[],
@@ -175,7 +175,7 @@ CREATE OR REPLACE FUNCTION match_nist_controls(
   query_embedding vector(768),
   match_threshold float DEFAULT 0.7,
   match_count int DEFAULT 10,
-  frameworks text[] DEFAULT ARRAY['NIST_CSF', 'NIST_800_53', 'NIST_AI_RMF']
+  frameworks text[] DEFAULT ARRAY['NIST_CSF', 'NIST_800_53', 'NIST_AI_RMF', 'CIS_V8', 'ISO_27001']
 )
 RETURNS TABLE (
   id text,

@@ -10,7 +10,7 @@ export interface NISTControl {
   assessment_methods: string[];
   parameters?: string[];
   related_controls: string[];
-  framework: 'NIST_CSF' | 'NIST_800_53' | 'NIST_AI_RMF';
+  framework: 'NIST_CSF' | 'NIST_800_53' | 'NIST_AI_RMF' | 'CIS_V8' | 'ISO_27001';
   category?: string;
   subcategory?: string;
   informative_references?: string[];
@@ -174,7 +174,7 @@ class NISTKnowledgeService {
    */
   async queryControls(
     query: string,
-    frameworks: ('NIST_CSF' | 'NIST_800_53' | 'NIST_AI_RMF')[] = ['NIST_CSF', 'NIST_800_53', 'NIST_AI_RMF'],
+    frameworks: ('NIST_CSF' | 'NIST_800_53' | 'NIST_AI_RMF' | 'CIS_V8' | 'ISO_27001')[] = ['NIST_CSF', 'NIST_800_53', 'NIST_AI_RMF', 'CIS_V8'],
     limit: number = 10
   ): Promise<NISTQueryResult> {
     try {
