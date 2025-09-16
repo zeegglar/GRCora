@@ -138,7 +138,7 @@ const App: React.FC = () => {
               project={data.project}
               assessmentItems={data.assessmentItems}
               risks={data.risks}
-              onNavigate={(tab) => setView({ type: 'project', projectId: data.project.id, tab })}
+              onNavigate={(tab) => setView({ type: 'project', projectId: data.project.id, tab: tab as 'dashboard' | 'assessments' | 'evidence' | 'risks' | 'policies' | 'vendors' | 'workflows' | 'reports' })}
             />
           );
         }
@@ -154,7 +154,7 @@ const App: React.FC = () => {
                         project={data.project}
                         assessmentItems={data.assessmentItems}
                         risks={data.risks}
-                        onNavigate={(tab) => setView({ type: 'project', projectId: view.projectId, tab })}
+                        onNavigate={(tab) => setView({ type: 'project', projectId: view.projectId, tab: tab as 'dashboard' | 'assessments' | 'evidence' | 'risks' | 'policies' | 'vendors' | 'workflows' | 'reports' })}
                     />
                 );
             }

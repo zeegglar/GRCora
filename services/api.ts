@@ -52,6 +52,19 @@ let mockAssessmentItems: AssessmentItem[] = [
     { id: 'asm-1', controlId: 'SOC2-CC6.1', projectId: 'proj-1', status: 'In Progress', notes: 'Reviewing user access lists for key systems.' },
     { id: 'asm-2', controlId: 'NIST-PR.AC-1', projectId: 'proj-1', status: 'Compliant', notes: 'Policy is documented and approved.' },
     { id: 'asm-3', controlId: 'ISO-A.5.15', projectId: 'proj-2', status: 'Non-Compliant', notes: 'Quarterly access reviews are overdue.' },
+    { id: 'asm-4', controlId: 'SOC2-CC6.2', projectId: 'proj-1', status: 'Compliant', notes: 'Multi-factor authentication implemented for all privileged accounts.' },
+    { id: 'asm-5', controlId: 'SOC2-CC6.3', projectId: 'proj-1', status: 'In Progress', notes: 'Testing network access controls and segmentation.' },
+    { id: 'asm-6', controlId: 'ISO-A.9.1.2', projectId: 'proj-1', status: 'Compliant', notes: 'Access to networks and network services documented and approved.' },
+    { id: 'asm-7', controlId: 'ISO-A.12.1.2', projectId: 'proj-2', status: 'Non-Compliant', notes: 'Malware protection procedures need updating.' },
+    { id: 'asm-8', controlId: 'NIST-PR.DS-1', projectId: 'proj-1', status: 'Compliant', notes: 'Data-at-rest protection controls verified.' },
+    { id: 'asm-9', controlId: 'NIST-PR.DS-2', projectId: 'proj-2', status: 'In Progress', notes: 'Data-in-transit protection assessment ongoing.' },
+    { id: 'asm-10', controlId: 'NIST-DE.AE-1', projectId: 'proj-1', status: 'Compliant', notes: 'Baseline network traffic established and monitored.' },
+    { id: 'asm-11', controlId: 'ISO-A.16.1.2', projectId: 'proj-2', status: 'In Progress', notes: 'Incident response procedures under review.' },
+    { id: 'asm-12', controlId: 'NIST-RS.RP-1', projectId: 'proj-1', status: 'Compliant', notes: 'Response plan executed during tabletop exercise.' },
+    { id: 'asm-13', controlId: 'SOC2-CC7.1', projectId: 'proj-2', status: 'Non-Compliant', notes: 'Change management approval process gaps identified.' },
+    { id: 'asm-14', controlId: 'ISO-A.14.2.2', projectId: 'proj-1', status: 'Compliant', notes: 'System development lifecycle policy reviewed.' },
+    { id: 'asm-15', controlId: 'NIST-PR.IP-1', projectId: 'proj-2', status: 'In Progress', notes: 'Information system inventory being updated.' },
+    { id: 'asm-16', controlId: 'SOC2-CC8.1', projectId: 'proj-1', status: 'Compliant', notes: 'Change management controls tested and verified.' }
 ];
 
 const daysAgo = (days: number) => new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
@@ -68,7 +81,14 @@ let mockRisks: Risk[] = [
 ];
 
 let mockPolicies: Policy[] = [
-    { id: 'pol-1', title: 'Access Control Policy', content: '...', version: '1.2', status: PolicyStatus.APPROVED, ownerId: 'user-2', projectId: 'proj-1', lastUpdated: '2023-10-15', controlId: 'SOC2-CC6.1' },
+    { id: 'pol-1', title: 'Access Control Policy', content: 'Comprehensive policy governing user access to information systems and data assets.', version: '1.2', status: PolicyStatus.APPROVED, ownerId: 'user-2', projectId: 'proj-1', lastUpdated: '2023-10-15', controlId: 'SOC2-CC6.1' },
+    { id: 'pol-2', title: 'Information Security Policy', content: 'Establishes the framework for protecting organizational information assets.', version: '2.1', status: PolicyStatus.APPROVED, ownerId: 'user-4', projectId: 'proj-1', lastUpdated: '2023-11-20', controlId: 'ISO-A.5.1.1' },
+    { id: 'pol-3', title: 'Incident Response Policy', content: 'Defines procedures for detecting, responding to, and recovering from security incidents.', version: '1.0', status: PolicyStatus.IN_REVIEW, ownerId: 'user-3', projectId: 'proj-2', lastUpdated: '2023-12-01', controlId: 'ISO-A.16.1.2' },
+    { id: 'pol-4', title: 'Data Protection Policy', content: 'Guidelines for protecting personal and sensitive data throughout its lifecycle.', version: '1.3', status: PolicyStatus.APPROVED, ownerId: 'user-2', projectId: 'proj-1', lastUpdated: '2023-09-15', controlId: 'NIST-PR.DS-1' },
+    { id: 'pol-5', title: 'Change Management Policy', content: 'Procedures for managing changes to information systems and applications.', version: '1.1', status: PolicyStatus.DRAFT, ownerId: 'user-4', projectId: 'proj-2', lastUpdated: '2023-12-10', controlId: 'SOC2-CC8.1' },
+    { id: 'pol-6', title: 'Network Security Policy', content: 'Standards for securing network infrastructure and communications.', version: '2.0', status: PolicyStatus.APPROVED, ownerId: 'user-3', projectId: 'proj-1', lastUpdated: '2023-08-30', controlId: 'ISO-A.9.1.2' },
+    { id: 'pol-7', title: 'Business Continuity Policy', content: 'Framework for maintaining business operations during disruptions.', version: '1.4', status: PolicyStatus.APPROVED, ownerId: 'user-2', projectId: 'proj-2', lastUpdated: '2023-07-15', controlId: 'NIST-RC.RP-1' },
+    { id: 'pol-8', title: 'Vendor Management Policy', content: 'Guidelines for managing third-party vendor relationships and risks.', version: '1.0', status: PolicyStatus.IN_REVIEW, ownerId: 'user-4', projectId: 'proj-1', lastUpdated: '2023-11-05', controlId: 'SOC2-CC9.1' }
 ];
 
 let mockPolicyVersions: PolicyVersion[] = [
@@ -196,11 +216,139 @@ let mockVendors: Vendor[] = [
         certifications: [],
         complianceFrameworks: ['HIPAA', 'SOC 2 Type I'],
         projectId: 'proj-2'
+    },
+    {
+        id: 'ven-4',
+        name: 'Microsoft Corporation',
+        description: 'Global technology company providing cloud computing, productivity software, and business applications',
+        website: 'https://microsoft.com',
+        industry: 'Software & Technology',
+        headquarters: 'Redmond, WA, USA',
+        foundedYear: 1975,
+        employeeCount: '200,000+',
+        annualRevenue: '$200B+',
+        serviceCategory: 'Productivity & Collaboration',
+        servicesProvided: ['Office 365', 'Azure Active Directory', 'Teams', 'SharePoint'],
+        criticality: VendorCriticality.CRITICAL,
+        tier: '1',
+        overallRiskScore: 20,
+        riskLevel: VendorCriticality.LOW,
+        lastRiskAssessment: '2024-01-10',
+        nextRiskAssessment: '2024-07-10',
+        regulatoryRequirements: ['SOC 2', 'ISO 27001', 'GDPR', 'HIPAA'],
+        status: VendorLifecycleStage.ACTIVE,
+        onboardingDate: '2022-03-01',
+        nextReviewDate: '2024-03-01',
+        businessOwner: 'CTO',
+        technicalOwner: 'IT Director',
+        procurementOwner: 'Chief Procurement Officer',
+        contacts: [
+            { name: 'Jennifer Park', role: 'Enterprise Account Manager', email: 'j.park@microsoft.com', phone: '+1-555-0100', isPrimary: true }
+        ],
+        dataTypes: ['Business Data', 'User Data', 'Communication Data'],
+        accessLevel: 'Standard',
+        hasSystemAccess: true,
+        systemsAccessed: ['Email Systems', 'Collaboration Platforms', 'Identity Management'],
+        annualSpend: 350000,
+        currency: 'USD',
+        paymentTerms: 'Net 30',
+        certifications: [],
+        complianceFrameworks: ['SOC 2 Type II', 'ISO 27001', 'GDPR', 'HIPAA'],
+        projectId: 'proj-1'
+    },
+    {
+        id: 'ven-5',
+        name: 'Splunk Inc.',
+        description: 'Security and observability platform for searching, monitoring, and analyzing machine data',
+        website: 'https://splunk.com',
+        industry: 'Security & Analytics',
+        headquarters: 'San Francisco, CA, USA',
+        foundedYear: 2003,
+        employeeCount: '7,000-10,000',
+        annualRevenue: '$3B+',
+        serviceCategory: 'Security Monitoring',
+        servicesProvided: ['SIEM', 'Log Analysis', 'Security Analytics', 'Incident Investigation'],
+        criticality: VendorCriticality.HIGH,
+        tier: '1',
+        overallRiskScore: 30,
+        riskLevel: VendorCriticality.LOW,
+        lastRiskAssessment: '2024-02-15',
+        nextRiskAssessment: '2024-08-15',
+        regulatoryRequirements: ['SOC 2', 'ISO 27001'],
+        status: VendorLifecycleStage.ACTIVE,
+        onboardingDate: '2023-01-15',
+        nextReviewDate: '2024-08-15',
+        businessOwner: 'CISO',
+        technicalOwner: 'Security Operations Manager',
+        procurementOwner: 'IT Procurement',
+        contacts: [
+            { name: 'David Kumar', role: 'Technical Account Manager', email: 'd.kumar@splunk.com', phone: '+1-555-0200', isPrimary: true }
+        ],
+        dataTypes: ['Security Logs', 'System Logs', 'Application Logs'],
+        accessLevel: 'Privileged',
+        hasSystemAccess: true,
+        systemsAccessed: ['SIEM Platform', 'Log Aggregation Systems'],
+        annualSpend: 180000,
+        currency: 'USD',
+        paymentTerms: 'Net 45',
+        certifications: [],
+        complianceFrameworks: ['SOC 2 Type II', 'ISO 27001'],
+        projectId: 'proj-2'
+    },
+    {
+        id: 'ven-6',
+        name: 'CloudFlare Inc.',
+        description: 'Web infrastructure and security company providing CDN, DDoS protection, and security services',
+        website: 'https://cloudflare.com',
+        industry: 'Web Infrastructure',
+        headquarters: 'San Francisco, CA, USA',
+        foundedYear: 2009,
+        employeeCount: '3,000-5,000',
+        annualRevenue: '$1B+',
+        serviceCategory: 'Web Security & Performance',
+        servicesProvided: ['CDN', 'DDoS Protection', 'Web Application Firewall', 'DNS Services'],
+        criticality: VendorCriticality.HIGH,
+        tier: '2',
+        overallRiskScore: 35,
+        riskLevel: VendorCriticality.LOW,
+        lastRiskAssessment: '2024-01-25',
+        nextRiskAssessment: '2024-07-25',
+        regulatoryRequirements: ['SOC 2', 'ISO 27001'],
+        status: VendorLifecycleStage.ACTIVE,
+        onboardingDate: '2023-05-01',
+        nextReviewDate: '2024-05-01',
+        businessOwner: 'Infrastructure Lead',
+        technicalOwner: 'Network Operations',
+        procurementOwner: 'IT Procurement',
+        contacts: [
+            { name: 'Sarah Johnson', role: 'Solutions Engineer', email: 's.johnson@cloudflare.com', phone: '+1-555-0300', isPrimary: true }
+        ],
+        dataTypes: ['Web Traffic Data', 'DNS Queries', 'Security Event Data'],
+        accessLevel: 'Standard',
+        hasSystemAccess: false,
+        systemsAccessed: [],
+        annualSpend: 95000,
+        currency: 'USD',
+        paymentTerms: 'Net 30',
+        certifications: [],
+        complianceFrameworks: ['SOC 2 Type II', 'ISO 27001'],
+        projectId: 'proj-1'
     }
 ];
 
 let mockEvidence: Evidence[] = [
     { id: 'ev-1', title: 'Q3 Access Review Spreadsheet.xlsx', fileUrl: '#', uploadDate: '2023-11-01', uploaderId: 'user-3', controlId: 'SOC2-CC6.1', projectId: 'proj-1' },
+    { id: 'ev-2', title: 'MFA Implementation Screenshots.pdf', fileUrl: '#', uploadDate: '2023-11-15', uploaderId: 'user-4', controlId: 'SOC2-CC6.2', projectId: 'proj-1' },
+    { id: 'ev-3', title: 'Network Segmentation Diagram.vsdx', fileUrl: '#', uploadDate: '2023-10-20', uploaderId: 'user-2', controlId: 'SOC2-CC6.3', projectId: 'proj-1' },
+    { id: 'ev-4', title: 'Encryption Configuration Report.docx', fileUrl: '#', uploadDate: '2023-09-30', uploaderId: 'user-3', controlId: 'NIST-PR.DS-1', projectId: 'proj-1' },
+    { id: 'ev-5', title: 'Incident Response Test Results.pdf', fileUrl: '#', uploadDate: '2023-12-05', uploaderId: 'user-2', controlId: 'ISO-A.16.1.2', projectId: 'proj-2' },
+    { id: 'ev-6', title: 'Change Control Board Minutes.docx', fileUrl: '#', uploadDate: '2023-11-28', uploaderId: 'user-4', controlId: 'SOC2-CC8.1', projectId: 'proj-1' },
+    { id: 'ev-7', title: 'Security Monitoring Dashboard.png', fileUrl: '#', uploadDate: '2023-10-15', uploaderId: 'user-3', controlId: 'NIST-DE.AE-1', projectId: 'proj-1' },
+    { id: 'ev-8', title: 'Vulnerability Scan Report Q4.pdf', fileUrl: '#', uploadDate: '2023-12-01', uploaderId: 'user-2', controlId: 'ISO-A.12.6.1', projectId: 'proj-2' },
+    { id: 'ev-9', title: 'Data Backup Verification Log.xlsx', fileUrl: '#', uploadDate: '2023-11-10', uploaderId: 'user-4', controlId: 'NIST-PR.IP-4', projectId: 'proj-1' },
+    { id: 'ev-10', title: 'Asset Inventory Report.csv', fileUrl: '#', uploadDate: '2023-10-25', uploaderId: 'user-3', controlId: 'NIST-PR.IP-1', projectId: 'proj-2' },
+    { id: 'ev-11', title: 'User Training Completion Records.xlsx', fileUrl: '#', uploadDate: '2023-09-15', uploaderId: 'user-2', controlId: 'ISO-A.7.2.2', projectId: 'proj-1' },
+    { id: 'ev-12', title: 'Third-Party Security Assessment.pdf', fileUrl: '#', uploadDate: '2023-11-20', uploaderId: 'user-4', controlId: 'SOC2-CC9.1', projectId: 'proj-1' }
 ];
 
 let mockMappings: ControlMapping[] = [

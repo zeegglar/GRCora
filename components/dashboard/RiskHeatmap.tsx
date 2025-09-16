@@ -53,14 +53,13 @@ const DrillDownModal: React.FC<DrillDownModalProps> = ({ risks, level, isOpen, o
                     {risk.status}
                   </span>
                 </div>
-                <p className="text-slate-300 mb-3">{risk.description}</p>
+                <p className="text-slate-300 mb-3">Risk level: {risk.level}</p>
                 <div className="flex items-center justify-between text-sm">
                   <div className="flex items-center space-x-4">
-                    <span className="text-slate-400">Impact: <span className="text-white">{risk.impact}</span></span>
-                    <span className="text-slate-400">Likelihood: <span className="text-white">{risk.likelihood}</span></span>
+                    <span className="text-slate-400">Control: <span className="text-white font-mono">{risk.controlId}</span></span>
                   </div>
-                  {risk.dueDate && (
-                    <span className="text-slate-400">Due: <span className="text-white">{new Date(risk.dueDate).toLocaleDateString()}</span></span>
+                  {risk.creationDate && (
+                    <span className="text-slate-400">Created: <span className="text-white">{new Date(risk.creationDate).toLocaleDateString()}</span></span>
                   )}
                 </div>
               </div>
