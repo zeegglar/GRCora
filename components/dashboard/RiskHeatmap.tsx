@@ -78,10 +78,10 @@ const riskMatrix = [
 ];
 
 const levelStyles: { [key in RiskLevel]: string } = {
-  [RiskLevel.LOW]: 'bg-gradient-to-br from-emerald-500/90 to-emerald-600/90 hover:from-emerald-400 hover:to-emerald-500 border border-emerald-400/30 shadow-lg shadow-emerald-500/20',
-  [RiskLevel.MEDIUM]: 'bg-gradient-to-br from-amber-500/90 to-amber-600/90 hover:from-amber-400 hover:to-amber-500 border border-amber-400/30 shadow-lg shadow-amber-500/20',
-  [RiskLevel.HIGH]: 'bg-gradient-to-br from-orange-500/90 to-red-500/90 hover:from-orange-400 hover:to-red-400 border border-orange-400/30 shadow-lg shadow-orange-500/20',
-  [RiskLevel.CRITICAL]: 'bg-gradient-to-br from-red-600/95 to-red-700/95 hover:from-red-500 hover:to-red-600 border border-red-400/40 shadow-lg shadow-red-500/30',
+  [RiskLevel.LOW]: 'bg-gradient-to-br from-green-500 to-green-600 hover:from-green-400 hover:to-green-500 border-2 border-green-400 shadow-xl shadow-green-500/40',
+  [RiskLevel.MEDIUM]: 'bg-gradient-to-br from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 border-2 border-yellow-400 shadow-xl shadow-yellow-500/40',
+  [RiskLevel.HIGH]: 'bg-gradient-to-br from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 border-2 border-orange-400 shadow-xl shadow-orange-500/40',
+  [RiskLevel.CRITICAL]: 'bg-gradient-to-br from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 border-2 border-red-400 shadow-xl shadow-red-500/50',
 };
 
 const RiskHeatmap: React.FC<RiskHeatmapProps> = ({ risks, onRiskClick }) => {
@@ -123,11 +123,11 @@ const RiskHeatmap: React.FC<RiskHeatmapProps> = ({ risks, onRiskClick }) => {
                   <div
                     key={index}
                     onClick={() => isClickable && handleCellClick(level)}
-                    className={`h-28 w-full rounded-xl flex items-center justify-center text-white font-bold text-3xl transition-all duration-300 transform ${
+                    className={`h-32 w-full rounded-xl flex items-center justify-center text-white font-bold text-3xl transition-all duration-300 transform ${
                       isClickable
                         ? 'hover:scale-105 cursor-pointer hover:shadow-2xl'
-                        : 'opacity-40 grayscale cursor-not-allowed'
-                    } ${levelStyles[level]} ${isClickable ? 'drop-shadow-lg' : ''}`}
+                        : 'opacity-30 cursor-not-allowed bg-slate-700 border-2 border-slate-600'
+                    } ${isClickable ? levelStyles[level] : ''}`}
                   >
                     {count > 0 ? (
                       <div className="text-center">
