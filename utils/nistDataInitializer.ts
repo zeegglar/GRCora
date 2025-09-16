@@ -182,6 +182,13 @@ export async function initializeNistData(): Promise<boolean> {
   console.log('🚀 Initializing NIST knowledge base...');
 
   try {
+    // Check if data is already in the database
+    const isAlreadyInitialized = await isKnowledgeBaseInitialized();
+    if (isAlreadyInitialized) {
+      console.log('✅ NIST knowledge base already initialized');
+      return true;
+    }
+
     // Try to load JSON files first, then fall back to JSONL
     let nistData = await loadNistDataFiles();
 
@@ -202,11 +209,12 @@ export async function initializeNistData(): Promise<boolean> {
     • NIST AI RMF: ${aiRmfArray.length} items`);
 
     if (csfArray.length === 0 && sp80053Array.length === 0 && aiRmfArray.length === 0) {
-      console.warn('⚠️ No NIST data found. Please ensure files are placed in public/data/');
+      console.warn('⚠️ No NIST data found. Please run the ingestion script:');
+      console.warn('💡 npm run ingest-nist');
       return false;
     }
 
-    // Initialize the knowledge base
+    // Initialize the knowledge base using the legacy method for compatibility
     await nistKnowledgeService.initializeKnowledgeBase(
       csfArray,
       sp80053Array,
@@ -215,10 +223,12 @@ export async function initializeNistData(): Promise<boolean> {
 
     console.log('✅ NIST knowledge base initialized successfully!');
     console.log('💡 You can now use the AI Assistant to query NIST controls and get compliance guidance.');
+    console.log('🔧 For better performance, consider using: npm run ingest-nist');
 
     return true;
   } catch (error) {
     console.error('❌ Failed to initialize NIST knowledge base:', error);
+    console.log('💡 Try running the ingestion script: npm run ingest-nist');
     return false;
   }
 }
