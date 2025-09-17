@@ -8,7 +8,8 @@
       "Bash(find:*)",
       "Bash(supabase status:*)",
       "Bash(supabase stop:*)",
-      "Bash(supabase db:*)"
+      "Bash(supabase db:*)",
+      "Bash(tsx scripts/testRagDirect.ts:*)"
     ],
     "deny": [],
     "ask": []
