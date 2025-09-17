@@ -9,7 +9,9 @@
       "Bash(supabase status:*)",
       "Bash(supabase stop:*)",
       "Bash(supabase db:*)",
-      "Bash(tsx scripts/testRagDirect.ts:*)"
+      "Bash(tsx scripts/testRagDirect.ts:*)",
+      "Bash(psql:*)",
+      "Bash(rm:*)"
     ],
     "deny": [],
     "ask": []
