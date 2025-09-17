@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { Risk, Control } from '../../../types';
 import { RiskLevel } from '../../../types';
+import { sanitizeInput } from '../../../utils/sanitization';
 
 interface NewRiskModalProps {
   isOpen: boolean;
@@ -55,7 +56,8 @@ const NewRiskModal: React.FC<NewRiskModalProps> = ({ isOpen, onClose, onSave, co
                 type="text"
                 id="riskTitle"
                 value={title}
-                onChange={e => setTitle(e.target.value)}
+                onChange={e => setTitle(sanitizeInput(e.target.value))}
+                maxLength={255}
                 className="w-full px-3 py-2 text-slate-200 bg-slate-900/50 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="e.g., Lack of formal incident response plan"
                 required

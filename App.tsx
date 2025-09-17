@@ -88,7 +88,8 @@ const AppContent: React.FC = () => {
           }
       }
     } catch (error) {
-      console.error('Error fetching data:', error);
+      // Log minimal error details without exposing sensitive information
+      console.error('Application initialization failed:', error instanceof Error ? error.message : 'Unknown error');
     } finally {
       setIsLoading(false);
     }

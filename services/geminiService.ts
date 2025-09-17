@@ -9,8 +9,9 @@ async function callAIAssist(prompt: string): Promise<string> {
   });
 
   if (error) {
-    console.error("Error invoking Supabase function:", error);
-    throw new Error("Failed to get response from AI model via Edge Function.");
+    // Log minimal error details without exposing API keys or internal details
+    console.error("AI service error:", error.message || 'Service unavailable');
+    throw new Error("AI service is temporarily unavailable. Please try again later.");
   }
   
   // FIX: The invoked function returns an object with a 'text' property.

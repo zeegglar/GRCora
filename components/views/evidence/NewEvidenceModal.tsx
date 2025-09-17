@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import type { Evidence, Control } from '../../../types';
+import { sanitizeInput, validateURL } from '../../../utils/sanitization';
 
 interface NewEvidenceModalProps {
   isOpen: boolean;
@@ -20,6 +21,10 @@ const NewEvidenceModal: React.FC<NewEvidenceModalProps> = ({ isOpen, onClose, on
     e.preventDefault();
     if (!title || !controlId) {
       alert('Please fill out all required fields.');
+      return;
+    }
+    if (fileUrl && !validateURL(fileUrl)) {
+      alert('Please enter a valid URL.');
       return;
     }
     onSave({
@@ -53,7 +58,8 @@ const NewEvidenceModal: React.FC<NewEvidenceModalProps> = ({ isOpen, onClose, on
                 type="text"
                 id="evidenceTitle"
                 value={title}
-                onChange={e => setTitle(e.target.value)}
+                onChange={e => setTitle(sanitizeInput(e.target.value))}
+                maxLength={255}
                 className="w-full px-3 py-2 text-slate-200 bg-slate-900/50 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="e.g., User Access Control Policy v1.3.pdf"
                 required
@@ -78,7 +84,8 @@ const NewEvidenceModal: React.FC<NewEvidenceModalProps> = ({ isOpen, onClose, on
                 type="text"
                 id="fileUrl"
                 value={fileUrl}
-                onChange={e => setFileUrl(e.target.value)}
+                onChange={e => setFileUrl(sanitizeInput(e.target.value))}
+                maxLength={2000}
                 className="w-full px-3 py-2 text-slate-200 bg-slate-900/50 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="https://example.com/path/to/file.pdf"
               />
