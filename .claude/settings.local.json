@@ -5,7 +5,8 @@
       "Bash(tsx scripts/mockRagDemo.ts:*)",
       "Bash(npm test)",
       "Bash(env)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(supabase status:*)"
     ],
     "deny": [],
     "ask": []
