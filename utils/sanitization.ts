@@ -123,3 +123,52 @@ export function validateURL(url: string): boolean {
     return false;
   }
 }
+
+// Sanitize prompts for AI/RAG systems to prevent prompt injection
+export function sanitizePrompt(prompt: string): string {
+  if (!prompt || typeof prompt !== 'string') return '';
+
+  return prompt
+    .trim()
+    // Remove potential instruction injection attempts
+    .replace(/\b(ignore|forget|disregard)\s+(previous|all|the above|instructions|system|prompt)/gi, '[REMOVED]')
+    .replace(/\b(act as|pretend to be|role[\s-]*play|simulate)\s+[^.!?]*[.!?]/gi, '[REMOVED]')
+    // Remove attempts to access system information
+    .replace(/\b(system|admin|root|config|database|env|environment)\s*(info|details|access|password|key|secret)/gi, '[REMOVED]')
+    // Remove attempts to execute commands
+    .replace(/\b(exec|execute|run|cmd|command|shell|bash|powershell|script)/gi, '[REMOVED]')
+    // Limit dangerous characters
+    .replace(/[<>\"'`${}]/g, '')
+    // Remove excessive whitespace
+    .replace(/\s+/g, ' ')
+    // Limit length to prevent token exhaustion attacks
+    .substring(0, 4000);
+}
+
+// Validate prompt content for additional safety
+export function validatePromptSafety(prompt: string): { isValid: boolean; reason?: string } {
+  if (!prompt || prompt.length === 0) {
+    return { isValid: false, reason: 'Empty prompt' };
+  }
+
+  if (prompt.length > 4000) {
+    return { isValid: false, reason: 'Prompt too long' };
+  }
+
+  // Check for potential jailbreak attempts
+  const dangerousPatterns = [
+    /\b(bypass|override|disable)\s+(safety|security|protection|filter)/gi,
+    /\b(jailbreak|escape|break out of|circumvent)/gi,
+    /\b(developer\s+mode|admin\s+mode|debug\s+mode)/gi,
+    /\bDAN\s+mode/gi, // "Do Anything Now" mode
+    /\b(ignore|disregard)\s+(all\s+)?previous\s+(instructions|rules|constraints)/gi
+  ];
+
+  for (const pattern of dangerousPatterns) {
+    if (pattern.test(prompt)) {
+      return { isValid: false, reason: 'Potentially unsafe content detected' };
+    }
+  }
+
+  return { isValid: true };
+}

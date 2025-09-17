@@ -1,11 +1,20 @@
 import { supabase } from './supabaseClient';
 import type { Control, Project, AssessmentItem, Risk } from '../types';
+import { sanitizePrompt, validatePromptSafety } from '../utils/sanitization';
 
 
 // A helper function to call our secure Supabase Edge Function
 async function callAIAssist(prompt: string): Promise<string> {
+  // Validate and sanitize the prompt to prevent injection attacks
+  const validation = validatePromptSafety(prompt);
+  if (!validation.isValid) {
+    throw new Error(`Invalid prompt: ${validation.reason}`);
+  }
+
+  const sanitizedPrompt = sanitizePrompt(prompt);
+
   const { data, error } = await supabase.functions.invoke('ai-assist', {
-    body: { prompt },
+    body: { prompt: sanitizedPrompt },
   });
 
   if (error) {
