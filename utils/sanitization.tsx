@@ -3,6 +3,8 @@
  * Prevents XSS attacks by sanitizing and safely rendering HTML content
  */
 
+import React from 'react';
+
 // Simple markdown-to-React converter that's XSS-safe
 export function parseMarkdownSafely(text: string): React.ReactNode[] {
   if (!text) return [];
