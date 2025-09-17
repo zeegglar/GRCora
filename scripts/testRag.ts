@@ -72,9 +72,8 @@ async function testRAG() {
   console.log('\n✅ RAG testing completed!');
 }
 
-if (require.main === module) {
-  testRAG().catch(error => {
-    console.error('❌ RAG testing failed:', error);
-    process.exit(1);
-  });
-}
+// Run the test
+testRAG().catch(error => {
+  console.error('❌ RAG testing failed:', error);
+  process.exit(1);
+});

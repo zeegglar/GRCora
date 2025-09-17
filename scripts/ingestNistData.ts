@@ -1,6 +1,6 @@
 #!/usr/bin/env tsx
 import { createClient } from '@supabase/supabase-js';
-import { readFileSync } from 'fs';
+import { readFileSync, existsSync } from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 
@@ -556,7 +556,7 @@ async function main() {
 
   // Process each file
   for (const filePath of files) {
-    if (require('fs').existsSync(filePath)) {
+    if (existsSync(filePath)) {
       const controls = await processJSONLFile(filePath);
       allControls.push(...controls);
     } else {
@@ -582,9 +582,7 @@ async function main() {
 }
 
 // Handle command line execution
-if (require.main === module) {
-  main().catch(error => {
-    console.error('❌ Ingestion failed:', error);
-    process.exit(1);
-  });
-}
+main().catch(error => {
+  console.error('❌ Ingestion failed:', error);
+  process.exit(1);
+});

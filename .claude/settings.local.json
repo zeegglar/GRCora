@@ -15,7 +15,8 @@
       "Bash(del \"supabase\\migrations\\20250916032802_create_grcora_schema.sql\")",
       "Read(//c/Users/abbas/**)",
       "Read(//tmp/grc_prejson_extract/json//**)",
-      "Bash(npx tsx:*)"
+      "Bash(npx tsx:*)",
+      "Bash(npm run:*)"
     ],
     "deny": [],
     "ask": []
