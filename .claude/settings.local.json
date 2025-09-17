@@ -6,7 +6,8 @@
       "Bash(npm test)",
       "Bash(env)",
       "Bash(find:*)",
-      "Bash(supabase status:*)"
+      "Bash(supabase status:*)",
+      "Bash(supabase stop:*)"
     ],
     "deny": [],
     "ask": []
