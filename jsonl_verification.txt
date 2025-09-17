@@ -1,0 +1,71 @@
+JSONL VERIFICATION REPORT
+========================
+
+STATUS: FAILED - System NOT Production Ready
+
+ABSOLUTE PATHS:
+- C:\Users\abbas\GRCora\public\data\cis-v8.jsonl
+- C:\Users\abbas\GRCora\public\data\iso-27001.jsonl
+- C:\Users\abbas\GRCora\public\data\nist-800-53.jsonl
+- C:\Users\abbas\GRCora\public\data\nist-ai-rmf.jsonl
+- C:\Users\abbas\GRCora\public\data\nist-csf.jsonl
+
+LINE COUNTS & HASHES:
+=== cis-v8.jsonl ===
+Lines: 171
+SHA256: 49237af4d632a34e2706e21b7975e54f5bb7291bef6db470f60d8850a8f4a01d
+
+=== iso-27001.jsonl ===
+Lines: 92
+SHA256: 3f24fb1736f0ee231a7704cf154d0ddce5f9594294c1863ffbb7406fd851c30c
+
+=== nist-800-53.jsonl ===
+Lines: 1016
+SHA256: 04faa1237825e25dfa43682331af5dd126ecccc056628c25410c92e171f6894b
+
+=== nist-ai-rmf.jsonl ===
+Lines: 72
+SHA256: edb09330bd8096440cff14a70434d0031a9417c602ec36f2f169f5d8345acd52
+
+=== nist-csf.jsonl ===
+Lines: 1 ❌ CRITICAL ERROR
+SHA256: 84979b633a310fb463c2b9654e519a6de0848b068318efd8a4255401e39f5f0b
+
+SCHEMA VALIDATION:
+✅ CIS v8: Valid JSON, fields: Asset_Class, IG1/2/3, CIS_Control, CIS_Safeguard, Description, Security_Function, Title
+✅ ISO 27001: Valid JSON, fields: framework, framework_version, source_file, control_id, family, title, description, guidance, evidence_types, csf_mapping, tags, full_id
+✅ NIST 800-53: Valid JSON, fields: framework, framework_version, source_file, control_id, family, title, text
+✅ NIST AI RMF: Valid JSON, fields: framework, framework_version, source_file, control_id, family, title, text
+❌ NIST CSF: Only 1 line (malformed/incomplete)
+
+WELL-FORMEDNESS CHECK:
+❌ CIS v8: Contains BOM (UTF-8 byte order mark)
+✅ ISO 27001: Valid UTF-8, no trailing commas
+✅ NIST 800-53: Valid UTF-8, no trailing commas
+✅ NIST AI RMF: Valid UTF-8, no trailing commas
+❌ NIST CSF: Incomplete dataset
+
+SCHEMA DRIFT:
+❌ Missing required fields: prompt, response (needed for RAG)
+❌ Inconsistent field naming across frameworks
+❌ No vector embeddings present
+
+INGESTION STATUS:
+❌ FAILED - Missing environment variables:
+   - NEXT_PUBLIC_SUPABASE_URL
+   - SUPABASE_SERVICE_ROLE_KEY
+
+RAG INDEX STATUS:
+❌ NOT INGESTED - Cannot verify without environment setup
+
+TOTAL CONTROLS EXPECTED: 1,351
+TOTAL CONTROLS FOUND: 1,351 (171+92+1016+72+1 - but NIST CSF incomplete)
+ACTUAL USABLE: 1,350 (excluding malformed NIST CSF)
+
+DEDUPLICATION: Not applicable - ingestion failed
+
+CONCLUSION: FAIL - Production readiness cannot be validated due to:
+1. Missing environment configuration
+2. Incomplete NIST CSF dataset
+3. RAG system not ingested
+4. No vector embeddings generated

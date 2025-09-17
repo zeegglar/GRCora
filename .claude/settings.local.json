@@ -18,7 +18,10 @@
       "Bash(npx tsx:*)",
       "Bash(npm run:*)",
       "Bash(python:*)",
-      "Bash(sed:*)"
+      "Bash(sed:*)",
+      "Bash(for file in *.jsonl)",
+      "Bash(do echo \"=== $file ===\")",
+      "Bash(done)"
     ],
     "deny": [],
     "ask": []
