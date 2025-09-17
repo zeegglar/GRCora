@@ -4,6 +4,19 @@ import { readFileSync, existsSync } from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 
+// Load environment variables from .env file
+try {
+  const envFile = readFileSync('.env', 'utf8');
+  envFile.split('\n').forEach(line => {
+    const [key, value] = line.split('=');
+    if (key && value) {
+      process.env[key.trim()] = value.trim();
+    }
+  });
+} catch (error) {
+  console.log('No .env file found or error reading it');
+}
+
 // Secure environment variable validation
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
