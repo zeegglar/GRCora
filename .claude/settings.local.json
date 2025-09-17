@@ -16,7 +16,9 @@
       "Read(//c/Users/abbas/**)",
       "Read(//tmp/grc_prejson_extract/json//**)",
       "Bash(npx tsx:*)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(python:*)",
+      "Bash(sed:*)"
     ],
     "deny": [],
     "ask": []
