@@ -6,6 +6,7 @@ import { PolicyStatus } from '../../../types';
 import { mockApi } from '../../../services/api';
 import { analyzePolicyAgainstFramework } from '../../../services/geminiService';
 import { DocumentTextIcon, PresentationChartBarIcon, ClipboardDocumentIcon, CheckCircleIcon } from '../../ui/Icons';
+import { parseMarkdownSafely, sanitizeInput } from '../../../utils/sanitization';
 
 
 interface NewPolicyModalProps {
@@ -164,11 +165,11 @@ const NewPolicyModal: React.FC<NewPolicyModalProps> = ({ isOpen, onClose, onSave
                 <div className="p-6 max-h-[60vh] overflow-y-auto space-y-4">
                     <div>
                         <label htmlFor="policyTitle" className="block text-sm font-medium text-slate-300 mb-1">Policy Title</label>
-                        <input type="text" id="policyTitle" value={title} onChange={e => setTitle(e.target.value)} className="w-full px-3 py-2 text-slate-200 bg-slate-900/50 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+                        <input type="text" id="policyTitle" value={title} onChange={e => setTitle(sanitizeInput(e.target.value))} maxLength={200} className="w-full px-3 py-2 text-slate-200 bg-slate-900/50 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required />
                     </div>
                     <div>
                         <label htmlFor="policyContent" className="block text-sm font-medium text-slate-300 mb-1">Content</label>
-                        <textarea id="policyContent" value={content} onChange={e => setContent(e.target.value)} rows={10} className="w-full p-2 text-sm bg-slate-900/50 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                        <textarea id="policyContent" value={content} onChange={e => setContent(e.target.value)} rows={10} maxLength={10000} className="w-full p-2 text-sm bg-slate-900/50 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
                     </div>
                 </div>
                 <footer className="p-4 border-t border-slate-700 flex justify-end space-x-3">
@@ -182,7 +183,7 @@ const NewPolicyModal: React.FC<NewPolicyModalProps> = ({ isOpen, onClose, onSave
              <div className="p-6 max-h-[60vh] overflow-y-auto space-y-4">
                 <div>
                     <label htmlFor="policyToAnalyze" className="block text-sm font-medium text-slate-300 mb-1">Paste Existing Policy Text</label>
-                    <textarea id="policyToAnalyze" value={policyToAnalyze} onChange={e => setPolicyToAnalyze(e.target.value)} rows={8} className="w-full p-2 text-sm bg-slate-900/50 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Paste the full text of your policy here..."></textarea>
+                    <textarea id="policyToAnalyze" value={policyToAnalyze} onChange={e => setPolicyToAnalyze(e.target.value)} rows={8} maxLength={20000} className="w-full p-2 text-sm bg-slate-900/50 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Paste the full text of your policy here..."></textarea>
                 </div>
                 <div className="flex items-end space-x-3">
                     <div className="flex-grow">
@@ -203,7 +204,9 @@ const NewPolicyModal: React.FC<NewPolicyModalProps> = ({ isOpen, onClose, onSave
                             {isAnalyzing && <div className="text-center">Generating analysis...</div>}
                             {analysisResult && !isAnalyzing && (
                                 <>
-                                    <div dangerouslySetInnerHTML={{ __html: analysisResult.replace(/## /g, '<h2 class="text-lg font-bold text-blue-300 mt-2 mb-1">').replace(/### /g, '<h3 class="text-md font-semibold text-white mb-1">') }} />
+                                    <div className="analysis-result">
+                                        {parseMarkdownSafely(analysisResult)}
+                                    </div>
                                     <div className="flex justify-end space-x-2 mt-4 pt-3 border-t border-slate-700/50">
                                          <button onClick={handleCopy} className="flex items-center space-x-1 px-2 py-1 text-xs rounded-md bg-slate-600/80 hover:bg-slate-500 text-white transition-colors">
                                             {isCopied ? <CheckCircleIcon className="h-4 w-4 text-green-400" /> : <ClipboardDocumentIcon className="h-4 w-4" />}

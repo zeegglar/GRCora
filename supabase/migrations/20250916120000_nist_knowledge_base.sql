@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS project_controls (
   status TEXT CHECK (status IN ('not_implemented', 'partially_implemented', 'implemented', 'not_applicable')),
   implementation_notes TEXT,
   evidence_references TEXT[],
-  assigned_to UUID REFERENCES users(id),
+  assigned_to UUID REFERENCES user_profiles(id),
   target_completion_date DATE,
   actual_completion_date DATE,
   last_assessed_date DATE,
@@ -50,8 +50,8 @@ CREATE TABLE IF NOT EXISTS project_controls (
 CREATE TABLE IF NOT EXISTS client_communications (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   project_id UUID REFERENCES projects(id) ON DELETE CASCADE,
-  from_user_id UUID REFERENCES users(id),
-  to_user_id UUID REFERENCES users(id),
+  from_user_id UUID REFERENCES user_profiles(id),
+  to_user_id UUID REFERENCES user_profiles(id),
   message_type TEXT CHECK (message_type IN ('message', 'notification', 'approval_request', 'status_update')),
   subject TEXT,
   content TEXT NOT NULL,
@@ -69,8 +69,8 @@ CREATE TABLE IF NOT EXISTS client_tasks (
   project_id UUID REFERENCES projects(id) ON DELETE CASCADE,
   title TEXT NOT NULL,
   description TEXT,
-  assigned_to UUID REFERENCES users(id),
-  assigned_by UUID REFERENCES users(id),
+  assigned_to UUID REFERENCES user_profiles(id),
+  assigned_by UUID REFERENCES user_profiles(id),
   status TEXT CHECK (status IN ('pending', 'in_progress', 'completed', 'on_hold', 'cancelled')),
   priority TEXT CHECK (priority IN ('low', 'medium', 'high', 'urgent')),
   task_type TEXT CHECK (task_type IN ('document_review', 'information_request', 'approval', 'implementation', 'meeting')),
@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS project_financials (
 CREATE TABLE IF NOT EXISTS consultant_time_entries (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   project_id UUID REFERENCES projects(id) ON DELETE CASCADE,
-  consultant_id UUID REFERENCES users(id),
+  consultant_id UUID REFERENCES user_profiles(id),
   task_id UUID REFERENCES client_tasks(id),
   activity_description TEXT NOT NULL,
   hours_worked DECIMAL(4,2) NOT NULL,
@@ -125,8 +125,8 @@ CREATE TABLE IF NOT EXISTS client_approvals (
   approval_type TEXT CHECK (approval_type IN ('document', 'scope_change', 'budget_change', 'deliverable', 'timeline')),
   title TEXT NOT NULL,
   description TEXT,
-  requested_by UUID REFERENCES users(id),
-  approval_required_from UUID REFERENCES users(id),
+  requested_by UUID REFERENCES user_profiles(id),
+  approval_required_from UUID REFERENCES user_profiles(id),
   status TEXT CHECK (status IN ('pending', 'approved', 'rejected', 'expired')) DEFAULT 'pending',
   priority TEXT CHECK (priority IN ('low', 'medium', 'high', 'urgent')) DEFAULT 'medium',
   attachments JSONB DEFAULT '[]',
@@ -158,7 +158,7 @@ CREATE TABLE IF NOT EXISTS project_milestones (
 CREATE TABLE IF NOT EXISTS ai_knowledge_queries (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   project_id UUID REFERENCES projects(id) ON DELETE CASCADE,
-  user_id UUID REFERENCES users(id),
+  user_id UUID REFERENCES user_profiles(id),
   query_text TEXT NOT NULL,
   query_embedding vector(768),
   response_text TEXT,
@@ -226,7 +226,7 @@ CREATE POLICY "Project controls viewable by project members" ON project_controls
     project_id IN (
       SELECT projects.id FROM projects
       WHERE projects.organization_id = (
-        SELECT users.organization_id FROM users WHERE users.id = auth.uid()
+        SELECT user_profiles.organization_id FROM user_profiles WHERE user_profiles.id = auth.uid()
       )
     )
   );
@@ -240,7 +240,7 @@ CREATE POLICY "Communications viewable by participants" ON client_communications
     project_id IN (
       SELECT projects.id FROM projects
       WHERE projects.organization_id = (
-        SELECT users.organization_id FROM users WHERE users.id = auth.uid()
+        SELECT user_profiles.organization_id FROM user_profiles WHERE user_profiles.id = auth.uid()
       )
     )
   );
@@ -254,7 +254,7 @@ CREATE POLICY "Tasks viewable by project members" ON client_tasks
     project_id IN (
       SELECT projects.id FROM projects
       WHERE projects.organization_id = (
-        SELECT users.organization_id FROM users WHERE users.id = auth.uid()
+        SELECT user_profiles.organization_id FROM user_profiles WHERE user_profiles.id = auth.uid()
       )
     )
   );
@@ -266,7 +266,7 @@ CREATE POLICY "Financials viewable by authorized users" ON project_financials
     project_id IN (
       SELECT projects.id FROM projects
       WHERE projects.organization_id = (
-        SELECT users.organization_id FROM users WHERE users.id = auth.uid()
+        SELECT user_profiles.organization_id FROM user_profiles WHERE user_profiles.id = auth.uid()
       )
     )
   );
@@ -279,7 +279,7 @@ CREATE POLICY "Time entries viewable by relevant parties" ON consultant_time_ent
     (client_visible = true AND project_id IN (
       SELECT projects.id FROM projects
       WHERE projects.organization_id = (
-        SELECT users.organization_id FROM users WHERE users.id = auth.uid()
+        SELECT user_profiles.organization_id FROM user_profiles WHERE user_profiles.id = auth.uid()
       )
     ))
   );
@@ -293,7 +293,7 @@ CREATE POLICY "Approvals viewable by participants" ON client_approvals
     project_id IN (
       SELECT projects.id FROM projects
       WHERE projects.organization_id = (
-        SELECT users.organization_id FROM users WHERE users.id = auth.uid()
+        SELECT user_profiles.organization_id FROM user_profiles WHERE user_profiles.id = auth.uid()
       )
     )
   );
@@ -305,7 +305,7 @@ CREATE POLICY "Milestones viewable by project members" ON project_milestones
     project_id IN (
       SELECT projects.id FROM projects
       WHERE projects.organization_id = (
-        SELECT users.organization_id FROM users WHERE users.id = auth.uid()
+        SELECT user_profiles.organization_id FROM user_profiles WHERE user_profiles.id = auth.uid()
       )
     )
   );
@@ -318,7 +318,7 @@ CREATE POLICY "AI queries viewable by project members" ON ai_knowledge_queries
     project_id IN (
       SELECT projects.id FROM projects
       WHERE projects.organization_id = (
-        SELECT users.organization_id FROM users WHERE users.id = auth.uid()
+        SELECT user_profiles.organization_id FROM user_profiles WHERE user_profiles.id = auth.uid()
       )
     )
   );

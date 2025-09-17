@@ -4,9 +4,22 @@ import { readFileSync, existsSync } from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 
-// Supabase configuration
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'http://localhost:54321';
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || 'your-service-key';
+// Secure environment variable validation
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+if (!supabaseUrl || !supabaseServiceKey) {
+  console.error('❌ Missing required environment variables:');
+  if (!supabaseUrl) console.error('  - NEXT_PUBLIC_SUPABASE_URL');
+  if (!supabaseServiceKey) console.error('  - SUPABASE_SERVICE_ROLE_KEY');
+  console.error('Please set these environment variables before running the ingestion script.');
+  process.exit(1);
+}
+
+if (supabaseServiceKey === 'your-service-key' || supabaseUrl.includes('placeholder')) {
+  console.error('❌ Environment variables contain placeholder values. Please set real credentials.');
+  process.exit(1);
+}
 
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 

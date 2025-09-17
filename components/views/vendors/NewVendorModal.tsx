@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import type { Vendor } from '../../../types';
 import { VendorCriticality } from '../../../types';
+import { sanitizeInput } from '../../../utils/sanitization';
 
 interface NewVendorModalProps {
   isOpen: boolean;
@@ -79,7 +80,8 @@ const NewVendorModal: React.FC<NewVendorModalProps> = ({ isOpen, onClose, onSave
                 type="text"
                 id="vendorName"
                 value={name}
-                onChange={e => setName(e.target.value)}
+                onChange={e => setName(sanitizeInput(e.target.value))}
+                maxLength={200}
                 className="w-full px-3 py-2 text-slate-200 bg-slate-900/50 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
@@ -90,7 +92,8 @@ const NewVendorModal: React.FC<NewVendorModalProps> = ({ isOpen, onClose, onSave
                 type="text"
                 id="vendorService"
                 value={serviceCategory}
-                onChange={e => setServiceCategory(e.target.value)}
+                onChange={e => setServiceCategory(sanitizeInput(e.target.value))}
+                maxLength={100}
                 className="w-full px-3 py-2 text-slate-200 bg-slate-900/50 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="e.g., Cloud Hosting, Penetration Testing"
                 required
@@ -117,7 +120,8 @@ const NewVendorModal: React.FC<NewVendorModalProps> = ({ isOpen, onClose, onSave
                   type="text"
                   id="vendorOwner"
                   value={businessOwner}
-                  onChange={e => setBusinessOwner(e.target.value)}
+                  onChange={e => setBusinessOwner(sanitizeInput(e.target.value))}
+                maxLength={100}
                   className="w-full px-3 py-2 text-slate-200 bg-slate-900/50 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 />

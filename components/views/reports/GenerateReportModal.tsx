@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import type { Project, AssessmentItem, Risk, Control } from '../../../types';
 import { generateExecutiveSummary } from '../../../services/geminiService';
 import { ClipboardDocumentIcon } from '../../ui/Icons';
+import { parseMarkdownSafely } from '../../../utils/sanitization';
 
 interface GenerateReportModalProps {
   isOpen: boolean;
@@ -81,7 +82,9 @@ const GenerateReportModal: React.FC<GenerateReportModalProps> = ({ isOpen, onClo
                     {error && <p className="text-red-400">{error}</p>}
                     {reportOutput && !isLoading && (
                         <>
-                            <div dangerouslySetInnerHTML={{ __html: reportOutput.replace(/## /g, '<h2 class="text-lg font-bold text-blue-300 mt-2 mb-1">').replace(/### /g, '<h3 class="text-md font-semibold text-white mb-1">') }} />
+                            <div className="report-output">
+                                {parseMarkdownSafely(reportOutput)}
+                            </div>
                              <button 
                                 type="button"
                                 onClick={handleCopy}
