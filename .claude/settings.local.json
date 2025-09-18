@@ -18,7 +18,9 @@
       "Bash(grep:*)",
       "Bash(node:*)",
       "Bash(ollama list:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(git checkout:*)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []
