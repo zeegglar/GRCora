@@ -15,7 +15,10 @@
       "Bash(npm run dev:*)",
       "Bash(npx tsx:*)",
       "Bash(docker:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(node:*)",
+      "Bash(ollama list:*)",
+      "Bash(npm install:*)"
     ],
     "deny": [],
     "ask": []
