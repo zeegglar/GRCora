@@ -54,7 +54,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ setView }) => {
     }, 30);
 
     const demoTimer = setInterval(() => {
-      setCurrentDemo(prev => (prev + 1) % 3);
+      setCurrentDemo(prev => (prev + 1) % 4);
     }, 4000);
 
     return () => {
@@ -66,21 +66,27 @@ const LandingPage: React.FC<LandingPageProps> = ({ setView }) => {
 
   const demoFeatures = [
     {
-      title: "Real-Time Risk Monitoring",
-      description: "Watch as critical risks are detected and classified instantly",
-      metrics: `${riskCount} Risks Identified`,
+      title: "🏥 Post-Ransomware Recovery Assessment",
+      description: "Regional Medical Center: ISO 27001 compliance assessment following data breach incident",
+      metrics: "Critical Priority",
       color: "text-red-400"
     },
     {
-      title: "Live Compliance Scoring",
-      description: "See compliance scores update in real-time as controls are validated",
-      metrics: `${complianceScore}% Compliance Score`,
-      color: "text-green-400"
+      title: "🏦 Cloud Migration Security Review",
+      description: "Financial Trust Corp: SOC 2 Type II readiness assessment for AWS infrastructure",
+      metrics: "In Progress",
+      color: "text-yellow-400"
     },
     {
-      title: "Automated Workflow Engine",
-      description: "Tasks and assessments generated automatically based on your requirements",
-      metrics: "12 Tasks Auto-Generated",
+      title: "🏭 Supply Chain Security Assessment",
+      description: "TechFlow Manufacturing: NIST CSF implementation after third-party breach",
+      metrics: "Risk Identified",
+      color: "text-orange-400"
+    },
+    {
+      title: "💻 Insider Threat Response & Controls",
+      description: "InnovateTech Startup: Access control audit and remediation planning",
+      metrics: "Remediation Active",
       color: "text-blue-400"
     }
   ];
@@ -119,14 +125,14 @@ const LandingPage: React.FC<LandingPageProps> = ({ setView }) => {
                     Manage multiple client engagements, streamline complex audits, and collaborate securely in a single, audit-ready platform. GRCora brings clarity and control to your entire compliance lifecycle.
                 </p>
 
-                {/* Live Demo Preview */}
+                {/* Live Cybersecurity Scenario Demo */}
                 <div className="mt-12 max-w-4xl mx-auto">
                   <div className="glass-card p-6 rounded-lg">
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-lg font-semibold text-white">🔴 Live Platform Demo</h3>
+                      <h3 className="text-lg font-semibold text-white">🔴 Live Cybersecurity Incident Scenarios</h3>
                       <div className="flex space-x-2">
                         <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                        <span className="text-sm text-green-400">Real-time Updates</span>
+                        <span className="text-sm text-green-400">Real Incident Data</span>
                       </div>
                     </div>
                     <div className="bg-slate-800/50 rounded-lg p-4 text-left">
@@ -143,8 +149,9 @@ const LandingPage: React.FC<LandingPageProps> = ({ setView }) => {
                         <div className="w-full bg-slate-700 rounded-full h-2">
                           <div
                             className={`h-2 rounded-full transition-all duration-1000 ${
-                              currentDemo === 0 ? 'bg-red-400 w-3/4' :
-                              currentDemo === 1 ? 'bg-green-400 w-5/6' : 'bg-blue-400 w-1/2'
+                              currentDemo === 0 ? 'bg-red-400 w-4/5' :
+                              currentDemo === 1 ? 'bg-yellow-400 w-3/5' :
+                              currentDemo === 2 ? 'bg-orange-400 w-2/3' : 'bg-blue-400 w-3/4'
                             }`}
                           ></div>
                         </div>
