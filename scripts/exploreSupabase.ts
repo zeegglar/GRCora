@@ -12,22 +12,9 @@ async function exploreDatabase() {
   try {
     console.log('📊 Checking table structure...\n');
 
-    // Check what tables exist
-    const { data: tables, error: tableError } = await supabase
-      .from('information_schema.tables')
-      .select('table_name')
-      .eq('table_schema', 'public')
-      .order('table_name');
-
-    if (tableError) {
-      console.log('❌ Error getting tables:', tableError.message);
-      return;
-    }
-
-    console.log(`✅ Found ${tables?.length || 0} tables:`);
-    tables?.forEach((table, index) => {
-      console.log(`   ${index + 1}. ${table.table_name}`);
-    });
+    // Test known tables directly
+    const knownTables = ['organizations', 'projects', 'nist_controls', 'assessments', 'controls'];
+    console.log('🔍 Testing known tables:');
 
     // Check organizations table
     console.log('\n📋 Organizations table:');
