@@ -48,7 +48,7 @@ class NISTKnowledgeService {
     nist80053Data: any[],
     nistAiData: any[]
   ): Promise<void> {
-    console.log('Initializing NIST knowledge base...');
+    // Initialize NIST knowledge base
 
     try {
       // Process CSF data
@@ -63,7 +63,7 @@ class NISTKnowledgeService {
       const aiControls = this.parseAIData(nistAiData);
       await this.storeControls(aiControls);
 
-      console.log('NIST knowledge base initialized successfully');
+      // NIST knowledge base initialized successfully
     } catch (error) {
       console.error('Failed to initialize NIST knowledge base:', error);
       throw error;

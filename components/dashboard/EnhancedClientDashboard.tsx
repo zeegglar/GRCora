@@ -252,10 +252,10 @@ const EnhancedClientDashboard: React.FC<ClientDashboardProps> = ({ user, project
         </div>
 
         {/* Key Metrics */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
           <div
             onClick={() => onNavigate?.('assessments')}
-            className="glass-card p-6 rounded-lg cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:bg-slate-700/30 flex flex-col justify-between h-full"
+            className="glass-card p-6 rounded-lg cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-slate-700/30"
           >
             <div className="flex items-center justify-between mb-4">
               <div>
@@ -282,7 +282,7 @@ const EnhancedClientDashboard: React.FC<ClientDashboardProps> = ({ user, project
 
           <div
             onClick={() => onNavigate?.('risks')}
-            className="glass-card p-6 rounded-lg cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:bg-slate-700/30 flex flex-col justify-between h-full"
+            className="glass-card p-6 rounded-lg cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-slate-700/30"
           >
             <div className="flex items-center justify-between mb-4">
               <div>
@@ -310,7 +310,7 @@ const EnhancedClientDashboard: React.FC<ClientDashboardProps> = ({ user, project
 
           <div
             onClick={() => onNavigate?.('vendors')}
-            className="glass-card p-6 rounded-lg cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:bg-slate-700/30 flex flex-col justify-between h-full"
+            className="glass-card p-6 rounded-lg cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-slate-700/30"
           >
             <div className="flex items-center justify-between mb-4">
               <div>
@@ -329,7 +329,7 @@ const EnhancedClientDashboard: React.FC<ClientDashboardProps> = ({ user, project
 
           <div
             onClick={() => onNavigate?.('risks')}
-            className="glass-card p-6 rounded-lg cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:bg-slate-700/30 flex flex-col justify-between h-full"
+            className="glass-card p-6 rounded-lg cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-slate-700/30"
           >
             <div className="flex items-center justify-between mb-4">
               <div>
@@ -381,7 +381,7 @@ const EnhancedClientDashboard: React.FC<ClientDashboardProps> = ({ user, project
           {/* Compliance Details */}
           <div
             onClick={() => onNavigate?.('assessments')}
-            className="glass-card p-6 rounded-lg cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:bg-slate-700/30 flex flex-col justify-between h-full"
+            className="glass-card p-6 rounded-lg cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-slate-700/30"
           >
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold text-white">Compliance Status</h2>
@@ -437,10 +437,7 @@ const EnhancedClientDashboard: React.FC<ClientDashboardProps> = ({ user, project
           </div>
 
           {/* Risk Breakdown */}
-          <div
-            onClick={() => onNavigate?.('risks')}
-            className="glass-card p-6 rounded-lg cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:bg-slate-700/30 flex flex-col justify-between h-full"
-          >
+          <div className="glass-card p-6 rounded-lg">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold text-white">Risk Breakdown</h2>
               <ChartBarIcon className="w-6 h-6 text-slate-400" />
@@ -489,10 +486,7 @@ const EnhancedClientDashboard: React.FC<ClientDashboardProps> = ({ user, project
           </div>
 
           {/* Vendor Summary */}
-          <div
-            onClick={() => onNavigate?.('vendors')}
-            className="glass-card p-6 rounded-lg cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:bg-slate-700/30 flex flex-col justify-between h-full"
-          >
+          <div className="glass-card p-6 rounded-lg">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold text-white">Vendor Overview</h2>
               <UsersIcon className="w-6 h-6 text-slate-400" />
@@ -539,7 +533,7 @@ const EnhancedClientDashboard: React.FC<ClientDashboardProps> = ({ user, project
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <button
               onClick={() => onNavigate?.('assessments')}
-              className="p-4 bg-blue-600/20 border border-blue-600/30 rounded-lg hover:bg-blue-600/30 hover:scale-[1.02] transition-all duration-300 text-left transform hover:shadow-lg cursor-pointer"
+              className="p-4 bg-blue-600/20 border border-blue-600/30 rounded-lg hover:bg-blue-600/30 hover:scale-105 transition-all duration-300 text-left transform hover:shadow-lg"
             >
               <DocumentTextIcon className="w-6 h-6 text-blue-400 mb-2" />
               <h3 className="font-medium text-white">Review Assessments</h3>
@@ -548,7 +542,7 @@ const EnhancedClientDashboard: React.FC<ClientDashboardProps> = ({ user, project
 
             <button
               onClick={() => onNavigate?.('risks')}
-              className="p-4 bg-red-600/20 border border-red-600/30 rounded-lg hover:bg-red-600/30 hover:scale-[1.02] transition-all duration-300 text-left transform hover:shadow-lg cursor-pointer"
+              className="p-4 bg-red-600/20 border border-red-600/30 rounded-lg hover:bg-red-600/30 hover:scale-105 transition-all duration-300 text-left transform hover:shadow-lg"
             >
               <ExclamationTriangleIcon className="w-6 h-6 text-red-400 mb-2" />
               <h3 className="font-medium text-white">Address Risks</h3>
@@ -557,7 +551,7 @@ const EnhancedClientDashboard: React.FC<ClientDashboardProps> = ({ user, project
 
             <button
               onClick={() => onNavigate?.('vendors')}
-              className="p-4 bg-purple-600/20 border border-purple-600/30 rounded-lg hover:bg-purple-600/30 hover:scale-[1.02] transition-all duration-300 text-left transform hover:shadow-lg cursor-pointer"
+              className="p-4 bg-purple-600/20 border border-purple-600/30 rounded-lg hover:bg-purple-600/30 hover:scale-105 transition-all duration-300 text-left transform hover:shadow-lg"
             >
               <UsersIcon className="w-6 h-6 text-purple-400 mb-2" />
               <h3 className="font-medium text-white">Vendor Management</h3>

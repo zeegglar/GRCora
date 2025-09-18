@@ -137,7 +137,7 @@ export const uploadFile = async (
 export const deleteFile = async (fileKey: string): Promise<void> => {
   if (!isSupabaseConfigured) {
     // In demo mode, just log the deletion
-    console.log('Demo mode: Would delete file', fileKey);
+    // Demo mode: File deletion simulated
     return;
   }
 

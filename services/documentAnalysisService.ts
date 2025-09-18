@@ -397,7 +397,7 @@ class DocumentAnalysisService {
     fileName: string
   ): Promise<void> {
     // Mock vector storage - real implementation would use Pinecone, Weaviate, or PostgreSQL with pgvector
-    console.log(`Storing ${chunks.length} chunks for ${fileName} in project ${projectId}`);
+    // Store document chunks for vector search
 
     // In real implementation:
     // - Store embeddings in vector database

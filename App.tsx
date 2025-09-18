@@ -82,7 +82,7 @@ const App: React.FC = () => {
     if (foundUser) {
       setUser(foundUser);
       if (foundUser.role.startsWith('CLIENT')) {
-          // Find client project and set view
+          // Find client project and set project view with dashboard tab
           mockApi.getProjectForClient(foundUser.organizationId).then(p => {
               if (p) setView({type: 'project', projectId: p.id, tab: 'dashboard' });
               else setView({type: 'dashboard'});
@@ -132,12 +132,32 @@ const App: React.FC = () => {
           return <ConsultantDashboard user={user} setView={setView} />;
         }
         if (data.project) {
-          return <ClientDashboard user={user} project={data.project} assessmentItems={data.assessmentItems} risks={data.risks} />;
+          return (
+            <ClientDashboard
+              user={user}
+              project={data.project}
+              assessmentItems={data.assessmentItems}
+              risks={data.risks}
+              onNavigate={(tab) => setView({ type: 'project', projectId: data.project.id, tab })}
+            />
+          );
         }
         return <div className="p-8">No project assigned.</div>
         
       case 'project':
         if (data.project?.id === view.projectId) {
+            // If client user with dashboard tab, show ClientDashboard
+            if (user.role.startsWith('CLIENT') && view.tab === 'dashboard') {
+                return (
+                    <ClientDashboard
+                        user={user}
+                        project={data.project}
+                        assessmentItems={data.assessmentItems}
+                        risks={data.risks}
+                        onNavigate={(tab) => setView({ type: 'project', projectId: view.projectId, tab })}
+                    />
+                );
+            }
             return <ProjectView user={user} view={view} projectData={data} setView={setView} onUpdate={fetchData} />;
         }
         // Placeholder for consultant viewing a client project
@@ -162,7 +182,7 @@ const App: React.FC = () => {
 
   return (
     <NotificationProvider>
-      <div className="flex h-screen bg-slate-900 text-white">
+      <div className="flex h-screen">
         <Sidebar
           user={user}
           currentView={view}
@@ -172,8 +192,10 @@ const App: React.FC = () => {
         />
         <div className="flex-1 flex flex-col overflow-hidden">
           <Header user={user} />
-          <main className="flex-1 overflow-y-auto">
-            {renderContent()}
+          <main className="flex-1 overflow-y-auto px-4 pb-4">
+            <div className="fade-in">
+              {renderContent()}
+            </div>
           </main>
         </div>
         {user && <RealTimeSystem user={user} currentProjectId={view.type === 'project' ? view.projectId : undefined} />}
