@@ -17,12 +17,14 @@ const LoginPage: React.FC = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  // Demo mode users
+  // Demo mode users - Realistic cybersecurity scenarios
   const demoUsers = [
-    { id: 'user-1', name: 'Alice Martin (Consultant Owner)', role: 'CONSULTANT_OWNER' },
-    { id: 'user-2', name: 'Bob Chen (Client Admin)', role: 'CLIENT_ADMIN' },
-    { id: 'user-3', name: 'Charlie Davis (Client User)', role: 'CLIENT_USER' },
-    { id: 'user-4', name: 'Diana Prince (Consultant Admin)', role: 'CONSULTANT_ADMIN' }
+    { id: 'user-1', name: 'Sarah Mitchell (Lead GRC Consultant)', role: 'CONSULTANT_OWNER', scenario: 'SecureGRC Consultants' },
+    { id: 'user-2', name: 'Dr. James Chen (CISO)', role: 'CLIENT_ADMIN', scenario: 'Regional Medical Center - Post-Ransomware Recovery' },
+    { id: 'user-3', name: 'Maria Rodriguez (IT Security Manager)', role: 'CLIENT_USER', scenario: 'Financial Trust Corp - Cloud Migration Security' },
+    { id: 'user-4', name: 'Alex Thompson (Security Analyst)', role: 'CLIENT_USER', scenario: 'TechFlow Manufacturing - Supply Chain Breach Response' },
+    { id: 'user-5', name: 'Lisa Park (Compliance Director)', role: 'CLIENT_ADMIN', scenario: 'InnovateTech Startup - Insider Threat Investigation' },
+    { id: 'user-6', name: 'Michael Davis (Senior Consultant)', role: 'CONSULTANT_ADMIN', scenario: 'SecureGRC Consultants' }
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -91,6 +93,7 @@ const LoginPage: React.FC = () => {
                 >
                   <div className="font-medium">{user.name}</div>
                   <div className="text-xs text-slate-400">{user.role.replace(/_/g, ' ')}</div>
+                  <div className="text-xs text-slate-500 mt-1">{user.scenario}</div>
                 </button>
               ))}
             </div>

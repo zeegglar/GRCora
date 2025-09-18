@@ -1,27 +1,33 @@
 import type { User, Organization, Project, Control, AssessmentItem, Risk, Policy, PolicyVersion, Vendor, Evidence, ControlMapping, VendorRiskAssessment, VendorDueDiligence, VendorContract, VendorPerformanceMetric, VendorIncident, VendorCertification } from '../types';
 import { UserRole, RiskLevel, PolicyStatus, VendorLifecycleStage, VendorCriticality, VendorRiskCategory, DueDiligenceStatus, ContractStatus } from '../types';
 
-// Mock Data
+// Mock Data - Realistic cybersecurity scenarios
 export const mockUsers: User[] = [
-  { id: 'user-1', name: 'Alice Martin', role: UserRole.CONSULTANT_OWNER, avatarUrl: '/avatars/avatar1.png', organizationId: 'org-consultancy' },
-  { id: 'user-2', name: 'Bob Chen', role: UserRole.CLIENT_ADMIN, avatarUrl: '/avatars/avatar2.png', organizationId: 'org-client-a' },
-  { id: 'user-3', name: 'Charlie Davis', role: UserRole.CLIENT_USER, avatarUrl: '/avatars/avatar3.png', organizationId: 'org-client-a' },
-  { id: 'user-4', name: 'Diana Prince', role: UserRole.CONSULTANT_ADMIN, avatarUrl: '/avatars/avatar4.png', organizationId: 'org-consultancy' },
+  { id: 'user-1', name: 'Sarah Mitchell', role: UserRole.CONSULTANT_OWNER, avatarUrl: '/avatars/avatar1.png', organizationId: 'org-consultancy' },
+  { id: 'user-2', name: 'Dr. James Chen', role: UserRole.CLIENT_ADMIN, avatarUrl: '/avatars/avatar2.png', organizationId: 'org-medical-center' },
+  { id: 'user-3', name: 'Maria Rodriguez', role: UserRole.CLIENT_USER, avatarUrl: '/avatars/avatar3.png', organizationId: 'org-financial-trust' },
+  { id: 'user-4', name: 'Alex Thompson', role: UserRole.CLIENT_USER, avatarUrl: '/avatars/avatar4.png', organizationId: 'org-techflow-mfg' },
+  { id: 'user-5', name: 'Lisa Park', role: UserRole.CLIENT_ADMIN, avatarUrl: '/avatars/avatar5.png', organizationId: 'org-innovate-tech' },
+  { id: 'user-6', name: 'Michael Davis', role: UserRole.CONSULTANT_ADMIN, avatarUrl: '/avatars/avatar6.png', organizationId: 'org-consultancy' },
 ];
 
 export const mockOrganizations: Organization[] = [
   { id: 'org-consultancy', name: 'SecureGRC Consultants' },
-  { id: 'org-client-a', name: 'Fintech Innovations Inc.' },
-  { id: 'org-client-b', name: 'HealthPlus Solutions' },
+  { id: 'org-medical-center', name: 'Regional Medical Center' },
+  { id: 'org-financial-trust', name: 'Financial Trust Corp' },
+  { id: 'org-techflow-mfg', name: 'TechFlow Manufacturing' },
+  { id: 'org-innovate-tech', name: 'InnovateTech Startup' },
 ];
 
 export const consultantClientLinks: Record<string, string[]> = {
-    'org-consultancy': ['org-client-a', 'org-client-b']
+    'org-consultancy': ['org-medical-center', 'org-financial-trust', 'org-techflow-mfg', 'org-innovate-tech']
 }
 
 let mockProjects: Project[] = [
-  { id: 'proj-1', name: 'Q3 2024 SOC 2 Audit', organizationId: 'org-client-a', frameworks: ['SOC 2', 'NIST CSF 2.0'] },
-  { id: 'proj-2', name: 'ISO 27001 Certification Prep', organizationId: 'org-client-b', frameworks: ['ISO 27001:2022'] },
+  { id: 'proj-1', name: 'Post-Ransomware Recovery Assessment', organizationId: 'org-medical-center', frameworks: ['ISO 27001:2022', 'HIPAA'] },
+  { id: 'proj-2', name: 'Cloud Migration Security Review', organizationId: 'org-financial-trust', frameworks: ['SOC 2', 'NIST CSF 2.0'] },
+  { id: 'proj-3', name: 'Supply Chain Security Assessment', organizationId: 'org-techflow-mfg', frameworks: ['NIST CSF 2.0', 'ISO 27001:2022'] },
+  { id: 'proj-4', name: 'Insider Threat Response & Controls', organizationId: 'org-innovate-tech', frameworks: ['SOC 2', 'NIST CSF 2.0'] },
 ];
 
 let mockControls: Control[] = [
