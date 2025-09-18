@@ -5,6 +5,7 @@ import { RiskLevel, VendorCriticality } from '../../types';
 import { PlusCircleIcon, ArrowUpRightIcon, ArrowDownRightIcon, ChartBarIcon, ClockIcon, ExclamationTriangleIcon, CheckCircleIcon } from '../ui/Icons';
 import NewEngagementModal from './NewEngagementModal';
 import InteractiveDashboard from './InteractiveDashboard';
+import ImprovementRoadmapWidget from './ImprovementRoadmapWidget';
 import { useNotifications } from '../context/NotificationContext';
 
 interface ConsultantDashboardProps {
@@ -438,6 +439,22 @@ const ConsultantDashboard: React.FC<ConsultantDashboardProps> = ({ user, setView
             </div>
           </div>
         </header>
+
+        {/* Improvement Roadmap - Show for current project if viewing specific project */}
+        {filteredAndSortedMetrics.length > 0 && (
+          <div className="mb-8">
+            <ImprovementRoadmapWidget
+              project={filteredAndSortedMetrics[0].project}
+              risks={allRisks.filter(r => r.projectId === filteredAndSortedMetrics[0].project.id)}
+              assessmentItems={[]}
+              onNavigate={(tab) => setView({
+                type: 'project',
+                projectId: filteredAndSortedMetrics[0].project.id,
+                tab
+              })}
+            />
+          </div>
+        )}
 
         {/* Projects Grid */}
         <main>

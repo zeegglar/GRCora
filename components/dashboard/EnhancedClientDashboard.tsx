@@ -4,6 +4,7 @@ import { RiskLevel, VendorCriticality, ContractStatus } from '../../types';
 import { mockApi } from '../../services/api';
 import { useNotifications } from '../context/NotificationContext';
 import RiskHeatmap from './RiskHeatmap';
+import NextActionsWidget from './NextActionsWidget';
 import {
   ShieldCheckIcon,
   ExclamationTriangleIcon,
@@ -377,6 +378,16 @@ const EnhancedClientDashboard: React.FC<ClientDashboardProps> = ({ user, project
       </header>
 
       <main>
+        {/* Next Actions Widget - Prominent at top */}
+        <div className="mb-8">
+          <NextActionsWidget
+            project={project}
+            assessmentItems={assessmentItems}
+            risks={risks}
+            onNavigate={onNavigate}
+          />
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
           {/* Compliance Details */}
           <div

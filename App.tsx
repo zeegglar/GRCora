@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import type { User, View, Project, AssessmentItem, Risk, Policy, Vendor, Evidence, Control, Organization } from './types';
 import { UserRole } from './types';
-import { mockApi, mockUsers } from './services/api';
+import { mockApi } from './services/api';
 import { isSupabaseConfigured } from './services/supabaseClient';
 import { NotificationProvider } from './components/context/NotificationContext';
+import { AuthProvider, useAuth } from './components/context/AuthContext';
 
 import Sidebar from './components/layout/Sidebar';
 import Header from './components/layout/Header';
@@ -19,8 +20,8 @@ import RemediationTracker from './components/views/remediation/RemediationTracke
 import RealTimeSystem from './components/realtime/RealTimeSystem';
 import EnvironmentNotice from './components/setup/EnvironmentNotice';
 
-const App: React.FC = () => {
-  const [user, setUser] = useState<User | null>(null);
+const AppContent: React.FC = () => {
+  const { user, isLoading: authLoading, isAuthenticated } = useAuth();
   const [view, setView] = useState<View>({ type: 'landing' });
   const [data, setData] = useState<any>({});
   const [isLoading, setIsLoading] = useState(true);
@@ -77,26 +78,16 @@ const App: React.FC = () => {
     fetchData();
   }, [user, view]);
 
-  const handleLogin = (userId: string) => {
-    const foundUser = mockUsers.find(u => u.id === userId);
-    if (foundUser) {
-      setUser(foundUser);
-      if (foundUser.role.startsWith('CLIENT')) {
-          // Find client project and set project view with dashboard tab
-          mockApi.getProjectForClient(foundUser.organizationId).then(p => {
-              if (p) setView({type: 'project', projectId: p.id, tab: 'dashboard' });
-              else setView({type: 'dashboard'});
-          })
-      } else {
-        setView({ type: 'dashboard' });
-      }
-    }
-  };
+  const { signOut } = useAuth();
 
-  const handleLogout = () => {
-    setUser(null);
-    setData({});
-    setView({type: 'landing'}); // Show landing page after logout
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      setData({});
+      setView({type: 'landing'});
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
   };
 
   const currentProjectName = useMemo(() => {
@@ -114,11 +105,31 @@ const App: React.FC = () => {
     return <EnvironmentNotice />;
   }
 
-  if (!user) {
-    if (view.type === 'landing') {
-      return <LandingPage setView={setView} onLogin={handleLogin} />;
+  useEffect(() => {
+    if (user && user.role.startsWith('CLIENT')) {
+      // Find client project and set project view with dashboard tab
+      mockApi.getProjectForClient(user.organizationId).then(p => {
+        if (p) setView({type: 'project', projectId: p.id, tab: 'dashboard' });
+        else setView({type: 'dashboard'});
+      });
+    } else if (user && user.role.startsWith('CONSULTANT')) {
+      setView({ type: 'dashboard' });
     }
-    return <LoginPage onLogin={handleLogin} />;
+  }, [user]);
+
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+        <div className="text-white">Loading...</div>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    if (view.type === 'landing') {
+      return <LandingPage setView={setView} />;
+    }
+    return <LoginPage />;
   }
 
   const renderContent = () => {
@@ -181,26 +192,34 @@ const App: React.FC = () => {
   };
 
   return (
-    <NotificationProvider>
-      <div className="flex h-screen">
-        <Sidebar
-          user={user}
-          currentView={view}
-          setView={setView}
-          onLogout={handleLogout}
-          currentProjectName={currentProjectName}
-        />
-        <div className="flex-1 flex flex-col overflow-hidden">
-          <Header user={user} />
-          <main className="flex-1 overflow-y-auto px-4 pb-4">
-            <div className="fade-in">
-              {renderContent()}
-            </div>
-          </main>
-        </div>
-        {user && <RealTimeSystem user={user} currentProjectId={view.type === 'project' ? view.projectId : undefined} />}
+    <div className="flex h-screen">
+      <Sidebar
+        user={user}
+        currentView={view}
+        setView={setView}
+        onLogout={handleLogout}
+        currentProjectName={currentProjectName}
+      />
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <Header user={user} />
+        <main className="flex-1 overflow-y-auto px-4 pb-4">
+          <div className="fade-in">
+            {renderContent()}
+          </div>
+        </main>
       </div>
-    </NotificationProvider>
+      {user && <RealTimeSystem user={user} currentProjectId={view.type === 'project' ? view.projectId : undefined} />}
+    </div>
+  );
+};
+
+const App: React.FC = () => {
+  return (
+    <AuthProvider>
+      <NotificationProvider>
+        <AppContent />
+      </NotificationProvider>
+    </AuthProvider>
   );
 };
 

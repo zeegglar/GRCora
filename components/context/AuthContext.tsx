@@ -159,11 +159,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  // Mock login for demo mode
+  // Mock login for demo mode (only when Supabase is not configured)
   const mockLogin = (userId: string) => {
-    const foundUser = mockUsers.find(u => u.id === userId);
-    if (foundUser) {
-      setUser(foundUser);
+    if (isDemoMode) {
+      const foundUser = mockUsers.find(u => u.id === userId);
+      if (foundUser) {
+        setUser(foundUser);
+      }
     }
   };
 

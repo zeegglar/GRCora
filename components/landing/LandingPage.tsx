@@ -6,7 +6,6 @@ import {
 
 interface LandingPageProps {
   setView: (view: View) => void;
-  onLogin: (userId: string) => void;
 }
 
 const CheckIcon: React.FC<{className?: string}> = ({className}) => (
@@ -26,7 +25,7 @@ const FeatureCard: React.FC<{ icon: React.ReactNode; title: string; children: Re
 );
 
 
-const LandingPage: React.FC<LandingPageProps> = ({ setView, onLogin }) => {
+const LandingPage: React.FC<LandingPageProps> = ({ setView }) => {
   const [currentDemo, setCurrentDemo] = useState(0);
   const [riskCount, setRiskCount] = useState(0);
   const [complianceScore, setComplianceScore] = useState(0);
@@ -35,13 +34,13 @@ const LandingPage: React.FC<LandingPageProps> = ({ setView, onLogin }) => {
     window.location.href = `mailto:demo@grcora.test?subject=${encodeURIComponent(subject)}`;
   };
 
-  // Direct login for demo purposes
+  // Navigate to login page
   const handleExploreConsultant = () => {
-    onLogin('user-1'); // Consultant user
+    setView({ type: 'login' });
   };
 
   const handleTryClient = () => {
-    onLogin('user-4'); // Client user
+    setView({ type: 'login' });
   };
 
   // Animate stats on mount
