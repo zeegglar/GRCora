@@ -35,6 +35,15 @@ const LandingPage: React.FC<LandingPageProps> = ({ setView, onLogin }) => {
     window.location.href = `mailto:demo@grcora.test?subject=${encodeURIComponent(subject)}`;
   };
 
+  // Direct login for demo purposes
+  const handleExploreConsultant = () => {
+    onLogin('user-1'); // Consultant user
+  };
+
+  const handleTryClient = () => {
+    onLogin('user-4'); // Client user
+  };
+
   // Animate stats on mount
   useEffect(() => {
     const riskTimer = setInterval(() => {
@@ -149,10 +158,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ setView, onLogin }) => {
                     <button onClick={() => handleContact('GRCora Demo Request')} className="px-8 py-3 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors">
                         Book a Demo
                     </button>
-                    <button onClick={() => onLogin('user-1')} className="px-8 py-3 font-semibold text-white bg-slate-700/50 border border-slate-600 rounded-lg hover:bg-slate-700 transition-colors">
+                    <button onClick={handleExploreConsultant} className="px-8 py-3 font-semibold text-white bg-slate-700/50 border border-slate-600 rounded-lg hover:bg-slate-700 transition-colors">
                         Explore Consultant View
                     </button>
-                    <button onClick={() => onLogin('user-2')} className="px-8 py-3 font-semibold text-white bg-green-600/20 border border-green-600 rounded-lg hover:bg-green-600/30 transition-colors">
+                    <button onClick={handleTryClient} className="px-8 py-3 font-semibold text-white bg-green-600/20 border border-green-600 rounded-lg hover:bg-green-600/30 transition-colors">
                         Try Client Portal
                     </button>
                 </div>
@@ -239,7 +248,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ setView, onLogin }) => {
             </div>
           </div>
         </section>
-        
+
         {/* Security */}
         <section id="security" className="py-20 px-6 bg-slate-900">
              <div className="container mx-auto text-center">
@@ -292,7 +301,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ setView, onLogin }) => {
              </div>
         </section>
       </main>
-      
+
       {/* Footer */}
       <footer className="bg-slate-900 border-t border-slate-800">
         <div className="container mx-auto px-6 py-8">
