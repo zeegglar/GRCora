@@ -241,21 +241,30 @@ html.light .btn-secondary:hover {
   line-height: 1.6;
 }
 
-/* Light Theme Text Color Overrides */
+/* Light Theme Text Color Overrides - High Specificity */
 html.light .text-heading {
-  color: var(--slate-900);
+  color: var(--slate-900) !important;
 }
 
 html.light .text-subheading {
-  color: var(--slate-800);
+  color: var(--slate-800) !important;
 }
 
 html.light .text-body {
-  color: var(--slate-600);
+  color: var(--slate-600) !important;
 }
 
 html.light .text-muted {
-  color: var(--slate-500);
+  color: var(--slate-500) !important;
+}
+
+/* Force all white text to dark in light mode */
+html.light * {
+  color: inherit;
+}
+
+html.light body {
+  color: var(--slate-900) !important;
 }
 
 /* Enhanced Status Colors with Gradients */
