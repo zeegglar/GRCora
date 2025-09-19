@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import type { User, View, Project, Organization, Risk, Vendor } from '../../types';
+import type { User, View, Project, Organization, Risk, AssessmentItem } from '../../types';
 import { mockApi, mockOrganizations, consultantClientLinks } from '../../services/api';
-import { RiskLevel, VendorCriticality } from '../../types';
+import { RiskLevel } from '../../types';
 import {
   DollarSignIcon,
   TrendingUpIcon,

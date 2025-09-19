@@ -11,15 +11,19 @@
     "test-rag": "tsx scripts/testRag.ts"
   },
   "dependencies": {
-    "@google/genai": "^1.19.0",
+    "@google/generative-ai": "^0.24.1",
     "@langchain/community": "^0.3.56",
     "@langchain/core": "^0.3.77",
     "@langchain/ollama": "^0.2.4",
+    "@react-pdf/renderer": "^4.3.0",
     "@supabase/supabase-js": "^2.57.4",
     "@types/node": "^24.5.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^3.0.3",
     "langchain": "^0.3.34",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-pdf": "^10.1.0",
     "recharts": "^3.2.0",
     "tsx": "^4.20.5"
   },

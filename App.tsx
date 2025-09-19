@@ -5,12 +5,13 @@ import { mockApi } from './services/api';
 import { isSupabaseConfigured } from './services/supabaseClient';
 import { NotificationProvider } from './components/context/NotificationContext';
 import { AuthProvider, useAuth } from './components/context/AuthContext';
+import { ThemeProvider } from './components/context/ThemeContext';
 
 import Sidebar from './components/layout/Sidebar';
 import Header from './components/layout/Header';
 import LoginPage from './components/auth/LoginPage';
 import LandingPage from './components/landing/LandingPage';
-import ConsultantDashboard from './components/dashboard/EnhancedConsultantDashboard';
+import ConsultantDashboard from './components/dashboard/CleanConsultantDashboard';
 import ClientDashboard from './components/dashboard/EnhancedClientDashboard';
 import ProjectView from './components/views/ProjectView';
 import VendorDetailView from './components/views/vendors/VendorDetailView';
@@ -201,7 +202,16 @@ const AppContent: React.FC = () => {
         currentProjectName={currentProjectName}
       />
       <div className="flex-1 flex flex-col overflow-hidden">
-        <Header user={user} />
+        <Header
+          user={user}
+          onLogoClick={() => {
+            if (user.role.startsWith('CONSULTANT')) {
+              setView({ type: 'dashboard' });
+            } else {
+              setView({ type: 'project', projectId: data.project?.id || '', tab: 'dashboard' });
+            }
+          }}
+        />
         <main className="flex-1 overflow-y-auto px-4 pb-4">
           <div className="fade-in">
             {renderContent()}
@@ -215,11 +225,13 @@ const AppContent: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <AuthProvider>
-      <NotificationProvider>
-        <AppContent />
-      </NotificationProvider>
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <NotificationProvider>
+          <AppContent />
+        </NotificationProvider>
+      </AuthProvider>
+    </ThemeProvider>
   );
 };
 

@@ -29,7 +29,7 @@ const NotificationPanel: React.FC = () => {
                 )}
             </button>
             {isOpen && (
-                <div className="absolute right-0 mt-2 w-80 bg-slate-800 border border-slate-700 rounded-lg shadow-2xl z-10 animate-fade-in-scale-up">
+                <div className="absolute right-0 mt-2 w-80 bg-slate-800 border border-slate-700 rounded-lg shadow-2xl z-50 animate-fade-in-scale-up">
                     <div className="p-3 font-semibold text-white border-b border-slate-700 flex justify-between items-center">
                         <span>Notifications</span>
                         {notifications.length > 0 && (
