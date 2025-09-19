@@ -7,6 +7,7 @@ const LoginPage: React.FC = () => {
   const [isSignUp, setIsSignUp] = useState(false);
   const [isResetPassword, setIsResetPassword] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [forceDemoMode, setForceDemoMode] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -71,7 +72,7 @@ const LoginPage: React.FC = () => {
     mockLogin(userId);
   };
 
-  if (isDemoMode) {
+  if (isDemoMode || forceDemoMode) {
     return (
       <div className="min-h-screen bg-slate-900 flex flex-col justify-center items-center p-4">
         <div className="w-full max-w-sm">
@@ -96,6 +97,14 @@ const LoginPage: React.FC = () => {
                   <div className="text-xs text-slate-500 mt-1">{user.scenario}</div>
                 </button>
               ))}
+            </div>
+            <div className="mt-4 text-center">
+              <button
+                onClick={() => setForceDemoMode(false)}
+                className="text-slate-400 hover:text-slate-300 text-sm"
+              >
+                Use Real Account Login Instead
+              </button>
             </div>
           </div>
         </div>
@@ -254,6 +263,15 @@ const LoginPage: React.FC = () => {
                 </button>
               </div>
             )}
+
+            <div className="mt-6 text-center">
+              <button
+                onClick={() => setForceDemoMode(true)}
+                className="text-blue-400 hover:text-blue-300 text-sm"
+              >
+                🎮 Try Demo Mode (Cybersecurity Scenarios)
+              </button>
+            </div>
           </div>
         </div>
       </div>
