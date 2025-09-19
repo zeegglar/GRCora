@@ -166,7 +166,6 @@ const SoAManager: React.FC<SoAManagerProps> = ({ project, onBack }) => {
     if (!bulkAction || selectedControls.size === 0) return;
 
     // In real implementation, this would call API
-    console.log(`Applying ${bulkAction} to ${selectedControls.size} controls`);
     setSelectedControls(new Set());
     setBulkAction('');
   };

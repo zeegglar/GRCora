@@ -676,7 +676,139 @@ export interface ReportGenerationRequest {
 // UTILITY TYPES
 // =============================================================================
 
-export type RiskLevel = 'low' | 'medium' | 'high' | 'critical';
+// Import RiskLevel from main types to ensure consistency
+import { RiskLevel } from '../types';
+
+// =============================================================================
+// MISSING TYPES FOR RAG AND AI SERVICES
+// =============================================================================
+
+export interface QueryResponse {
+  answer: string;
+  response: string; // Alias for answer
+  confidence: number;
+  confidence_score: number; // Alias for confidence
+  sources: string[];
+  citations: string[]; // Alias for sources
+  context: RAGContext[];
+  query_id: string;
+  timestamp: Date;
+  suggested_actions?: string[];
+}
+
+export interface RAGContext {
+  content: string;
+  source: string;
+  relevance_score: number;
+  document_type: string;
+  metadata: Record<string, any>;
+  organization_id?: string; // Optional organization context
+}
+
+export interface EmbeddingResult {
+  content: string;
+  embedding: number[];
+  metadata: Record<string, any>;
+  document_id: string;
+}
+
+export interface Control {
+  id: string;
+  framework: string;
+  control_id: string;
+  title: string;
+  description: string;
+  implementation_guidance: string;
+  category: string;
+  subcategory?: string;
+  risk_level: RiskLevel;
+  compliance_evidence_required: string[];
+  testing_procedures: string[];
+  created_at: Date;
+  updated_at: Date;
+}
+
+export interface Policy {
+  id: string;
+  name: string;
+  description: string;
+  content: string;
+  version: string;
+  status: 'draft' | 'under_review' | 'approved' | 'published' | 'retired';
+  category: string;
+  owner: string;
+  approver?: string;
+  effective_date?: Date;
+  review_date?: Date;
+  created_at: Date;
+  updated_at: Date;
+}
+
+export interface ApprovalRequest {
+  id: string;
+  policy_id: string;
+  requester: string;
+  approver: string;
+  status: 'pending' | 'approved' | 'rejected';
+  comments?: string;
+  requested_at: Date;
+  responded_at?: Date;
+}
+
+export interface ApprovalWorkflow {
+  id: string;
+  name: string;
+  steps: ApprovalStep[];
+  policy_categories: string[];
+  created_at: Date;
+  updated_at: Date;
+}
+
+export interface ApprovalStep {
+  order: number;
+  approver_role: string;
+  approver_email?: string;
+  required: boolean;
+  auto_approve_conditions?: Record<string, any>;
+}
+
+export interface PolicyReview {
+  id: string;
+  policy_id: string;
+  reviewer: string;
+  review_type: 'scheduled' | 'triggered' | 'ad_hoc';
+  status: 'pending' | 'in_progress' | 'completed';
+  findings: string[];
+  recommendations: string[];
+  completed_at?: Date;
+}
+
+export interface MaturityAssessment {
+  id: string;
+  control_id: string;
+  project_id: string;
+  maturity_level: 0 | 1 | 2 | 3 | 4 | 5;
+  overall_maturity_level: 0 | 1 | 2 | 3 | 4 | 5; // Overall assessment score
+  overall_maturity_score: number; // Numeric score representation
+  evidence_quality: 'poor' | 'adequate' | 'good' | 'excellent';
+  implementation_status: 'not_implemented' | 'partially_implemented' | 'fully_implemented';
+  effectiveness_rating: 'ineffective' | 'partially_effective' | 'effective' | 'highly_effective';
+  gaps: ControlGap[];
+  recommendations: string[];
+  assessed_by: string;
+  assessed_at: Date;
+}
+
+export interface ControlGap {
+  id: string;
+  control_id: string; // Link to the control this gap belongs to
+  gap_type: 'policy' | 'procedure' | 'technology' | 'training' | 'monitoring';
+  description: string;
+  severity: 'low' | 'medium' | 'high' | 'critical';
+  remediation_effort: 'low' | 'medium' | 'high';
+  target_date?: Date;
+  status: 'identified' | 'in_progress' | 'resolved' | 'accepted';
+}
 export type MaturityLevel = 0 | 1 | 2 | 3 | 4 | 5;
 export type UserRole = 'consultant_owner' | 'consultant_admin' | 'consultant_user' | 'client_admin' | 'client_user';
 export type ControlStatus = 'not_started' | 'in_progress' | 'implemented' | 'tested' | 'compliant' | 'non_compliant';

@@ -78,7 +78,6 @@ const QuantitativeRiskAssessment: React.FC<QuantitativeRiskAssessmentProps> = ({
   const runSimulation = async () => {
     setLoading(true);
     try {
-      console.log(`Running Monte Carlo simulation with ${config.iterations} iterations`);
 
       // Run individual scenario simulations
       const individualResults: MonteCarloResults[] = [];
@@ -94,7 +93,6 @@ const QuantitativeRiskAssessment: React.FC<QuantitativeRiskAssessmentProps> = ({
         setPortfolioResults(portfolioResult);
       }
 
-      console.log('Simulation completed successfully');
     } catch (error) {
       console.error('Simulation failed:', error);
       alert('Simulation failed. Please check the configuration and try again.');

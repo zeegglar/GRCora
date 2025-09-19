@@ -370,3 +370,9 @@ export const CloudArrowDownIcon: React.FC<IconProps> = (props) => (
   </svg>
 );
 
+export const CalculatorIcon: React.FC<IconProps> = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008V18H8.25v-.75zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007V18h-.007v-.75zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008V18h-.008v-.75zm2.498-6.75h.008v.008h-.008v-.008zM5.25 6.75h13.5A2.25 2.25 0 0121 9v10.5a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 19.5V9a2.25 2.25 0 012.25-2.25z" />
+  </svg>
+);
+

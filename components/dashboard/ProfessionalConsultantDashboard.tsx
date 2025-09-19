@@ -372,7 +372,6 @@ const ProfessionalConsultantDashboard: React.FC<ConsultantDashboardProps> = ({ u
       addNotification(`New engagement "${name}" created successfully with automated notifications`, 'success');
 
       // Here you would typically save the engagement settings to trigger automated notifications
-      console.log('Engagement settings:', settings);
     } catch (error) {
       addNotification('Failed to create engagement', 'error');
     }

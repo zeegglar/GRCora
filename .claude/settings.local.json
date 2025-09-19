@@ -25,7 +25,8 @@
       "Bash(curl:*)",
       "Bash(npm run build:*)",
       "Bash(npm run lint)",
-      "Bash(npm uninstall:*)"
+      "Bash(npm uninstall:*)",
+      "Bash(npx tsc:*)"
     ],
     "deny": [],
     "ask": []

@@ -92,7 +92,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       async (event, session) => {
         if (!mounted) return;
 
-        console.log('Auth state changed:', event, session);
 
         setSession(session);
         if (session?.user) {

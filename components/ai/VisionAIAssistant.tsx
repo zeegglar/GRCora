@@ -127,7 +127,6 @@ const VisionAIAssistant: React.FC<VisionAIAssistantProps> = ({
   const initializeKnowledgeBase = async () => {
     try {
       setIsLoading(true);
-      console.log('Initializing Vision AI knowledge base...');
 
       await ragService.initializeKnowledgeBase(organizationId);
       const stats = ragService.getKnowledgeBaseStats(organizationId);
@@ -235,7 +234,6 @@ How can I assist you today?`,
 
   const provideFeedback = (messageId: string, isPositive: boolean) => {
     // In a real implementation, this would send feedback to analytics
-    console.log('Feedback:', messageId, isPositive ? 'positive' : 'negative');
   };
 
   const getConfidenceBadgeVariant = (score: number) => {

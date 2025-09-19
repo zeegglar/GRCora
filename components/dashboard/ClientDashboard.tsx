@@ -38,7 +38,7 @@ const ClientDashboard: React.FC<ClientDashboardProps> = ({ user, project, assess
     <div className="flex-1 p-8 overflow-y-auto">
       <header className="mb-8">
         <h1 className="text-4xl font-bold text-heading">Dashboard</h1>
-        <p className="text-muted mt-1">Welcome back, <span className="text-heading font-medium">{user.name}</span>. Here's the status of the <span className="text-subheading text-sm">"{project.name}"</span> engagement.</p>
+        <p className="text-muted mt-1">Welcome back, <span className="text-heading text-xl font-bold">{user.name}</span>. Here's the status of the <span className="text-muted text-sm font-normal">"{project.name}"</span> engagement.</p>
       </header>
       <main>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
