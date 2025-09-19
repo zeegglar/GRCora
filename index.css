@@ -120,7 +120,7 @@ body {
 
 html.light body {
   background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
-  color: var(--slate-100);
+  color: var(--slate-900);
 }
 
 /* Enhanced Glass Morphism Effect */
@@ -594,6 +594,13 @@ html.light .border-slate-800 {
 /* NotificationPanel Light Theme Overrides */
 html.light .border-slate-700\/50 {
   border-color: rgba(226, 232, 240, 0.8) !important;
+}
+
+/* Notification Panel Fixed Positioning Light Theme */
+html.light [class*="bg-slate-800"][class*="fixed"] {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-color: rgba(148, 163, 184, 0.3) !important;
+  backdrop-filter: blur(8px);
 }
 
 /* Additional Light Theme Overrides */
