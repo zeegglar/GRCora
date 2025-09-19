@@ -37,30 +37,30 @@ const ClientDashboard: React.FC<ClientDashboardProps> = ({ user, project, assess
   return (
     <div className="flex-1 p-8 overflow-y-auto">
       <header className="mb-8">
-        <h1 className="text-4xl font-bold text-white">Dashboard</h1>
-        <p className="text-slate-400 mt-1">Welcome back, {user.name}. Here's the status of the "{project.name}" engagement.</p>
+        <h1 className="text-4xl font-bold text-heading">Dashboard</h1>
+        <p className="text-muted mt-1">Welcome back, <span className="text-heading font-medium">{user.name}</span>. Here's the status of the <span className="text-subheading text-sm">"{project.name}"</span> engagement.</p>
       </header>
       <main>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="glass-card p-6 rounded-lg">
-            <h2 className="font-semibold text-white">Compliance Posture</h2>
-            <p className="text-sm text-slate-400">Overall assessment progress</p>
+            <h2 className="font-semibold text-subheading">Compliance Posture</h2>
+            <p className="text-sm text-muted">Overall assessment progress</p>
             <div className="relative pt-8">
               <div className="flex items-center justify-center">
                 <span className="text-5xl font-bold text-green-400">{complianceSummary.percentage}%</span>
               </div>
-              <p className="text-center text-sm text-slate-400 mt-2">Compliant</p>
+              <p className="text-center text-sm text-muted mt-2">Compliant</p>
             </div>
             <div className="mt-6 space-y-2 text-sm">
-              <div className="flex justify-between"><span className="text-slate-400">Compliant</span><span className="font-medium text-white">{complianceSummary.compliant}</span></div>
-              <div className="flex justify-between"><span className="text-slate-400">Non-Compliant</span><span className="font-medium text-white">{complianceSummary.nonCompliant}</span></div>
-              <div className="flex justify-between"><span className="text-slate-400">In Progress</span><span className="font-medium text-white">{complianceSummary.inProgress}</span></div>
+              <div className="flex justify-between"><span className="text-muted">Compliant</span><span className="font-medium text-subheading">{complianceSummary.compliant}</span></div>
+              <div className="flex justify-between"><span className="text-muted">Non-Compliant</span><span className="font-medium text-subheading">{complianceSummary.nonCompliant}</span></div>
+              <div className="flex justify-between"><span className="text-muted">In Progress</span><span className="font-medium text-subheading">{complianceSummary.inProgress}</span></div>
             </div>
           </div>
           
           <div className="glass-card p-6 rounded-lg">
-             <h2 className="font-semibold text-white">Open Risks by Level</h2>
-             <p className="text-sm text-slate-400">Total: {openRisks.length} open risks</p>
+             <h2 className="font-semibold text-subheading">Open Risks by Level</h2>
+             <p className="text-sm text-muted">Total: {openRisks.length} open risks</p>
              <div className="mt-6 space-y-4">
                 <div className="flex items-center">
                     <div className="w-24 text-sm text-red-400">Critical</div>
@@ -86,10 +86,10 @@ const ClientDashboard: React.FC<ClientDashboardProps> = ({ user, project, assess
           </div>
 
           <div className="glass-card p-6 rounded-lg">
-            <h2 className="font-semibold text-white">Project Details</h2>
+            <h2 className="font-semibold text-subheading">Project Details</h2>
             <div className="mt-4 space-y-3 text-sm">
-              <div><p className="text-slate-400">Project Name</p><p className="font-semibold text-white">{project.name}</p></div>
-              <div><p className="text-slate-400">Frameworks</p><p className="font-semibold text-white">{project.frameworks.join(', ')}</p></div>
+              <div><p className="text-muted">Project Name</p><p className="font-semibold text-subheading">{project.name}</p></div>
+              <div><p className="text-muted">Frameworks</p><p className="font-semibold text-subheading">{project.frameworks.join(', ')}</p></div>
             </div>
           </div>
         </div>

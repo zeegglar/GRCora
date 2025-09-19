@@ -26,8 +26,8 @@ const NavItem: React.FC<{
     onClick={onClick}
     className={`flex items-center p-3 my-1 rounded-lg cursor-pointer transition-colors ${
       isActive
-        ? 'bg-slate-700 text-white'
-        : 'text-slate-400 hover:bg-slate-700/50 hover:text-white'
+        ? 'bg-slate-700 text-heading'
+        : 'text-muted hover:bg-slate-700/50 hover:text-subheading'
     }`}
   >
     {icon}
@@ -89,15 +89,15 @@ const Sidebar: React.FC<SidebarProps> = ({ user, currentView, setView, onLogout,
     
 
   return (
-    <aside className="w-64 bg-slate-900 text-white flex flex-col h-screen p-4 border-r border-slate-800">
+    <aside className="w-64 bg-slate-900 text-heading flex flex-col h-screen p-4 border-r border-slate-800">
       <div className="flex items-center mb-8">
         <h1 className="text-3xl font-bold text-gradient bg-gradient-grcora">GRCora</h1>
       </div>
 
       {currentProjectName && (
           <div className="mb-4 p-3 bg-slate-800 rounded-lg">
-              <p className="text-xs text-slate-400">Project</p>
-              <p className="font-semibold">{currentProjectName}</p>
+              <p className="text-xs text-muted">Project</p>
+              <p className="font-semibold text-subheading">{currentProjectName}</p>
           </div>
       )}
       
@@ -111,8 +111,8 @@ const Sidebar: React.FC<SidebarProps> = ({ user, currentView, setView, onLogout,
         <div className="flex items-center p-3 rounded-lg bg-slate-800">
             <img src={user.avatarUrl} alt="User Avatar" className="h-10 w-10 rounded-full" />
             <div className="ml-3">
-                <p className="font-semibold">{user.name}</p>
-                <p className="text-xs text-slate-400">{user.role.replace(/_/g, ' ')}</p>
+                <p className="font-semibold text-subheading">{user.name}</p>
+                <p className="text-xs text-muted">{user.role.replace(/_/g, ' ')}</p>
             </div>
         </div>
         <NavItem

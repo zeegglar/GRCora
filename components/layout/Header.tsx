@@ -47,7 +47,11 @@ const Header: React.FC<HeaderProps> = ({ user, onLogoClick }) => {
           {/* Theme Toggle Button */}
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-lg bg-slate-700/50 hover:bg-slate-600/50 transition-all duration-200"
+            className={`p-2 rounded-lg transition-all duration-200 ${
+              theme === 'dark'
+                ? 'bg-slate-700/50 hover:bg-slate-600/50'
+                : 'bg-slate-200/80 hover:bg-slate-300/80'
+            }`}
             aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
             title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
           >
