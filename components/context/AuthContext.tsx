@@ -159,13 +159,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  // Mock login for demo mode (only when Supabase is not configured)
+  // Mock login for demo mode (works regardless of Supabase configuration)
   const mockLogin = (userId: string) => {
-    if (isDemoMode) {
-      const foundUser = mockUsers.find(u => u.id === userId);
-      if (foundUser) {
-        setUser(foundUser);
-      }
+    const foundUser = mockUsers.find(u => u.id === userId);
+    if (foundUser) {
+      setUser(foundUser);
+      // Clear any existing Supabase session when using demo mode
+      setSupabaseUser(null);
+      setSession(null);
     }
   };
 
