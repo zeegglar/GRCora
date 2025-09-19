@@ -413,14 +413,38 @@ export class RAGService {
   private buildGRCPrompt(question: string, context: string, ragContext: RAGContext): string {
     const roleDescription = this.getRoleBasedInstructions(ragContext.user_role);
 
-    // Check if this is a specific technical question
+    // Check if this is a basic definitional question
+    const isDefinitionalQuestion = question.toLowerCase().includes('what is') ||
+                                   question.toLowerCase().includes('define') ||
+                                   question.toLowerCase().includes('explain') ||
+                                   (question.toLowerCase().includes('risk') &&
+                                    !question.toLowerCase().includes('our') &&
+                                    !question.toLowerCase().includes('current') &&
+                                    !question.toLowerCase().includes('status') &&
+                                    !question.toLowerCase().includes('assessment'));
+
+    if (isDefinitionalQuestion) {
+      return `You are a professional GRC expert. The user is asking for a definition or general explanation.
+
+USER QUESTION: ${question}
+
+INSTRUCTIONS:
+1. Provide a clear, professional definition from your general GRC knowledge
+2. DO NOT make up or invent organizational data, statistics, or specific findings
+3. DO NOT reference "your organization" or provide fake metrics
+4. Focus on explaining concepts, frameworks, or general best practices
+5. If relevant, mention how this applies to GRC practices generally
+6. Keep the answer educational and factual
+
+Provide a clear, educational answer based on established GRC knowledge.`;
+    }
+
+    // Check if this is a specific technical question about standards/controls
     const isSpecificQuestion = question.toLowerCase().includes('clause') ||
                               question.toLowerCase().includes('control') ||
                               question.toLowerCase().includes('iso') ||
                               question.toLowerCase().includes('nist') ||
-                              question.toLowerCase().includes('summarize') ||
-                              question.toLowerCase().includes('explain') ||
-                              question.toLowerCase().includes('define');
+                              question.toLowerCase().includes('summarize');
 
     if (isSpecificQuestion && context) {
       return `You are a professional GRC expert. The user is asking a specific question about standards, frameworks, or controls.
