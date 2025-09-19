@@ -229,11 +229,14 @@ INSERT INTO approval_workflows (entity_type, stages, routing_rules) VALUES
 
 Add your Gemini API key to `.env`:
 ```bash
-# Add to your .env file
+# Copy .env.example to .env and update with your keys
+cp .env.example .env
+
+# Edit .env with your actual API keys
 VITE_GOOGLE_API_KEY=your_actual_gemini_api_key_here
 
-# For production, use server-side API calls
-GEMINI_API_KEY=your_server_side_key_here
+# For production, use GitHub secrets or environment variables
+# NEVER commit API keys to git!
 ```
 
 ### 6.2 Set Up RAG Knowledge Base

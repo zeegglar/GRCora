@@ -30,9 +30,15 @@ You should see controls like "SOC2-CC6.1", "ISO-A.5.15", etc.
 3. Copy the key (starts with "AIza...")
 
 ### 2.2 Add to Environment
-Replace `your_gemini_api_key_here` in `.env` file with your actual key:
-```
-VITE_GOOGLE_API_KEY=AIzaSyYourActualKeyHere
+Copy `.env.example` to `.env` and add your actual key:
+```bash
+# Copy example file
+cp .env.example .env
+
+# Edit .env file with your actual API key
+VITE_GOOGLE_API_KEY=your_actual_key_here
+
+# NEVER commit .env files to git!
 ```
 
 **Cost**: ~$0.50/month for 100 AI reports (super cheap!)
