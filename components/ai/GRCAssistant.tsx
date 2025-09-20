@@ -157,131 +157,87 @@ Feel free to ask me about any GRC-related topic!`,
       type: 'query'
     };
 
+    const queryText = input;
     setMessages(prev => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
 
-    // Simulate AI processing
-    setTimeout(() => {
-      const response = generateAIResponse(input);
+    try {
+      const response = await generateAIResponse(queryText);
       setMessages(prev => [...prev, response]);
+    } catch (error) {
+      console.error('Failed to get AI response:', error);
+      const errorMessage: Message = {
+        id: Date.now().toString(),
+        role: 'assistant',
+        content: 'Sorry, I encountered an error processing your request. Please make sure Ollama is running and try again.',
+        timestamp: new Date(),
+        type: 'query'
+      };
+      setMessages(prev => [...prev, errorMessage]);
+    } finally {
       setIsLoading(false);
-    }, 1000 + Math.random() * 2000);
+    }
   };
 
-  const generateAIResponse = (query: string): Message => {
-    const lowerQuery = query.toLowerCase();
-    let response = '';
-    let type: Message['type'] = 'query';
+  const generateAIResponse = async (query: string): Promise<Message> => {
+    try {
+      // Use the new dual-mode GRC AI service
+      const { default: GRCAIService } = await import('../../services/grcAIService');
+      const grcService = GRCAIService.getInstance();
 
-    if (lowerQuery.includes('risk') || lowerQuery.includes('threat')) {
-      response = `Based on my analysis of your risk landscape:
+      // Create timeout promise
+      const timeoutPromise = new Promise<never>((_, reject) => {
+        setTimeout(() => reject(new Error('AI request timeout')), 20000); // 20 second timeout
+      });
 
-🔴 **Critical Findings:**
-• ${risks.filter(r => r.level === 'Critical').length} critical risks identified
-• Top risk categories: Cybersecurity (40%), Operational (30%), Compliance (30%)
-• Risk velocity: 15% increase in new risks this month
+      const responsePromise = grcService.processQuery(query, {
+        project,
+        risks,
+        assessmentItems,
+        controls,
+        vendors
+      });
 
-📊 **Risk Distribution:**
-• Critical: ${risks.filter(r => r.level === 'Critical').length}
-• High: ${risks.filter(r => r.level === 'High').length}
-• Medium: ${risks.filter(r => r.level === 'Medium').length}
-• Low: ${risks.filter(r => r.level === 'Low').length}
+      const response = await Promise.race([responsePromise, timeoutPromise]);
 
-🎯 **Recommendations:**
-1. Prioritize critical cybersecurity risks
-2. Implement automated risk monitoring
-3. Enhance incident response procedures`;
-      type = 'analysis';
-    } else if (lowerQuery.includes('compliance') || lowerQuery.includes('control')) {
-      const compliantCount = assessmentItems.filter(item => item.status === 'Compliant').length;
-      const complianceRate = ((compliantCount / assessmentItems.length) * 100).toFixed(1);
+      // Format the response with metadata
+      let formattedContent = response.content;
 
-      response = `Here's your compliance analysis:
+      // Add metadata footer
+      const metadata = `\n\n---\n📊 **Response Type:** ${response.type}\n🔍 **Data Status:** ${response.dataStatus}\n📚 **Sources:** ${response.sources.join(', ')}\n⚡ **Confidence:** ${(response.confidence * 100).toFixed(0)}%`;
 
-✅ **Compliance Status:**
-• Overall compliance rate: ${complianceRate}%
-• Compliant controls: ${compliantCount}/${assessmentItems.length}
-• Non-compliant items requiring attention: ${assessmentItems.filter(item => item.status === 'Non-Compliant').length}
+      formattedContent += metadata;
 
-📋 **Control Effectiveness:**
-• Automated controls: 78% effective
-• Manual controls: 65% effective
-• Review frequency: Monthly
+      return {
+        id: Date.now().toString(),
+        role: 'assistant',
+        content: formattedContent,
+        timestamp: new Date(),
+        type: response.type === 'dataset-grounded' ? 'analysis' : 'query'
+      };
+    } catch (error) {
+      console.error('AI response generation failed:', error);
 
-🔧 **Improvement Areas:**
-1. Automate manual control testing
-2. Implement continuous monitoring
-3. Enhance evidence collection`;
-      type = 'analysis';
-    } else if (lowerQuery.includes('vendor') || lowerQuery.includes('third party')) {
-      response = `Vendor risk assessment summary:
+      // Provide specific error messages
+      let errorMessage = '';
+      if (error instanceof Error && error.message === 'AI request timeout') {
+        errorMessage = 'The AI is taking too long to respond. This usually means Ollama is not running or the model is not available. Please check that Ollama is running and try again.';
+      } else if (error instanceof Error && error.message.includes('Invalid query')) {
+        errorMessage = `Query validation failed: ${error.message}`;
+      } else {
+        errorMessage = `I'm having trouble processing your request. Error: ${error instanceof Error ? error.message : 'Unknown error'}. Please try again or check your connection.`;
+      }
 
-🏢 **Vendor Portfolio:**
-• Total vendors: ${vendors.length}
-• High-risk vendors: ${vendors.filter(v => v.riskLevel === VendorCriticality.HIGH).length}
-• Critical vendors: ${vendors.filter(v => v.riskLevel === VendorCriticality.CRITICAL).length}
-
-⚠️ **Risk Indicators:**
-• Vendors with expired certifications: 12%
-• Overdue risk assessments: 8%
-• Contract renewals needed: 15%
-
-📈 **Recommendations:**
-1. Implement vendor risk scoring
-2. Automate certification monitoring
-3. Enhance due diligence processes`;
-      type = 'analysis';
-    } else if (lowerQuery.includes('report') || lowerQuery.includes('dashboard')) {
-      response = `I can help you generate comprehensive reports:
-
-📊 **Available Reports:**
-• Executive Risk Summary
-• Compliance Status Report
-• Vendor Risk Assessment
-• Control Testing Results
-• Regulatory Readiness Report
-
-📋 **Report Features:**
-• AI-powered insights and trends
-• Automated data visualization
-• Regulatory mapping
-• Risk heat maps
-• Actionable recommendations
-
-Would you like me to generate a specific report for you?`;
-      type = 'report';
-    } else {
-      response = `I understand you're asking about "${query}". Let me provide you with relevant GRC insights:
-
-Based on my analysis of your current GRC posture, here are some key observations:
-
-🎯 **Overall Health Score: 78/100**
-• Risk Management: 82/100
-• Compliance: 75/100
-• Vendor Management: 76/100
-
-📈 **Trends:**
-• Risk exposure trending upward (+15%)
-• Compliance improving (+8%)
-• Vendor oversight stable
-
-💡 **Smart Recommendations:**
-1. Focus on high-impact, low-effort improvements
-2. Leverage automation for routine tasks
-3. Enhance cross-functional collaboration
-
-Is there a specific area you'd like me to dive deeper into?`;
-      type = 'recommendation';
+      // Fallback response
+      return {
+        id: Date.now().toString(),
+        role: 'assistant',
+        content: errorMessage,
+        timestamp: new Date(),
+        type: 'query'
+      };
     }
-
-    return {
-      id: Date.now().toString(),
-      role: 'assistant',
-      content: response,
-      timestamp: new Date(),
-      type
-    };
   };
 
   const getMessageIcon = (type?: Message['type']) => {
