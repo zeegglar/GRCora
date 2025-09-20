@@ -28,7 +28,9 @@
       "Bash(npm uninstall:*)",
       "Bash(npx tsc:*)",
       "Bash(npm run:*)",
-      "Bash(export:*)"
+      "Bash(export:*)",
+      "WebFetch(domain:mintylime.co.ke)",
+      "Bash(dir \"C:\\Users\\abbas\\GRCora\")"
     ],
     "deny": [],
     "ask": []
